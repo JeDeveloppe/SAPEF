@@ -1,0 +1,34 @@
+{% extends "site/base.html.twig" %}
+
+{% block body %}
+        <header class="masthead bg-primary text-white text-center">
+            <div class="container d-flex align-items-center flex-column">
+                <!-- Masthead Avatar Image-->
+                <img class="masthead-avatar mb-5" src="assets/img/avataaars.svg" alt="..." />
+                <!-- Masthead Heading-->
+                <h1 class="masthead-heading text-uppercase mb-0">S.A.P.E.F</h1>
+                <!-- Icon Divider-->
+                <div class="divider-custom divider-light">
+                    <div class="divider-custom-line"></div>
+                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                    <div class="divider-custom-line"></div>
+                </div>
+                <!-- Masthead Subheading-->
+                <p class="masthead-subheading font-weight-light mb-0">Syndicat Autonome du Personnel d'Euromaster France</p>
+            </div>
+        </header>
+        <!-- Portfolio Section-->
+        {% include "site/pages/portfolio.html.twig" %}
+
+        <!-- About Section-->
+        {% include "site/pages/about.html.twig" %}
+
+        <!-- Contact Section-->
+        {% include "site/pages/contact.html.twig" %}
+
+        <!-- Adherer Section-->
+        {% include "site/pages/adherer.html.twig" %}
+
+
+
+{% endblock %}
