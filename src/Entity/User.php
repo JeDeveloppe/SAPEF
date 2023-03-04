@@ -41,6 +41,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 18)]
     private ?string $phone = null;
 
+    #[ORM\Column]
+    private ?bool $isBureau = null;
+
+    #[ORM\OneToOne(inversedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?Fonction $fonction = null;
+
     public function __construct()
     {
         $this->reunions = new ArrayCollection();
@@ -166,6 +172,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPhone(string $phone): self
     {
         $this->phone = $phone;
+
+        return $this;
+    }
+
+    public function isIsBureau(): ?bool
+    {
+        return $this->isBureau;
+    }
+
+    public function setIsBureau(bool $isBureau): self
+    {
+        $this->isBureau = $isBureau;
+
+        return $this;
+    }
+
+    public function getFonction(): ?Fonction
+    {
+        return $this->fonction;
+    }
+
+    public function setFonction(?Fonction $fonction): self
+    {
+        $this->fonction = $fonction;
 
         return $this;
     }
