@@ -31,6 +31,9 @@ class Paiement
     #[ORM\JoinColumn(nullable: false)]
     private ?User $createdBy = null;
 
+    #[ORM\Column]
+    private ?\DateTimeImmutable $paymentAt = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -92,6 +95,18 @@ class Paiement
     public function setCreatedBy(?User $createdBy): static
     {
         $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    public function getPaymentAt(): ?\DateTimeImmutable
+    {
+        return $this->paymentAt;
+    }
+
+    public function setPaymentAt(\DateTimeImmutable $paymentAt): static
+    {
+        $this->paymentAt = $paymentAt;
 
         return $this;
     }
