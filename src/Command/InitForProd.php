@@ -42,12 +42,12 @@ class InitForProd extends Command
 
         $io = new SymfonyStyle($input,$output);
         
-        $this->importShopService->import($io);
         $this->creationJobsEuromasterService->addJob($io);
-        // $this->creationMoyenDePaiementService->addMoyens($io);
-        // $this->importSapefRegionService->importRegionsErm($io);
-        // $this->importDepartmentsService->import($io);
-        // $this->importCityService->import($io);
+        $this->creationMoyenDePaiementService->addMoyens($io);
+        $this->importSapefRegionService->importRegionsErm($io);
+        $this->importDepartmentsService->import($io);
+        $this->importCityService->import($io);
+        $this->importShopService->import($io);
 
         //ON CREE OU ON MET A JOUR L'ADMIN
         $this->userService->initForProd_adminUser($io);

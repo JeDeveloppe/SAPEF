@@ -21,10 +21,6 @@ class Department
     #[ORM\Column(length: 255)]
     private ?string $codeMap = null;
 
-    #[ORM\ManyToOne(inversedBy: 'departments')]
-    #[ORM\JoinColumn(nullable: true)]
-    private ?RegionErm $region = null;
-
     #[ORM\OneToMany(mappedBy: 'department', targetEntity: City::class)]
     private Collection $cities;
 
@@ -33,6 +29,9 @@ class Department
 
     #[ORM\OneToMany(mappedBy: 'department', targetEntity: Shop::class)]
     private Collection $shops;
+
+    #[ORM\ManyToOne(inversedBy: 'departements')]
+    private ?RegionErm $regionErm = null;
 
     public function __construct()
     {
@@ -65,18 +64,6 @@ class Department
     public function setCodeMap(string $codeMap): static
     {
         $this->codeMap = $codeMap;
-
-        return $this;
-    }
-
-    public function getRegion(): ?RegionErm
-    {
-        return $this->region;
-    }
-
-    public function setRegion(?RegionErm $region): static
-    {
-        $this->region = $region;
 
         return $this;
     }
@@ -157,4 +144,17 @@ class Department
     {
         return $this->number.' - '.$this->name;
     }
+
+    public function getRegionErm(): ?RegionErm
+    {
+        return $this->regionErm;
+    }
+
+    public function setRegionErm(?RegionErm $regionErm): static
+    {
+        $this->regionErm = $regionErm;
+
+        return $this;
+    }
+
 }

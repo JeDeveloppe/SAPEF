@@ -24,16 +24,16 @@ class RegionErm
     #[ORM\Column(length: 10)]
     private ?string $colorHover = null;
 
-    #[ORM\OneToMany(mappedBy: 'region', targetEntity: Department::class)]
-    private Collection $departments;
-
     #[ORM\OneToMany(mappedBy: 'regionErm', targetEntity: Elu::class)]
     private Collection $elus;
 
+    #[ORM\OneToMany(mappedBy: 'regionErm', targetEntity: Department::class)]
+    private Collection $departements;
+
     public function __construct()
     {
-        $this->departments = new ArrayCollection();
         $this->elus = new ArrayCollection();
+        $this->departements = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -78,36 +78,6 @@ class RegionErm
     }
 
     /**
-     * @return Collection<int, Department>
-     */
-    public function getDepartments(): Collection
-    {
-        return $this->departments;
-    }
-
-    public function addDepartment(Department $department): static
-    {
-        if (!$this->departments->contains($department)) {
-            $this->departments->add($department);
-            $department->setRegion($this);
-        }
-
-        return $this;
-    }
-
-    public function removeDepartment(Department $department): static
-    {
-        if ($this->departments->removeElement($department)) {
-            // set the owning side to null (unless already changed)
-            if ($department->getRegion() === $this) {
-                $department->setRegion(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
      * @return Collection<int, Elu>
      */
     public function getElus(): Collection
@@ -131,6 +101,36 @@ class RegionErm
             // set the owning side to null (unless already changed)
             if ($elu->getRegionErm() === $this) {
                 $elu->setRegionErm(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Department>
+     */
+    public function getDepartements(): Collection
+    {
+        return $this->departements;
+    }
+
+    public function addDepartement(Department $departement): static
+    {
+        if (!$this->departements->contains($departement)) {
+            $this->departements->add($departement);
+            $departement->setRegionErm($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDepartement(Department $departement): static
+    {
+        if ($this->departements->removeElement($departement)) {
+            // set the owning side to null (unless already changed)
+            if ($departement->getRegionErm() === $this) {
+                $departement->setRegionErm(null);
             }
         }
 

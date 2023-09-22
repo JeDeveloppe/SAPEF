@@ -2,9 +2,10 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Department;
-use App\Entity\RegionErm;
 use App\Entity\Shop;
+use App\Entity\User;
+use App\Entity\RegionErm;
+use App\Entity\Department;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -33,6 +34,11 @@ class DashboardController extends AbstractDashboardController
         
         yield MenuItem::section('Gestion des centres:');
         yield MenuItem::linkToCrud('Centres', 'fas fa-list', Shop::class);
+
+        yield MenuItem::section('Gestion des paiements:');
+
+        yield MenuItem::section('Gestion des membres:');
+        yield MenuItem::linkToCrud('Membres', 'fas fa-list', User::class);
 
         yield MenuItem::section('Paramètres géographiques:');
         yield MenuItem::linkToCrud('Régions ERM', 'fas fa-list', RegionErm::class);
