@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Service\InitForProd;
+namespace App\Service;
 
 use App\Entity\MeanOfPaiement;
 use App\Repository\MeanOfPaiementRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-class CreationMoyenDePaiementService
+class MeansOfPaiementService
 {
     public function __construct(
         private EntityManagerInterface $em,
@@ -15,9 +15,10 @@ class CreationMoyenDePaiementService
         ){
     }
 
-    public function addMoyens(SymfonyStyle $io){
+    public function addMeansOfPaiements(SymfonyStyle $io){
 
-        $moyens = ['CB','ESPÈCES','CHQ','VIR'];
+        //TODO A VERIFIER 
+        $moyens = ['CB','ESPÈCES','CHQ','VIR','PAYPAL'];
 
         foreach($moyens as $moyenArray){
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service\InitForProd;
+namespace App\Service;
 
 use League\Csv\Reader;
 use App\Entity\Department;
@@ -8,7 +8,7 @@ use App\Repository\DepartmentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-class ImportDepartmentsService
+class DepartmentService
 {
     public function __construct(
         private EntityManagerInterface $em,
@@ -16,7 +16,7 @@ class ImportDepartmentsService
         ){
     }
 
-    public function import(SymfonyStyle $io): void
+    public function importDepartments(SymfonyStyle $io): void
     {
         $io->title('Importation des départements');
 

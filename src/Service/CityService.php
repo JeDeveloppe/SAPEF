@@ -1,16 +1,15 @@
 <?php
 
-namespace App\Service\InitForProd;
+namespace App\Service;
 
 use App\Entity\City;
 use League\Csv\Reader;
-use App\Entity\Department;
 use App\Repository\CityRepository;
 use App\Repository\DepartmentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-class ImportCityService
+class CityService
 {
     public function __construct(
         private EntityManagerInterface $em,
@@ -19,7 +18,7 @@ class ImportCityService
         ){
     }
 
-    public function import(SymfonyStyle $io): void
+    public function importCsv(SymfonyStyle $io): void
     {
         $io->title('Importation des villes');
 

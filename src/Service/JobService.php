@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Service\InitForProd;
+namespace App\Service;
 
 use App\Entity\Job;
 use App\Repository\JobRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-class CreationJobsEuromasterService
+class JobService
 {
     public function __construct(
         private EntityManagerInterface $em,
@@ -15,7 +15,7 @@ class CreationJobsEuromasterService
         ){
     }
 
-    public function addJob(SymfonyStyle $io){
+    public function addJobs(SymfonyStyle $io){
 
 
         //TODO FAIRE LISTE DES METIERS

@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20230922110617 extends AbstractMigration
+final class Version20230923202203 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,12 +20,12 @@ final class Version20230922110617 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE department CHANGE region_id region_id INT DEFAULT NULL');
+        $this->addSql('CREATE TABLE configuration_site (id INT AUTO_INCREMENT NOT NULL, cotisation NUMERIC(6, 2) NOT NULL, email_site VARCHAR(255) NOT NULL, delay_before_meeting_to_send_email INT NOT NULL, iban VARCHAR(33) NOT NULL, bic VARCHAR(11) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE department CHANGE region_id region_id INT NOT NULL');
+        $this->addSql('DROP TABLE configuration_site');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\ConfigurationSite;
 use App\Entity\Shop;
 use App\Entity\User;
 use App\Entity\RegionErm;
@@ -11,6 +12,7 @@ use App\Entity\DeskRole;
 use App\Entity\Elu;
 use App\Entity\EluStatus;
 use App\Entity\Job;
+use App\Entity\LegalInformation;
 use App\Entity\MeanOfPaiement;
 use App\Entity\Meeting;
 use App\Entity\MeetingName;
@@ -41,7 +43,7 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linkToRoute('SITE','fa-solid fa-shop','app_home');
+        yield MenuItem::linkToRoute('SITE','fa-solid fa-shop','app_site_home');
         
         yield MenuItem::section('Gestion des réunions:');
         yield MenuItem::linkToCrud('Les réunions', 'fas fa-list', Meeting::class);
@@ -71,6 +73,10 @@ class DashboardController extends AbstractDashboardController
 
         yield MenuItem::section('Gestion des centres:');
         yield MenuItem::linkToCrud('Centres', 'fas fa-list', Shop::class);
+
+        yield MenuItem::section('Gestion administratif:');
+        yield MenuItem::linkToCrud('Configurations', 'fas fa-list', ConfigurationSite::class);
+        yield MenuItem::linkToCrud('Informations légales', 'fas fa-list', LegalInformation::class);
     }
 
 }

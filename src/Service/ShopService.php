@@ -1,18 +1,16 @@
 <?php
 
-namespace App\Service\InitForProd;
+namespace App\Service;
 
 use League\Csv\Reader;
-use App\Entity\Department;
 use App\Entity\Shop;
-use App\Repository\CityRepository;
 use App\Repository\DepartmentRepository;
 use App\Repository\ShopRepository;
 use App\Service\Utilities;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-class ImportShopService
+class ShopService
 {
     public function __construct(
         private EntityManagerInterface $em,
@@ -22,7 +20,7 @@ class ImportShopService
         ){
     }
 
-    public function import(SymfonyStyle $io): void
+    public function importCsv(SymfonyStyle $io): void
     {
         $io->title('Importation des Centres');
 
@@ -47,7 +45,7 @@ class ImportShopService
 
     private function readCsvFile(): Reader
     {
-        $csv = Reader::createFromPath('%kernel.root.dir%/../.docs/import/store.csv','r');
+        $csv = Reader::createFromPath('%kernel.root.dir%/../.docs/import/shops.csv','r');
         $csv->setHeaderOffset(0);
 
         return $csv;
@@ -63,7 +61,6 @@ class ImportShopService
 
         //"id","name","cm","phone","address","postal_code","city","longitude","latitude"
 
-        
         $entity
         ->setName($arrayEntity['name'])
         ->setCounterMark($arrayEntity['cm'])

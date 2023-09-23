@@ -1,24 +1,14 @@
 <?php
 
-namespace App\Service\InitForProd;
+namespace App\Service;
 
-use App\Entity\City;
 use App\Entity\RegionErm;
-use App\Entity\Ville;
 use League\Csv\Reader;
-use League\Csv\Statement;
-use App\Repository\BoiteRepository;
-use App\Repository\CityRepository;
-use App\Repository\CountryRepository;
-use App\Repository\VilleRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Repository\DepartementRepository;
-use App\Repository\DepartmentRepository;
 use App\Repository\RegionErmRepository;
-use League\Csv\ResultSet;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-class ImportSapefRegionService
+class RegionErmService
 {
     public function __construct(
         private EntityManagerInterface $em,

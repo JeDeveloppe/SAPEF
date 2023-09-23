@@ -1,15 +1,13 @@
 <?php
 
-namespace App\Service\InitForProd;
+namespace App\Service;
 
-use App\Entity\sex;
 use App\Entity\SexStatus;
-use App\Repository\sexRepository;
 use App\Repository\SexStatusRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-class CreationSexService
+class GenderService
 {
     public function __construct(
         private EntityManagerInterface $em,
@@ -17,12 +15,11 @@ class CreationSexService
         ){
     }
 
-    public function addsex(SymfonyStyle $io){
-
+    public function addGenders(SymfonyStyle $io){
 
         $sexs = [];
 
-        //TODO FAIRE LISTE DES SEXES
+        //TODO FAIRE LISTE DES GENRES
         //! NE PAS CHANGER
         array_push($sexs,'HOMME', 'FEMME');
 

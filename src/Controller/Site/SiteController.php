@@ -2,7 +2,9 @@
 
 namespace App\Controller\Site;
 
+use App\Repository\ConfigurationSiteRepository;
 use App\Repository\DeskRepository;
+use App\Repository\LegalInformationRepository;
 use App\Service\EluService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,7 +13,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class SiteController extends AbstractController
 {
     public function __construct(
-        private DeskRepository $deskRepository
+        private DeskRepository $deskRepository,
+        private LegalInformationRepository $legalInformationRepository
     )
     {
     }
@@ -19,7 +22,7 @@ class SiteController extends AbstractController
     #[Route('/', name: 'app_site_home')]
     public function index(): Response
     {
-        return $this->render('site/index.html.twig', [
+        return $this->render('site/pages/index.html.twig', [
             'controller_name' => 'SiteController',
         ]);
     }
@@ -28,7 +31,7 @@ class SiteController extends AbstractController
     public function bureau(): Response
     {
         return $this->render('site/pages/bureau_du_sapef.html.twig', [
-            'bureaus' => $this->deskRepository->findAll()
+            'bureaux' => $this->deskRepository->findAll()
          ]);
     }
 
@@ -36,8 +39,6 @@ class SiteController extends AbstractController
     public function elus(EluService $eluService): Response
     {
         $donnees = $eluService->constructionOfTheMapOfFranceWithElus();
-
-    
 
         return $this->render('site/pages/elus_du_sapef.html.twig', [
             'donnees' => $donnees
@@ -53,10 +54,12 @@ class SiteController extends AbstractController
     }
 
     #[Route('/adherer-au-sapef', name: 'app_site_adherer')]
-    public function adherer(): Response
+    public function adherer(ConfigurationSiteRepository $configurationSiteRepository): Response
     {
 
-        return $this->render('site/pages/adherer.html.twig', []);
+        return $this->render('site/pages/adherer.html.twig', [
+            'configuration' => $configurationSiteRepository->findOneBy([])
+        ]);
     }
 
 
@@ -64,6 +67,8 @@ class SiteController extends AbstractController
     public function mentionsLegales(): Response
     {
 
-        return $this->render('site/pages/mentions_legales.html.twig', []);
+        return $this->render('site/pages/mentions_legales.html.twig', [
+            'legales' => $this->legalInformationRepository->findOneBy(['isOnline' => true], ['id' => 'ASC'])
+        ]);
     }
 }
