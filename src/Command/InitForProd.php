@@ -3,6 +3,7 @@
 namespace App\Command;
 
 use App\Repository\SexStatusRepository;
+use App\Service\EluService;
 use App\Service\InitForProd\CreationJobsEuromasterService;
 use App\Service\UserService;
 use Symfony\Component\Console\Command\Command;
@@ -29,7 +30,8 @@ class InitForProd extends Command
             private ImportCityService $importCityService,
             private CreationJobsEuromasterService $creationJobsEuromasterService,
             private ImportShopService $importShopService,
-            private CreationSexService $creationSexService
+            private CreationSexService $creationSexService,
+            private EluService $eluService
             // private ImportDepartementsService $importDepartementsService,
             // private ImportVillesFrancaisesService $importVillesFrancaiseService,
             // private ImportPaiementService $importPaiementService,
@@ -45,6 +47,7 @@ class InitForProd extends Command
 
         $io = new SymfonyStyle($input,$output);
         
+        $this->eluService->creationEluStatus($io);
         $this->creationJobsEuromasterService->addJob($io);
         $this->creationSexService->addsex($io);
         $this->creationMoyenDePaiementService->addMoyens($io);

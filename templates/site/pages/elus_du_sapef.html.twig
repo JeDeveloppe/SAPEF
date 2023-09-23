@@ -1,0 +1,43 @@
+{% extends 'site/base.html.twig' %}
+
+{% block title %}Les élus du Sapef{% endblock %}
+
+{% block body %}
+    <div class="js-locations" data-locations="{{ jsonStores }}"></div>
+    <div class="js-states" data-states="{{ jsonStates }}"></div>
+ 
+    <h1 class="page-section-heading text-center text-black text-uppercase mt-5">Les élus du Sapef</h1>
+
+    {% include "site/components/hr.html.twig" %}
+
+    <div class="row my-5">
+        <div class="col-11 col-md-9 col-lg-6 mx-auto">
+            <script type="text/javascript" src="{{ asset('map/mapdata.js') }}"></script> 
+            <script type="text/javascript" src="{{ asset('map/countrymap.js') }}"></script> 
+            <div id="map"></div>
+        </div>
+    </div>
+
+    {% if titulaires|length > 0 %}
+        {% include "site/components/hr.html.twig" %}
+
+        <div class="row my-5 text-black justify-content-around">
+            {% for titulaire in titulaires %}
+                {% include "site/components/card_elu.html.twig" with {'elu': titulaire} %}
+            {% endfor %}
+        </div>
+    {% endif %}
+
+
+    {% if suppleants|length > 0 %}
+
+        {% include "site/components/hr.html.twig" %}
+        
+        <div class="row my-5 text-black justify-content-around">
+            {% for suppleant in suppleants %}
+                {% include "site/components/card_elu.html.twig" with {'elu': suppleant} %}
+            {% endfor %}
+        </div>
+    {% endif %}
+
+{% endblock %}

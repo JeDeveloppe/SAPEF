@@ -1,0 +1,146 @@
+{% extends 'site/base.html.twig' %}
+
+{% block title %}Adhérer{% endblock %}
+
+{% block body %}
+    <h1 class="page-section-heading text-center text-black text-uppercase mt-5">Adherer au SAPEF</h1>
+
+    {% include "site/components/hr.html.twig" %}
+
+    <div class="accordion my-5" id="accordionExample">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                Être syndiqué, ça veut dire quoi ?
+            </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+            <div class="accordion-body bg-primary text-white">
+                Une personne syndiquée est une personne qui choisit d'adhérer à une organisation syndicale.<br/>
+                Un syndicat est un regroupement volontaire de personnes ayant pour objet de faire connaître et défendre les droits et intérêts collectifs.<br/>
+                Le syndicat mobilise, conteste, propose, revendique et négocie afin de faire respecter et évoluer les droits collectifs.
+            </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                Pourquoi être syndiqué ?
+            </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+            <div class="accordion-body bg-primary text-white">
+                <ul class="p-4">Il existe plusieurs raisons de se syndiquer:                                            
+                    <li>Être informé de vos droits individuels et collectifs ainsi que de l'évolution de la législation</li>
+                    <li>Etre écouté et soutenu au quotidien durant son parcours professionnel</li>
+                    <li>Être accompagné pour faire face à une situation compliquée (sanction disciplinaire, licenciement, etc.)</li>
+                    <li>Relayer des informations auprès de vos collègues et de votre syndicat</li>
+                    <li>Se sentir utile en aidant, conseillant et informant les salariés sur leurs droits</li>
+                    <li>Contribuer activement à améliorer la vie au sein de l’entreprise</li>
+                    <li>Vous pouvez vous présenter aux élections, et participer ainsi aux prises de décision</li>
+                </ul>
+            </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThree">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                Y'a t'il un risque pour ma carrière ?
+            </button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+            <div class="accordion-body bg-primary text-white">
+                Vous ne devez subir aucunes représailles de la part de votre employeur du fait de votre engagement syndical.<br/>
+                En effet, le Code du travail vous protège contre toute forme de discrimination liée à l'appartenance à un syndicat (article L. 1132-1 du Code du travail).<br/>
+                Toutefois, vous n'êtes absolument pas tenu de dire à votre employeur que vous adhérez à un syndicat.
+            </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingFour">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                A quoi sert la cotisation ?
+            </button>
+            </h2>
+            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+            <div class="accordion-body bg-primary text-white">
+                <p>Cotisation annuelle {{configuration.cotisation}} €</p>
+                <p>Cette cotisation permet notamment au syndicat de financer son activité, d'informer et défendre ses adhérents et de former les militants (tracts, site Internet, frais de déplacement…)</p>
+                <p>En versant {{configuration.cotisation}} au SAPEF, vous bénéficiez d'un crédit d'impôt de {{ (configuration.cotisation * 66 / 100) }} € (66 % de la cotisation annuelle payée).</p> 
+                <p class="lead">En adhérant, vous ferez partie d’un groupe autonome, dynamique et sympathique !</p>
+                <p class="col-12 text-center">Vous pouvez faire un don par virement:<br/>
+                        IBAN: {{ configuration.iban }}<br/>
+                        BIC: {{ configuration.bic }}
+                </p>
+                <p class="col-12 text-center mt-3">Ou en cliquant sur le logo ci-dessous:
+
+                <!-- Paiement Section Button-->
+                <div class="col-12 text-center mb-3">
+                    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=BBW6UW73TKFZ8&source=url">
+                        <img class="col-11 col-md-9 col-xl-6 mx-auto" src="{{ asset('build/images/site/paypal.png') }}" alt="Faire un don par Paypal ou CB !" data-bs-toggle="tooltip" data-bs-html="true" title="Faire un don par Paypal ou CB !">
+                    </a>
+                </div>
+                <p class="lead col-12 text-center mb-5 fw-bold">Plus nous serons nombreux, plus nous pèserons dans les décisions.</p>
+            </div>
+            </div>
+        </div>
+    </div>
+
+{# 
+    <div class="row text-black justify-content-center">
+        <div class="col-11 col-md-9 d-flex justify-content-center flex-wrap">           
+            <div class="card col-12 my-3 bg-primary">
+                <div class="card-header">Être syndiqué, ça veut dire quoi ?</div>
+                <div class="card-body">
+                    <p>Une personne syndiquée est une personne qui choisit d'adhérer à une organisation syndicale.<br/>
+                    Un syndicat est un regroupement volontaire de personnes ayant pour objet de faire connaître et défendre les droits et intérêts collectifs.<br/>
+                    Le syndicat mobilise, conteste, propose, revendique et négocie afin de faire respecter et évoluer les droits collectifs.</p>
+                </div>
+            </div>
+            <div class="card col-12 my-3 bg-primary">
+                <div class="card-header">Pourquoi être syndiqué ?</div>
+                <div class="card-body">
+                    <ul>Il existe plusieurs raisons de se syndiquer:                                            
+                        <li>Être informé de vos droits individuels et collectifs ainsi que de l'évolution de la législation</li>
+                        <li>Etre écouté et soutenu au quotidien durant son parcours professionnel</li>
+                        <li>Être accompagné pour faire face à une situation compliquée (sanction disciplinaire, licenciement, etc.)</li>
+                        <li>Relayer des informations auprès de vos collègues et de votre syndicat</li>
+                        <li>Se sentir utile en aidant, conseillant et informant les salariés sur leurs droits</li>
+                        <li>Contribuer activement à améliorer la vie au sein de l’entreprise</li>
+                        <li>Vous pouvez vous présenter aux élections, et participer ainsi aux prises de décision</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card col-12 my-3 bg-primary">
+                <div class="card-header">Y'a t'il un risque pour ma carrière ?</div>
+                <div class="card-body">
+                    <p>Vous ne devez subir aucunes représailles de la part de votre employeur du fait de votre engagement syndical.<br/>
+                    En effet, le Code du travail vous protège contre toute forme de discrimination liée à l'appartenance à un syndicat (article L. 1132-1 du Code du travail).<br/>
+                    Toutefois, vous n'êtes absolument pas tenu de dire à votre employeur que vous adhérez à un syndicat.</p> 
+                </div>
+            </div>
+            <div class="card col-12 my-3 bg-primary">
+                <div class="card-header">A quoi sert la cotisation ?</div>
+                <div class="card-body">
+                    <p>Cotisation annuelle {{configuration.cotisation}} €</p>
+                    <p>Cette cotisation permet notamment au syndicat de financer son activité, d'informer et défendre ses adhérents et de former les militants (tracts, site Internet, frais de déplacement…)</p>
+                    <p>En versant {{configuration.cotisation}} au SAPEF, vous bénéficiez d'un crédit d'impôt de {{ (configuration.cotisation * 66 / 100) }} € (66 % de la cotisation annuelle payée).</p> 
+                    <p class="lead">En adhérant, vous ferez partie d’un groupe autonome, dynamique et sympathique !</p>
+                    <p class="col-12 text-center">Vous pouvez faire un don par virement:<br/>
+                            IBAN: {{ configuration.iban }}<br/>
+                            BIC: {{ configuration.bic }}
+                    </p>
+                    <p class="col-12 text-center mt-3">Ou en cliquant sur le logo ci-dessous:</div>
+
+                    <!-- Paiement Section Button-->
+                    <div class="col-12 text-center mb-3">
+                        <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=BBW6UW73TKFZ8&source=url">
+                            <img class="col-11 col-md-9 col-xl-6 mx-auto" src="{{ asset('build/images/site/paypal.png') }}" alt="Faire un don par Paypal ou CB !" data-bs-toggle="tooltip" data-bs-html="true" title="Faire un don par Paypal ou CB !">
+                        </a>
+                    </div>
+                    <p class="lead col-12 text-center mb-5 fw-bold">Plus nous serons nombreux, plus nous pèserons dans les décisions.</p>
+                </div>
+            </div>
+        </div>
+    </div> #}
+{% endblock %}

@@ -8,12 +8,14 @@ use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use Symfony\Component\HttpFoundation\RequestStack;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserCrudController extends AbstractCrudController
 {
@@ -22,14 +24,38 @@ class UserCrudController extends AbstractCrudController
         return User::class;
     }
 
+    public function __construct(
+        private RequestStack $requestStack,
+        private UserPasswordHasherInterface $userPasswordHasher
+    )
+    {
+        
+    }
+
     public function configureFields(string $pageName): iterable
     {
+
+        //?edition logic
+        $id = $this->requestStack->getCurrentRequest()->get('entityId');
+        if($id){
+            $disabled = true;
+        }else{
+            $disabled = false;
+        }
+
+
         return [
             TextField::new('email'),
+            TextField::new('password')
+                ->setLabel('Mot de passe: (Si création => BienvenueAuSapef)')
+                ->hideOnIndex()
+                ->setFormTypeOption('disabled','disabled'),
             TextField::new('nickname')->onlyOnForms(),
-            AssociationField::new('job')->setLabel('Métier ERM:')->setDisabled(true),
-            AssociationField::new('sex')->setLabel('Genre:')->setDisabled(true)->onlyOnForms(),
-            AssociationField::new('shop')->setLabel('Centre:')->setDisabled(true),
+            TextField::new('firstname')->setLabel('Prénom:')->hideOnIndex(),
+            TextField::new('lastname')->setLabel('Nom:')->hideOnIndex(),
+            AssociationField::new('job')->setLabel('Métier ERM:')->setDisabled($disabled),
+            AssociationField::new('sex')->setLabel('Genre:')->setDisabled($disabled)->onlyOnForms(),
+            AssociationField::new('shop')->setLabel('Centre:')->setDisabled($disabled),
             ImageField::new('image')->setLabel('Image:')->setBasePath($this->getParameter('app.path.images_users'))->onlyOnIndex(),
             TextField::new('imageFile')->setFormType(VichImageType::class)->setFormTypeOptions([
                 //TODO vérifier les options
@@ -71,7 +97,12 @@ class UserCrudController extends AbstractCrudController
     {
         if ($entityInstance instanceof User) {
             $now = new DateTimeImmutable ('now');
-            $entityInstance->setCreatedAt($now)->setLastVisiteAt($now);
+            $entityInstance->setCreatedAt($now)->setLastVisiteAt($now)->setPassword(
+                $this->userPasswordHasher->hashPassword(
+                    $entityInstance,
+                    "BienvenueAuSapef"
+                )
+            );
 
             $entityManager->persist($entityInstance);
             $entityManager->flush();

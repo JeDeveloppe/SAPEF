@@ -1,0 +1,15 @@
+{% extends 'site/base.html.twig' %}
+
+{% block title %}Le bureau du SAPEF{% endblock %}
+
+{% block body %}
+    <h1 class="page-section-heading text-center text-black text-uppercase mt-5">Le bureau du SAPEF</h1>
+
+    {% include "site/components/hr.html.twig" %}
+
+     <div class="row text-black justify-content-around">
+        {% for bureau in bureaux %}
+            {% include "site/components/card_bureau.html.twig" with {'elu': bureau} %}
+        {% endfor %}
+    </div>
+{% endblock %}
