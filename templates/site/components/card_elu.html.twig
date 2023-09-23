@@ -1,0 +1,30 @@
+<div class="col-12 col-sm-11 col-md-9 col-lg-6 col-xl-5 col-xxl-4 mb-3">
+    <div class="card p-0 col-12 h-100">
+        <div class="card-header bg-primary">{{ elu.status }}</div>
+        <div class="card-body d-flex flex-wrap p-0">
+            <div class="col-6 p-4">
+                <i class="fas fa-user"></i> {{ elu.name.firstname }} {{ elu.name.lastname }}<br/>
+                <small><i class="fas fa-briefcase"></i> {{ elu.name.job.name }} </small><br/>
+                <i class="fas fa-location"></i> {{ elu.name.shop.name }}<br/>
+                {% if elu.name.phone is not null %}
+                    <br/><i class="fas fa-mobile-alt"></i> : {{ elu.name.phone }}
+                {% endif %}
+            </div>
+            <div class="col-6 p-4 d-flex justify-content-center">
+                {% if elu.name.image is not null %}
+                    <img class="img-thumbnail" src="{{ vich_uploader_asset(elu.name, 'imageFile') }}"/>
+                {% else %}
+                    <img class="img-thumbnail" src="{{ asset('/build/images/design/placeholder.png') }}" alt="Image à renseigner">
+                {% endif %}
+            </div>
+            <div class="col-6 mx-auto p-2">
+                <select class="form-select" name="departements_from_elu">
+                    <option value="">Départements...</option>
+                        {% for department in elu.regionErm.departements %}{
+                            <option value="">{{ department.number }} - {{ department.name }}</option>
+                        {% endfor %}
+                </select>
+            </div>
+        </div>
+    </div>
+</div>

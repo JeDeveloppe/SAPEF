@@ -3,8 +3,10 @@
 {% block title %}Les élus du Sapef{% endblock %}
 
 {% block body %}
-    <div class="js-locations" data-locations="{{ jsonStores }}"></div>
-    <div class="js-states" data-states="{{ jsonStates }}"></div>
+    {% dump(donnees) %}
+
+    <div class="js-locations" data-locations="{{ donnees.stores }}"></div>
+    <div class="js-states" data-states="{{ donnees.states }}"></div>
  
     <h1 class="page-section-heading text-center text-black text-uppercase mt-5">Les élus du Sapef</h1>
 
@@ -18,7 +20,8 @@
         </div>
     </div>
 
-    {% if titulaires|length > 0 %}
+    {% if donnees.titulaires|length > 0 %}
+    {% set titulaires = donnees.titulaires %}
         {% include "site/components/hr.html.twig" %}
 
         <div class="row my-5 text-black justify-content-around">
@@ -29,8 +32,8 @@
     {% endif %}
 
 
-    {% if suppleants|length > 0 %}
-
+    {% if donnees.suppleants|length > 0 %}
+    {% set suppleants = donnees.suppleants %}
         {% include "site/components/hr.html.twig" %}
         
         <div class="row my-5 text-black justify-content-around">

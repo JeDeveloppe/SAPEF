@@ -1,0 +1,16 @@
+<div id="header" class="">
+
+    {# {% set route =  app.request.attributes.get('_route') %}
+    {% if route is not same as "app_site" %}
+            <div class="col-11 mx-auto d-flex justify-content-center align-items-center py-2">
+                <div id="text_nav" class="d-inline-block text-black">
+                    Temps restant pour posez vos questions de la prochaine réunion {{ nextMeeting.statut.name }} du {{ nextMeetingDate|date("d-m-Y") }}:
+                </div>
+                <div id="countdown" class="ms-2">
+                    <div id='tiles'></div>
+                </div>
+            </div>
+    {% endif %} #}
+    
+    {% include "site/nav.html.twig" %}
+</div>

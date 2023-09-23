@@ -129,7 +129,6 @@ class EluService
         $donnees['stores'] = $jsonStores;
         $donnees['states'] = $jsonStates;
 
-        dd($donnees);
         return $donnees;
     }
 }
