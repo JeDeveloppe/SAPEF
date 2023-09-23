@@ -2,24 +2,26 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\EluStatus;
+use App\Entity\SexStatus;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 
-class EluStatusCrudController extends AbstractCrudController
+class SexStatusCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return EluStatus::class;
+        return SexStatus::class;
     }
 
     public function configureFields(string $pageName): iterable
     {
         return [
             TextField::new('name'),
+            AssociationField::new('users')->setLabel('Qté:')->onlyOnIndex()
         ];
     }
 
@@ -27,10 +29,10 @@ class EluStatusCrudController extends AbstractCrudController
     {
         return $crud
             ->showEntityActionsInlined()
-            ->setPageTitle('index', 'Liste des status')
-            ->setPageTitle('new', 'Nouveau status')
-            ->setPageTitle('edit', 'Édition d\'un status')
-            ->setDefaultSort(['name' => 'DESC'])
+            ->setPageTitle('index', 'Liste des genres')
+            ->setPageTitle('new', 'Nouveau genre')
+            ->setPageTitle('edit', 'Édition d\'un genre')
+            ->setDefaultSort(['name' => 'ASC'])
             ;
     }
 

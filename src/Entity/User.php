@@ -72,11 +72,25 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
+    #[ORM\OneToMany(mappedBy: 'updatedBy', targetEntity: Elu::class)]
+    private Collection $updatedElus;
+
+    #[ORM\Column(length: 255)]
+    private ?string $lastname = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $firstname = null;
+
+    #[ORM\ManyToOne(inversedBy: 'users')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?SexStatus $sex = null;
+
     public function __construct()
     {
         $this->elus = new ArrayCollection();
         $this->desks = new ArrayCollection();
         $this->paiements = new ArrayCollection();
+        $this->updatedElus = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -341,6 +355,72 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function __toString()
     {
-        return $this->email;
+        return $this->firstname.' '.$this->lastname.' - '.$this->email;
+    }
+
+    /**
+     * @return Collection<int, Elu>
+     */
+    public function getUpdatedElus(): Collection
+    {
+        return $this->updatedElus;
+    }
+
+    public function addUpdatedElu(Elu $updatedElu): static
+    {
+        if (!$this->updatedElus->contains($updatedElu)) {
+            $this->updatedElus->add($updatedElu);
+            $updatedElu->setUpdatedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUpdatedElu(Elu $updatedElu): static
+    {
+        if ($this->updatedElus->removeElement($updatedElu)) {
+            // set the owning side to null (unless already changed)
+            if ($updatedElu->getUpdatedBy() === $this) {
+                $updatedElu->setUpdatedBy(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getLastname(): ?string
+    {
+        return $this->lastname;
+    }
+
+    public function setLastname(string $lastname): static
+    {
+        $this->lastname = $lastname;
+
+        return $this;
+    }
+
+    public function getFirstname(): ?string
+    {
+        return $this->firstname;
+    }
+
+    public function setFirstname(string $firstname): static
+    {
+        $this->firstname = $firstname;
+
+        return $this;
+    }
+
+    public function getSex(): ?SexStatus
+    {
+        return $this->sex;
+    }
+
+    public function setSex(?SexStatus $sex): static
+    {
+        $this->sex = $sex;
+
+        return $this;
     }
 }

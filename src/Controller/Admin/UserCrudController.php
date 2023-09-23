@@ -13,6 +13,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 
 class UserCrudController extends AbstractCrudController
 {
@@ -26,6 +27,9 @@ class UserCrudController extends AbstractCrudController
         return [
             TextField::new('email'),
             TextField::new('nickname')->onlyOnForms(),
+            AssociationField::new('job')->setLabel('Métier ERM:')->setDisabled(true),
+            AssociationField::new('sex')->setLabel('Genre:')->setDisabled(true)->onlyOnForms(),
+            AssociationField::new('shop')->setLabel('Centre:')->setDisabled(true),
             ImageField::new('image')->setLabel('Image:')->setBasePath($this->getParameter('app.path.images_users'))->onlyOnIndex(),
             TextField::new('imageFile')->setFormType(VichImageType::class)->setFormTypeOptions([
                 //TODO vérifier les options
@@ -51,7 +55,7 @@ class UserCrudController extends AbstractCrudController
             ->setPageTitle('index', 'Liste des membres')
             ->setPageTitle('new', 'Nouveau membre')
             ->setPageTitle('edit', 'Édition du membre')
-            ->setDefaultSort(['id' => 'DESC'])
+            ->setDefaultSort(['lastVisiteAt' => 'DESC'])
             ;
     }
 

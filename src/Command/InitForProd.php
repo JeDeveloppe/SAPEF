@@ -2,6 +2,7 @@
 
 namespace App\Command;
 
+use App\Repository\SexStatusRepository;
 use App\Service\InitForProd\CreationJobsEuromasterService;
 use App\Service\UserService;
 use Symfony\Component\Console\Command\Command;
@@ -11,6 +12,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use App\Service\InitForProd\ImportSapefRegionService;
 use Symfony\Component\Console\Output\OutputInterface;
 use App\Service\InitForProd\CreationMoyenDePaiementService;
+use App\Service\InitForProd\CreationSexService;
 use App\Service\InitForProd\ImportCityService;
 use App\Service\InitForProd\ImportDepartmentsService;
 use App\Service\InitForProd\ImportShopService;
@@ -26,7 +28,8 @@ class InitForProd extends Command
             private ImportDepartmentsService $importDepartmentsService,
             private ImportCityService $importCityService,
             private CreationJobsEuromasterService $creationJobsEuromasterService,
-            private ImportShopService $importShopService
+            private ImportShopService $importShopService,
+            private CreationSexService $creationSexService
             // private ImportDepartementsService $importDepartementsService,
             // private ImportVillesFrancaisesService $importVillesFrancaiseService,
             // private ImportPaiementService $importPaiementService,
@@ -43,10 +46,11 @@ class InitForProd extends Command
         $io = new SymfonyStyle($input,$output);
         
         $this->creationJobsEuromasterService->addJob($io);
+        $this->creationSexService->addsex($io);
         $this->creationMoyenDePaiementService->addMoyens($io);
         $this->importSapefRegionService->importRegionsErm($io);
         $this->importDepartmentsService->import($io);
-        $this->importCityService->import($io);
+        // $this->importCityService->import($io);
         $this->importShopService->import($io);
 
         //ON CREE OU ON MET A JOUR L'ADMIN

@@ -17,7 +17,24 @@ class CreationJobsEuromasterService
 
     public function addJob(SymfonyStyle $io){
 
-        $jobs = ['RCGO VI', 'RCGO VL', 'RCGO VI/VL','RCS VI','RCS VL','RCS MULTI SITE', 'ACS VI', 'ACS VL'];
+
+        //TODO FAIRE LISTE DES METIERS
+        $jobs = [];
+
+        //! NE PAS CHANGER
+        array_push($jobs,'RCGO VI');
+
+        //? METTRE A JOUR
+        //?LISTE AUX OPERATIONS
+        array_push($jobs,'DG');
+        array_push($jobs,'DO','DOA');
+        array_push($jobs,'AO', 'DR', 'RAVL');
+        array_push($jobs,'RCGO VL', 'RCGO VI / VL','RCS VI','RCS VL','RCS MULTI SITE', 'RZ VI');
+        array_push($jobs,'ACS VI', 'ACS VL', 'ACS ITINERANT');
+        array_push($jobs,'TECHNICIEN VI', 'TECHNICIEN VL', 'TECHNICIEN EAD');
+
+        //?LISTE AU COMMERCE
+        array_push($jobs,'ATC PL', 'ATC AGR', 'ATC GC');
 
         foreach($jobs as $jobArray){
 

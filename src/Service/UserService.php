@@ -5,6 +5,7 @@ namespace App\Service;
 use App\Entity\User;
 use App\Repository\CountryRepository;
 use App\Repository\JobRepository;
+use App\Repository\SexStatusRepository;
 use App\Repository\ShopRepository;
 use DateTimeImmutable;
 use App\Repository\UserRepository;
@@ -18,7 +19,8 @@ class UserService
         private UserPasswordHasherInterface $userPasswordHasher,
         private UserRepository $userRepository,
         private JobRepository $jobRepository,
-        private ShopRepository $shopRepository
+        private ShopRepository $shopRepository,
+        private SexStatusRepository $sexStatusRepository
         ){
     }
 
@@ -39,6 +41,9 @@ class UserService
             ->setEmail($_ENV['ADMIN_EMAIL'])
             ->setRoles(['ROLE_SUPER_ADMIN'])
             ->setNickname('JeDéveloppe')
+            ->setFirstname('René')
+            ->setLastname('WETTA')
+            ->setSex($this->sexStatusRepository->findOneBy(['name' => 'HOMME']))
             ->setPhone($_ENV['ADMIN_PHONE'])
             ->setShop($this->shopRepository->findOneBy(['counterMark' => '3428']))
             ->setJob($this->jobRepository->findOneBy(['name' => 'RCGO VI']))

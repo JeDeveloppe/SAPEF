@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\EluStatusRepository;
+use App\Repository\SexStatusRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: EluStatusRepository::class)]
-class EluStatus
+#[ORM\Entity(repositoryClass: SexStatusRepository::class)]
+class SexStatus
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -18,12 +18,12 @@ class EluStatus
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\OneToMany(mappedBy: 'status', targetEntity: Elu::class)]
-    private Collection $elus;
+    #[ORM\OneToMany(mappedBy: 'sex', targetEntity: User::class)]
+    private Collection $users;
 
     public function __construct()
     {
-        $this->elus = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -44,29 +44,29 @@ class EluStatus
     }
 
     /**
-     * @return Collection<int, Elu>
+     * @return Collection<int, User>
      */
-    public function getElus(): Collection
+    public function getUsers(): Collection
     {
-        return $this->elus;
+        return $this->users;
     }
 
-    public function addElu(Elu $elu): static
+    public function addUser(User $user): static
     {
-        if (!$this->elus->contains($elu)) {
-            $this->elus->add($elu);
-            $elu->setStatus($this);
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+            $user->setSex($this);
         }
 
         return $this;
     }
 
-    public function removeElu(Elu $elu): static
+    public function removeUser(User $user): static
     {
-        if ($this->elus->removeElement($elu)) {
+        if ($this->users->removeElement($user)) {
             // set the owning side to null (unless already changed)
-            if ($elu->getStatus() === $this) {
-                $elu->setStatus(null);
+            if ($user->getSex() === $this) {
+                $user->setSex(null);
             }
         }
 

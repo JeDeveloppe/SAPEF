@@ -8,12 +8,15 @@ use App\Entity\RegionErm;
 use App\Entity\Department;
 use App\Entity\Desk;
 use App\Entity\DeskRole;
+use App\Entity\Elu;
+use App\Entity\EluStatus;
 use App\Entity\Job;
 use App\Entity\MeanOfPaiement;
 use App\Entity\Meeting;
 use App\Entity\MeetingName;
 use App\Entity\MeetingPlace;
 use App\Entity\Paiement;
+use App\Entity\SexStatus;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -45,24 +48,29 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Liste des types de réunions', 'fas fa-list', MeetingName::class);
         yield MenuItem::linkToCrud('Liste des lieux', 'fas fa-list', MeetingPlace::class);
 
-        yield MenuItem::section('Gestion du bureau:');
-        yield MenuItem::linkToCrud('Le bureau', 'fas fa-list', Desk::class);
-        yield MenuItem::linkToCrud('Liste des roles', 'fas fa-list', DeskRole::class);
-
-        yield MenuItem::section('Gestion des centres:');
-        yield MenuItem::linkToCrud('Centres', 'fas fa-list', Shop::class);
-
         yield MenuItem::section('Gestion des paiements:');
         yield MenuItem::linkToCrud('Liste des paiements', 'fas fa-list', Paiement::class);
         yield MenuItem::linkToCrud('Liste des moyens de paiement', 'fas fa-list', MeanOfPaiement::class);
 
-
         yield MenuItem::section('Gestion des membres:');
         yield MenuItem::linkToCrud('Liste des membres', 'fas fa-list', User::class);
         yield MenuItem::linkToCrud('Liste des métiers', 'fas fa-list', Job::class);
+        yield MenuItem::linkToCrud('Liste des genres', 'fas fa-list', SexStatus::class);
+        
+        yield MenuItem::section('Gestion du bureau:');
+        yield MenuItem::linkToCrud('Le bureau', 'fas fa-list', Desk::class);
+        yield MenuItem::linkToCrud('Liste des roles', 'fas fa-list', DeskRole::class);
+
+        yield MenuItem::section('Gestion des élus:');
+        yield MenuItem::linkToCrud('Les élus', 'fas fa-list', Elu::class);
+        yield MenuItem::linkToCrud('Liste des status', 'fas fa-list', EluStatus::class);
 
         yield MenuItem::section('Paramètres géographiques:');
         yield MenuItem::linkToCrud('Régions ERM', 'fas fa-list', RegionErm::class);
         yield MenuItem::linkToCrud('Départements', 'fas fa-list', Department::class);
+
+        yield MenuItem::section('Gestion des centres:');
+        yield MenuItem::linkToCrud('Centres', 'fas fa-list', Shop::class);
     }
+
 }

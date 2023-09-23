@@ -25,6 +25,13 @@ class Elu
     #[ORM\JoinColumn(nullable: false)]
     private ?RegionErm $regionErm = null;
 
+    #[ORM\ManyToOne(inversedBy: 'updatedElus')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $updatedBy = null;
+
+    #[ORM\Column]
+    private ?\DateTimeImmutable $updatedAt = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -64,5 +71,34 @@ class Elu
         $this->regionErm = $regionErm;
 
         return $this;
+    }
+
+    public function getUpdatedBy(): ?User
+    {
+        return $this->updatedBy;
+    }
+
+    public function setUpdatedBy(?User $updatedBy): static
+    {
+        $this->updatedBy = $updatedBy;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }
