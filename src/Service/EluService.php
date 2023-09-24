@@ -86,7 +86,7 @@ class EluService
             foreach($elus as $elu){
 
                 //on rempli l'array pour faire un tri alphabetique par la suite
-                $listeUsers[] = $elu->getName()->getFirstname().' '.$elu->getName()->getLastname().' ('.$elu->getName()->getJob().') '.$elu->getName()->getPhone();
+                $listeUsers[] = $elu->getName()->getFirstname().' '.$elu->getName()->getLastname().' ('.$elu->getName()->getJob().')<br/><i class="fas fa-mobile-alt"></i>: '.$elu->getName()->getPhone();
 
                 $stores[] = 
                 [
@@ -94,7 +94,7 @@ class EluService
                 "lng" => $elu->getName()->getShop()->getLongitude(),
                 "name" => $elu->getName()->getShop()->getName(),
                 "color" => "#000000",
-                "description" => $elu->getName()->getFirstName().' '.$elu->getName()->getLastname().' ('.$elu->getName()->getJob().')'
+                "description" => $elu->getName()->getFirstName().' '.$elu->getName()->getLastname().' ('.$elu->getName()->getJob().')<br/><i class="fas fa-mobile-alt"></i>: '.$elu->getName()->getPhone()
                 ];
 
                 $departments = $region->getDepartments();

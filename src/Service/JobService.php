@@ -36,6 +36,9 @@ class JobService
         //?LISTE AU COMMERCE
         array_push($jobs,'ATC PL', 'ATC AGR', 'ATC GC');
 
+        //?LISTE AU SIEGE ?
+        // array_push($jobs,'ATC PL', 'ATC AGR', 'ATC GC');
+
         foreach($jobs as $jobArray){
 
             $job = $this->jobRepository->findOneBy(['name' => $jobArray]);

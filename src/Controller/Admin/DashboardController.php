@@ -43,15 +43,15 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linkToRoute('SITE','fa-solid fa-shop','app_site_home');
+        yield MenuItem::linkToRoute('SITE','fa-solid fa-earth-europe','app_site_home');
         
         yield MenuItem::section('Gestion des réunions:');
-        yield MenuItem::linkToCrud('Les réunions', 'fas fa-list', Meeting::class);
+        yield MenuItem::linkToCrud('Les réunions', 'fa-solid fa-handshake', Meeting::class);
         yield MenuItem::linkToCrud('Liste des types de réunions', 'fas fa-list', MeetingName::class);
         yield MenuItem::linkToCrud('Liste des lieux', 'fas fa-list', MeetingPlace::class);
 
         yield MenuItem::section('Gestion des paiements:');
-        yield MenuItem::linkToCrud('Liste des paiements', 'fas fa-list', Paiement::class);
+        yield MenuItem::linkToCrud('Liste des paiements', 'fa-solid fa-money-bill', Paiement::class);
         yield MenuItem::linkToCrud('Liste des moyens de paiement', 'fas fa-list', MeanOfPaiement::class);
 
         yield MenuItem::section('Gestion des membres:');
@@ -60,11 +60,11 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Liste des genres', 'fas fa-list', SexStatus::class);
         
         yield MenuItem::section('Gestion du bureau:');
-        yield MenuItem::linkToCrud('Le bureau', 'fas fa-list', Desk::class);
+        yield MenuItem::linkToCrud('Le bureau', 'fa-solid fa-users-rectangle', Desk::class);
         yield MenuItem::linkToCrud('Liste des roles', 'fas fa-list', DeskRole::class);
 
         yield MenuItem::section('Gestion des élus:');
-        yield MenuItem::linkToCrud('Les élus', 'fas fa-list', Elu::class);
+        yield MenuItem::linkToCrud('Les élus', 'fa-solid fa-user-secret', Elu::class);
         yield MenuItem::linkToCrud('Liste des status', 'fas fa-list', EluStatus::class);
 
         yield MenuItem::section('Paramètres géographiques:');
@@ -75,8 +75,8 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Centres', 'fas fa-list', Shop::class);
 
         yield MenuItem::section('Gestion administratif:');
-        yield MenuItem::linkToCrud('Configurations', 'fas fa-list', ConfigurationSite::class);
-        yield MenuItem::linkToCrud('Informations légales', 'fas fa-list', LegalInformation::class);
+        yield MenuItem::linkToCrud('Configurations', 'fa-solid fa-gear', ConfigurationSite::class);
+        yield MenuItem::linkToCrud('Informations légales', 'fa-solid fa-scale-balanced', LegalInformation::class);
     }
 
 }
