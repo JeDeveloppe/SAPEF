@@ -97,7 +97,7 @@ class EluService
                 "description" => $elu->getName()->getFirstName().' '.$elu->getName()->getLastname().' ('.$elu->getName()->getJob().')'
                 ];
 
-                $departements = $elu->getRegionErm()->getDepartements();
+                $departments = $region->getDepartments();
 
                 //tri alphabetique de l'array
                 asort($listeUsers);
@@ -109,11 +109,11 @@ class EluService
                     }
                 $liste_users .= '</ul>';
                 
-                foreach($departements as $departement){
+                foreach($departments as $department){
     
-                    $states[$departement->getCodeMap()] =
+                    $states[$department->getCodeMap()] =
                     [
-                        "name" => $departement->getName().' ('.$departement->getNumber().')',
+                        "name" => $department->getName().' ('.$department->getNumber().')',
                         "description" => $liste_users,
                         "color" => $elu->getRegionErm()->getColor(),
                         "hover_color" => $elu->getRegionErm()->getColorHover(),

@@ -24,8 +24,8 @@ class RegionErmCrudController extends AbstractCrudController
             TextField::new('name')->setLabel('Nom:'),
             ColorField::new('color')->setLabel('Couleur de la région:'),
             ColorField::new('colorHover')->setLabel('Couleur de la région (hover)'),
-            AssociationField::new('departements')->setLabel('Qté de départements rattachés:')->onlyOnIndex(),
-            AssociationField::new('departements')->setLabel('Les départements rattachés:')->onlyOnForms(),
+            AssociationField::new('departments')->setLabel('Qté de départements rattachés:')->onlyOnIndex(),
+            AssociationField::new('departments')->setLabel('Les départements rattachés:')->onlyOnForms(),
             AssociationField::new('elus')->setLabel('Qté élus:')->onlyOnIndex(),
             AssociationField::new('elus')->setLabel('Les élus:')->onlyOnForms()->setDisabled(true),
 

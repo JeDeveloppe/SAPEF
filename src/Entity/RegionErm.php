@@ -27,13 +27,13 @@ class RegionErm
     #[ORM\OneToMany(mappedBy: 'regionErm', targetEntity: Elu::class)]
     private Collection $elus;
 
-    #[ORM\OneToMany(mappedBy: 'regionErm', targetEntity: Department::class)]
-    private Collection $departements;
+    #[ORM\ManyToMany(targetEntity: Department::class, inversedBy: 'regionErms')]
+    private Collection $departments;
 
     public function __construct()
     {
         $this->elus = new ArrayCollection();
-        $this->departements = new ArrayCollection();
+        $this->departments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -107,38 +107,32 @@ class RegionErm
         return $this;
     }
 
-    /**
-     * @return Collection<int, Department>
-     */
-    public function getDepartements(): Collection
-    {
-        return $this->departements;
-    }
-
-    public function addDepartement(Department $departement): static
-    {
-        if (!$this->departements->contains($departement)) {
-            $this->departements->add($departement);
-            $departement->setRegionErm($this);
-        }
-
-        return $this;
-    }
-
-    public function removeDepartement(Department $departement): static
-    {
-        if ($this->departements->removeElement($departement)) {
-            // set the owning side to null (unless already changed)
-            if ($departement->getRegionErm() === $this) {
-                $departement->setRegionErm(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function __toString()
     {
         return $this->name;
+    }
+
+    /**
+     * @return Collection<int, Department>
+     */
+    public function getDepartments(): Collection
+    {
+        return $this->departments;
+    }
+
+    public function addDepartment(Department $department): static
+    {
+        if (!$this->departments->contains($department)) {
+            $this->departments->add($department);
+        }
+
+        return $this;
+    }
+
+    public function removeDepartment(Department $department): static
+    {
+        $this->departments->removeElement($department);
+
+        return $this;
     }
 }

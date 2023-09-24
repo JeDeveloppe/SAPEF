@@ -30,13 +30,14 @@ class Department
     #[ORM\OneToMany(mappedBy: 'department', targetEntity: Shop::class)]
     private Collection $shops;
 
-    #[ORM\ManyToOne(inversedBy: 'departements')]
-    private ?RegionErm $regionErm = null;
+    #[ORM\ManyToMany(targetEntity: RegionErm::class, mappedBy: 'departments')]
+    private Collection $regionErms;
 
     public function __construct()
     {
         $this->cities = new ArrayCollection();
         $this->shops = new ArrayCollection();
+        $this->regionErms = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -145,14 +146,29 @@ class Department
         return $this->number.' - '.$this->name;
     }
 
-    public function getRegionErm(): ?RegionErm
+    /**
+     * @return Collection<int, RegionErm>
+     */
+    public function getRegionErms(): Collection
     {
-        return $this->regionErm;
+        return $this->regionErms;
     }
 
-    public function setRegionErm(?RegionErm $regionErm): static
+    public function addRegionErm(RegionErm $regionErm): static
     {
-        $this->regionErm = $regionErm;
+        if (!$this->regionErms->contains($regionErm)) {
+            $this->regionErms->add($regionErm);
+            $regionErm->addDepartment($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRegionErm(RegionErm $regionErm): static
+    {
+        if ($this->regionErms->removeElement($regionErm)) {
+            $regionErm->removeDepartment($this);
+        }
 
         return $this;
     }
