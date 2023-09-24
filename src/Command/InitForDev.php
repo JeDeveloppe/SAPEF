@@ -64,6 +64,7 @@ class InitForDev extends Command
         // $this->regionErmService->importRegionsErmForDev($io);
         // $this->departmentService->importDepartmentsForDev($io);
         // $this->cityService->importCsvCityForDev($io);
+        //TODO IN SHOP.CSV VOIR NUMBER CM FOR SIEGE AND UPDATE IN ...AllAdminsUsersForDev
         // $this->shopService->importCsvShopForDev($io);
         $this->userService->initAdminUserForDev($io);
         // $this->legalInformationService->addLegalInformationForDev($io);

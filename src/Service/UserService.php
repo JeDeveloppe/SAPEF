@@ -74,10 +74,21 @@ class UserService
             'nickname' => 'Jean-Luc',
             'firstname' => 'Jean-Luc',
             'lastname' => 'BORD',
-            'sex' => $this->sexStatusRepository->findOneBy(['name' => 'HOMME']), //? HOMME FEMME
+            'sex' => 'HOMME', //? HOMME FEMME
             'phone' => '00.00.00.00.00',
-            'shop' => $this->shopRepository->findOneBy(['counterMark' => 3203]), //? Vérifier dans table SHOP
-            'job' => $this->jobRepository->findOneBy(['name' => 'AO'])  //? Vérifier dans table JOB
+            'shop' => 3203, //? Vérifier dans table SHOP
+            'job' => 'AO'  //? Vérifier dans table JOB
+        ];
+        $users['Alain'] = [
+            'email' => 'alain.donel@euromaster.com',
+            'role' => ['ROLE_ADMIN'],
+            'nickname' => 'Alain',
+            'firstname' => 'Alain',
+            'lastname' => 'DONEL',
+            'sex' => 'HOMME', //? HOMME FEMME
+            'phone' => '00.00.00.00.00',
+            'shop' => 3204, //TODO à vérifier
+            'job' => 'TECHNICIEN EAD' //TODO à vérifier
         ];
         $users['Philippe'] = [
             'email' => 'philippe.chambat@euromaster.com',
@@ -85,10 +96,10 @@ class UserService
             'nickname' => 'Philippe',
             'firstname' => 'Philippe',
             'lastname' => 'CHAMBAT',
-            'sex' => $this->sexStatusRepository->findOneBy(['name' => 'HOMME']), //? HOMME FEMME
+            'sex' => 'HOMME', //? HOMME FEMME
             'phone' => '00.00.00.00.00',
-            'shop' => $this->shopRepository->findOneBy(['counterMark' => 0000]), //? Vérifier dans table SHOP
-            'job' => $this->jobRepository->findOneBy(['name' => 'AO']) //? Vérifier dans table JOB
+            'shop' => 3999, //TODO
+            'job' => 'AO' //TODO a vérifier
         ];
         $users['Thierry'] = [
             'email' => 'thierry.vivien@euromaster.com',
@@ -96,25 +107,48 @@ class UserService
             'nickname' => 'Thierry',
             'firstname' => 'Thierry',
             'lastname' => 'VIVIEN',
-            'sex' => $this->sexStatusRepository->findOneBy(['name' => 'HOMME']), //? HOMME FEMME
+            'sex' => 'HOMME', //? HOMME FEMME
             'phone' => '00.00.00.00.00',
-            'shop' => $this->shopRepository->findOneBy(['counterMark' => 0000]), //? Vérifier dans table SHOP
-            'job' => $this->jobRepository->findOneBy(['name' => 'ACS ITINERANT']) //? Vérifier dans table JOB
+            'shop' => 3999, //TODO à vérifier
+            'job' => 'ACS ITINERANT' //TODO à vérifier
         ];
-        $users['Thierry'] = [
+        $users['MarieDelphine'] = [
             'email' => 'marie-delphine.carneiro@euromaster.com',
             'role' => ['ROLE_ADMIN'],
             'nickname' => 'M-D',
             'firstname' => 'Marie-Delphine',
             'lastname' => 'CARNEIRO',
-            'sex' => $this->sexStatusRepository->findOneBy(['name' => 'FEMME']), //? HOMME FEMME
+            'sex' => 'FEMME', //? HOMME FEMME
             'phone' => '00.00.00.00.00',
-            'shop' => $this->shopRepository->findOneBy(['counterMark' => 0000]), //? Vérifier dans table SHOP
-            'job' => $this->jobRepository->findOneBy(['name' => 'ACS ITINERANT']) //? Vérifier dans table JOB
+            'shop' => 3999, //TODO à vérifier
+            'job' => 'ACS ITINERANT' //TODO à vérifier
         ];
+        $users['Martine'] = [
+            'email' => 'martine.tessa@euromaster.com',
+            'role' => ['ROLE_ADMIN'],
+            'nickname' => 'Martine',
+            'firstname' => 'Martine',
+            'lastname' => 'TESSA',
+            'sex' => 'FEMME', //? HOMME FEMME
+            'phone' => '00.00.00.00.00',
+            'shop' => 3999, //TODO à vérifier
+            'job' => 'ACS ITINERANT' //TODO à vérifier
+        ];
+        $users['Kévin'] = [
+            'email' => 'kevin.formet@euromaster.com',
+            'role' => ['ROLE_ADMIN'],
+            'nickname' => 'Kévin',
+            'firstname' => 'Kévin',
+            'lastname' => 'FORMET',
+            'sex' => 'HOMME', //? HOMME FEMME
+            'phone' => '00.00.00.00.00',
+            'shop' => 3999, //TODO à vérifier
+            'job' => 'TECHNICIEN EAD' //TODO à vérifier
+        ];
+      
         
 
-        $io->title('Création des rôles du bureau');
+        $io->title('Création des admins');
         $io->progressStart(count($users));
 
         foreach($users as $array){
@@ -133,16 +167,11 @@ class UserService
             ->setNickname($array['nickname'])
             ->setFirstname($array['firstname'])
             ->setLastname($array['lastname'])
-            ->setSex($array['sex'])
+            ->setSex($this->sexStatusRepository->findOneBy(['name' => $array['sex']]))
             ->setPhone($array['phone'])
-            ->setShop($array['shop'])
-            ->setJob($array['job'])
-            ->setPassword(
-                $this->userPasswordHasher->hashPassword(
-                        $user,
-                        $password
-                    )
-                );
+            ->setShop($this->shopRepository->findOneBy(['counterMark' => $array['shop']]))
+            ->setJob($this->jobRepository->findOneBy(['name' => $array['job']]))
+            ->setPassword($this->userPasswordHasher->hashPassword($user, $password));
 
             $this->em->persist($user);
         }
