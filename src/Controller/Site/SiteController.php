@@ -2,12 +2,18 @@
 
 namespace App\Controller\Site;
 
+use App\Entity\Contact;
+use App\Form\ContactType;
 use App\Repository\ConfigurationSiteRepository;
 use App\Repository\DeskRepository;
 use App\Repository\LegalInformationRepository;
 use App\Service\EluService;
 use App\Service\MeetingService;
+use DateTimeImmutable;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -16,7 +22,8 @@ class SiteController extends AbstractController
     public function __construct(
         private DeskRepository $deskRepository,
         private LegalInformationRepository $legalInformationRepository,
-        private MeetingService $meetingService
+        private MeetingService $meetingService,
+        private Security $security
     )
     {
     }
@@ -26,6 +33,46 @@ class SiteController extends AbstractController
     {
         return $this->render('site/pages/index.html.twig', [
             'controller_name' => 'SiteController',
+        ]);
+    }
+
+    #[Route('/contactez-le-sapef', name: 'app_site_contact')]
+    public function contact(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $contact = new Contact();
+        $form = $this->createForm(ContactType::class, $contact);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+
+            $user = $this->security->getUser();
+
+            if(!$user){
+
+                $contact
+                    ->setEmail($form->get('email')->getData())
+                    ->setPhone($form->get('phone')->getData());
+
+            }else{
+
+                $contact
+                    ->setUser($user)
+                    ->setPhone($user->getPhone())
+                    ->setEmail($user->getEmail());
+            }
+
+            $contact
+                ->setCreatedAt(new DateTimeImmutable('now'))
+                ->setQuestion($form->get('question')->getData());
+
+            $entityManager->persist($contact);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Message envoyé - Merci');
+        }
+
+        return $this->render('site/pages/contact.html.twig', [
+            'contactForm' => $form->createView(),
         ]);
     }
 

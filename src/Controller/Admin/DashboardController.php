@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\ConfigurationSite;
+use App\Entity\Contact;
 use App\Entity\Shop;
 use App\Entity\User;
 use App\Entity\RegionErm;
@@ -45,6 +46,9 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToRoute('SITE','fa-solid fa-earth-europe','app_site_home');
         
+        yield MenuItem::section('Gestion des questions:');
+        yield MenuItem::linkToCrud('Les questions', 'fa-solid fa-circle-question', Contact::class);
+
         yield MenuItem::section('Gestion des réunions:');
         yield MenuItem::linkToCrud('Les réunions', 'fa-solid fa-handshake', Meeting::class);
         yield MenuItem::linkToCrud('Liste des types de réunions', 'fas fa-list', MeetingName::class);

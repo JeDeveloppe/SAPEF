@@ -90,12 +90,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?bool $isAgreeTerms = null;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Contact::class)]
+    private Collection $contacts;
+
+    #[ORM\OneToMany(mappedBy: 'answeredBy', targetEntity: Contact::class)]
+    private Collection $answers;
+
     public function __construct()
     {
         $this->elus = new ArrayCollection();
         $this->desks = new ArrayCollection();
         $this->paiements = new ArrayCollection();
         $this->updatedElus = new ArrayCollection();
+        $this->contacts = new ArrayCollection();
+        $this->answers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -437,6 +445,66 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsAgreeTerms(bool $isAgreeTerms): static
     {
         $this->isAgreeTerms = $isAgreeTerms;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Contact>
+     */
+    public function getContacts(): Collection
+    {
+        return $this->contacts;
+    }
+
+    public function addContact(Contact $contact): static
+    {
+        if (!$this->contacts->contains($contact)) {
+            $this->contacts->add($contact);
+            $contact->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeContact(Contact $contact): static
+    {
+        if ($this->contacts->removeElement($contact)) {
+            // set the owning side to null (unless already changed)
+            if ($contact->getUser() === $this) {
+                $contact->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Contact>
+     */
+    public function getAnswers(): Collection
+    {
+        return $this->answers;
+    }
+
+    public function addAnswer(Contact $answer): static
+    {
+        if (!$this->answers->contains($answer)) {
+            $this->answers->add($answer);
+            $answer->setAnsweredBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAnswer(Contact $answer): static
+    {
+        if ($this->answers->removeElement($answer)) {
+            // set the owning side to null (unless already changed)
+            if ($answer->getAnsweredBy() === $this) {
+                $answer->setAnsweredBy(null);
+            }
+        }
 
         return $this;
     }
