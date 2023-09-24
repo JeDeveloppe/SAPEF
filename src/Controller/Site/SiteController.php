@@ -6,6 +6,7 @@ use App\Repository\ConfigurationSiteRepository;
 use App\Repository\DeskRepository;
 use App\Repository\LegalInformationRepository;
 use App\Service\EluService;
+use App\Service\MeetingService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,7 +15,8 @@ class SiteController extends AbstractController
 {
     public function __construct(
         private DeskRepository $deskRepository,
-        private LegalInformationRepository $legalInformationRepository
+        private LegalInformationRepository $legalInformationRepository,
+        private MeetingService $meetingService
     )
     {
     }

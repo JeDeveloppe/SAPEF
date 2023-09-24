@@ -65,8 +65,8 @@ class ShopService
         ->setName($arrayEntity['name'])
         ->setCounterMark($arrayEntity['cm'])
         ->setAddress($arrayEntity['address'])
-        ->setLatitude($this->utilities->stringToNull($arrayEntity['longitude'])) //?ok inverser dans le csv
-        ->setLongitude($this->utilities->stringToNull($arrayEntity['latitude'])) //?ok inverser dans le csv
+        ->setLatitude($this->utilities->stringToNull($arrayEntity['latitude'])) 
+        ->setLongitude($this->utilities->stringToNull($arrayEntity['longitude']))
         ->setDepartment($this->departmentRepository->findOneBy(['number' => substr($arrayEntity['postal_code'],0,2)]));
 
         return $entity;

@@ -20,7 +20,7 @@
         </div>
     </div>
 
-    {% if donnees.titulaires|length > 0 %}
+    {% if donnees.titulaires is defined and donnees.titulaires|length > 0 %}
     {% set titulaires = donnees.titulaires %}
         {% include "site/components/hr.html.twig" %}
 
@@ -32,7 +32,7 @@
     {% endif %}
 
 
-    {% if donnees.suppleants|length > 0 %}
+    {% if donnees.suppleants is defined and donnees.suppleants|length > 0 %}
     {% set suppleants = donnees.suppleants %}
         {% include "site/components/hr.html.twig" %}
         

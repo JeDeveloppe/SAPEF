@@ -375,7 +375,5 @@ var simplemaps_countrymap_mapdata={
   regions: {},
 };
 
-simplemaps_countrymap_mapdata["locations"] = JSON.parse(locations);
+simplemaps_countrymap_mapdata.locations = JSON.parse(locations);
 simplemaps_countrymap_mapdata["state_specific"] = JSON.parse(states);
-
-console.log(simplemaps_countrymap_mapdata.state_specific);

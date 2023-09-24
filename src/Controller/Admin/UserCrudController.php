@@ -26,7 +26,8 @@ class UserCrudController extends AbstractCrudController
 
     public function __construct(
         private RequestStack $requestStack,
-        private UserPasswordHasherInterface $userPasswordHasher
+        private UserPasswordHasherInterface $userPasswordHasher,
+        private EntityManagerInterface $entityManagerInterface
     )
     {
         
@@ -43,7 +44,6 @@ class UserCrudController extends AbstractCrudController
             $disabled = false;
         }
 
-
         return [
             TextField::new('email'),
             TextField::new('password')
@@ -53,9 +53,18 @@ class UserCrudController extends AbstractCrudController
             TextField::new('nickname')->onlyOnForms(),
             TextField::new('firstname')->setLabel('Prénom:')->hideOnIndex(),
             TextField::new('lastname')->setLabel('Nom:')->hideOnIndex(),
-            AssociationField::new('job')->setLabel('Métier ERM:')->setDisabled($disabled),
-            AssociationField::new('sex')->setLabel('Genre:')->setDisabled($disabled)->onlyOnForms(),
-            AssociationField::new('shop')->setLabel('Centre:')->setDisabled($disabled),
+            AssociationField::new('job')
+                ->setLabel('Métier ERM:')
+                ->setFormTypeOptions(['placeholder' => 'Sélectionner un métier...']),
+            AssociationField::new('sex')
+                ->setLabel('Genre:')
+                ->setDisabled($disabled)
+                ->onlyOnForms()
+                ->setFormTypeOptions(['placeholder' => 'Sélectionner un genre...']),
+            AssociationField::new('shop')
+                ->setLabel('Centre:')
+                ->setDisabled($disabled)
+                ->setFormTypeOptions(['placeholder' => 'Sélectionner un centre...']),
             ImageField::new('image')->setLabel('Image:')->setBasePath($this->getParameter('app.path.images_users'))->onlyOnIndex(),
             TextField::new('imageFile')->setFormType(VichImageType::class)->setFormTypeOptions([
                 //TODO vérifier les options

@@ -21,6 +21,37 @@ class MeetingRepository extends ServiceEntityRepository
         parent::__construct($registry, Meeting::class);
     }
 
+    public function save(Meeting $entity, bool $flush = false): void
+    {
+        $this->getEntityManager()->persist($entity);
+
+        if ($flush) {
+            $this->getEntityManager()->flush();
+        }
+    }
+
+    public function remove(Meeting $entity, bool $flush = false): void
+    {
+        $this->getEntityManager()->remove($entity);
+
+        if ($flush) {
+            $this->getEntityManager()->flush();
+        }
+    }
+
+    public function findNextMeeting($date): ?Meeting
+    {
+        return $this->createQueryBuilder('m')
+            // ->leftJoin('m.statut', 'ms')
+            ->where('m.date > :date')
+            // ->andWhere('ms.isDiscutable IS NOT NULL')
+            ->setParameter('date', $date)
+            ->setMaxResults(1)
+            ->orderBy('m.date', 'ASC')
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
 //    /**
 //     * @return Meeting[] Returns an array of Meeting objects
 //     */
