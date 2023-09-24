@@ -63,7 +63,7 @@ class InitBeforeProd extends Command
         // $this->genderService->addGenders($io);
         // $this->meansOfPaiementService->addMeansOfPaiements($io);
         // $this->regionErmService->importRegionsErm($io);
-        // $this->departmentService->importDepartments($io);
+        $this->departmentService->importDepartments($io);
         // $this->cityService->importCsv($io);
         $this->shopService->importCsv($io);
         // $this->userService->initForProd_adminUser($io);
