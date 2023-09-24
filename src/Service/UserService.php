@@ -48,6 +48,7 @@ class UserService
             ->setPhone($_ENV['ADMIN_PHONE'])
             ->setShop($this->shopRepository->findOneBy(['counterMark' => 3428]))
             ->setJob($this->jobRepository->findOneBy(['name' => 'RCGO VI']))
+            ->setIsAgreeTerms(true)
             ->setPassword(
                 $this->userPasswordHasher->hashPassword(
                         $user,
@@ -171,7 +172,8 @@ class UserService
             ->setPhone($array['phone'])
             ->setShop($this->shopRepository->findOneBy(['counterMark' => $array['shop']]))
             ->setJob($this->jobRepository->findOneBy(['name' => $array['job']]))
-            ->setPassword($this->userPasswordHasher->hashPassword($user, $password));
+            ->setPassword($this->userPasswordHasher->hashPassword($user, $password))
+            ->setIsAgreeTerms(true);
 
             $this->em->persist($user);
         }

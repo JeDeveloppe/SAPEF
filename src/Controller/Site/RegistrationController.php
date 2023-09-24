@@ -5,6 +5,7 @@ namespace App\Controller\Site;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Security\UserAuthenticator;
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,21 +16,26 @@ use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 
 class RegistrationController extends AbstractController
 {
-    #[Route('/register', name: 'app_register')]
+    #[Route('/inscription', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, UserAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if($form->isSubmitted() && $form->isValid() && $form->get('password')->getData() == $form->get('passwordVerify')->getData()) {
             // encode the plain password
+            $now = new DateTimeImmutable('now');
             $user->setPassword(
                 $userPasswordHasher->hashPassword(
                     $user,
-                    $form->get('plainPassword')->getData()
+                    $form->get('password')->getData()
                 )
-            );
+            )
+            ->setLastname(strtoupper($form->get('lastname')->getData()))
+            ->setFirstname(ucfirst($form->get('firstname')->getData()))
+            ->setCreatedAt($now)
+            ->setLastVisiteAt($now);
 
             $entityManager->persist($user);
             $entityManager->flush();
@@ -42,7 +48,7 @@ class RegistrationController extends AbstractController
             );
         }
 
-        return $this->render('registration/register.html.twig', [
+        return $this->render('site/registration/register.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
     }

@@ -87,6 +87,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\JoinColumn(nullable: false)]
     private ?SexStatus $sex = null;
 
+    #[ORM\Column]
+    private ?bool $isAgreeTerms = null;
+
     public function __construct()
     {
         $this->elus = new ArrayCollection();
@@ -422,6 +425,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setSex(?SexStatus $sex): static
     {
         $this->sex = $sex;
+
+        return $this;
+    }
+
+    public function getIsAgreeTerms(): ?bool
+    {
+        return $this->isAgreeTerms;
+    }
+
+    public function setIsAgreeTerms(bool $isAgreeTerms): static
+    {
+        $this->isAgreeTerms = $isAgreeTerms;
 
         return $this;
     }

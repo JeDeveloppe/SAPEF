@@ -24,7 +24,7 @@ class GenderService
         array_push($sexs,'HOMME', 'FEMME');
 
         //?METTRE A JOUR
-        array_push($sexs,'AUTRE', 'JE NE VEUX PAS LE RENSEIGNER');
+        array_push($sexs,'JE NE VEUX PAS LE RENSEIGNER');
 
         foreach($sexs as $sexArray){
 

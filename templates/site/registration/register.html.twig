@@ -1,0 +1,61 @@
+{% extends 'site/base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+    <h1 class="page-section-heading text-center text-black text-uppercase mt-5">Inscription</h1>
+
+    {% include "site/components/hr.html.twig" %}
+
+        {{ form_start(registrationForm) }}
+
+        <div class="col-11 col-lg-8 mx-auto d-flex flex-wrap justify-content-around my-4">
+            <div class="mb-3 col-11 mx-auto col-md-5 ">
+                <label class="form-label">{{ form_label(registrationForm.lastname) }}</label>
+                {{ form_widget(registrationForm.lastname) }}
+            </div>
+            <div class="mb-3 col-11 mx-auto col-md-5 ">
+                <label class="form-label">{{ form_label(registrationForm.firstname) }}</label>
+                {{ form_widget(registrationForm.firstname) }}
+            </div>
+            <div class="my-3 col-11 mx-auto col-md-8 offset-md-1 mx-md-0">
+                <label class="form-label">{{ form_label(registrationForm.email) }}</label>
+                {{ form_widget(registrationForm.email) }}
+                <div id="emailHelp" class="form-text">Identifiant de connexion.</div>
+            </div>
+            <div class="mb-3 col-11 mx-auto col-md-5 ">
+                <label class="form-label">{{ form_label(registrationForm.password) }}</label>
+                {{ form_widget(registrationForm.password) }}
+                <div id="PasswordHelp" class="form-text">Quelque chose de robuste...</div>
+            </div>
+            <div class="mb-3 col-11 mx-auto col-md-5 ">
+                <label class="form-label">{{ form_label(registrationForm.passwordVerify) }}</label>
+                {{ form_widget(registrationForm.passwordVerify) }}
+                <div id="PasswordVerifyHelp" class="form-text">Toujours quelque chose de robuste...</div>
+            </div>
+            <div class="mb-3 col-11 mx-auto col-md-5 ">
+                <label class="form-label">{{ form_label(registrationForm.sex) }}</label>
+                {{ form_widget(registrationForm.sex) }}
+            </div>
+            <div class="mb-3 col-11 mx-auto col-md-5 ">
+                <label class="form-label">{{ form_label(registrationForm.job) }}</label>
+                {{ form_widget(registrationForm.job) }}
+            </div>
+            <div class="mb-3 col-11 mx-auto col-md-5 ">
+                <label class="form-label">{{ form_label(registrationForm.shop) }}</label>
+                {{ form_widget(registrationForm.shop) }}
+            </div>
+            <div class="mb-3 col-11 mx-auto col-md-5 ">
+                <label class="form-label">{{ form_label(registrationForm.phone) }}</label>
+                {{ form_widget(registrationForm.phone) }}
+            </div>
+            <div class="my-3 col-11 mx-auto col-md-5  text-center">
+                <label class="form-label">{{ form_label(registrationForm.isAgreeTerms) }}</label>
+                {{ form_widget(registrationForm.isAgreeTerms) }}
+            </div>
+            <div class="col-12 text-center my-3">
+                <button type="submit" class="btn btn-success">Inscription</button>
+            </div>
+        </div>
+        {{ form_end(registrationForm) }}
+{% endblock %}
