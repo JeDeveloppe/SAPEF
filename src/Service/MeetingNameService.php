@@ -15,11 +15,10 @@ class MeetingNameService
         ){
     }
 
-    public function addMeetingName(SymfonyStyle $io): void
+    public function addMeetingNameForDev(SymfonyStyle $io): void
     {
         $entities = [];
 
-        //TODO FAIRE LISTE DES ENTITIES
         //! NE PAS CHANGER
         array_push($entities,'Réunion CSE');
 

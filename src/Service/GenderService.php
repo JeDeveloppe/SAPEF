@@ -15,7 +15,7 @@ class GenderService
         ){
     }
 
-    public function addGenders(SymfonyStyle $io){
+    public function addGendersForDev(SymfonyStyle $io){
 
         $sexs = [];
 

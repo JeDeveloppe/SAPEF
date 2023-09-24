@@ -17,11 +17,11 @@ class ConfigurationSiteService
         ){
     }
 
-    public function importConfigurationSite(SymfonyStyle $io): void
+    public function importForDevConfigurationSite(SymfonyStyle $io): void
     {
         $io->title('Importation des configurations');
 
-            $totals = $this->readCsvFile();
+            $totals = $this->readCsvFileForDev();
         
             $io->progressStart(count($totals));
 
@@ -40,10 +40,9 @@ class ConfigurationSiteService
         $io->success('Importation terminée');
     }
 
-    private function readCsvFile(): Reader
+    private function readCsvFileForDev(): Reader
     {
-        //TODO METTRE A JOUR LES DONNEES DANS LE CSV CONFIG
-        $csv = Reader::createFromPath('%kernel.root.dir%/../.docs/import/configuration_site.csv','r');
+        $csv = Reader::createFromPath('%kernel.root.dir%/../.docs/importForDev/configuration_site.csv','r');
         $csv->setHeaderOffset(0);
 
         return $csv;
@@ -68,5 +67,4 @@ class ConfigurationSiteService
 
         return $entity;
     }
-
 }

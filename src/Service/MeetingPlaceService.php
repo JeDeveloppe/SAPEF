@@ -15,7 +15,7 @@ class MeetingPlaceService
         ){
     }
 
-    public function addMeetingPlace(SymfonyStyle $io): void
+    public function addMeetingPlaceForDev(SymfonyStyle $io): void
     {
         $entities = [];
 

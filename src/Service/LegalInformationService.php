@@ -18,7 +18,7 @@ class LegalInformationService
         ){
     }
 
-    public function addLegalInformation(SymfonyStyle $io): void
+    public function addLegalInformationForDev(SymfonyStyle $io): void
     {        
         
         $legal = $this->legalInformationRepository->findOneBy(['companyName' => 'LE SAPEF']);

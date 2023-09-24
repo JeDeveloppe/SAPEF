@@ -15,7 +15,7 @@ class MeansOfPaiementService
         ){
     }
 
-    public function addMeansOfPaiements(SymfonyStyle $io){
+    public function addMeansOfPaiementsForDev(SymfonyStyle $io){
 
         //TODO A VERIFIER 
         $moyens = ['CB','ESPÈCES','CHQ','VIR','PAYPAL'];

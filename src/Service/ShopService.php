@@ -20,7 +20,7 @@ class ShopService
         ){
     }
 
-    public function importCsv(SymfonyStyle $io): void
+    public function importCsvShopForDev(SymfonyStyle $io): void
     {
         $io->title('Importation des Centres');
 
@@ -45,7 +45,7 @@ class ShopService
 
     private function readCsvFile(): Reader
     {
-        $csv = Reader::createFromPath('%kernel.root.dir%/../.docs/import/shops.csv','r');
+        $csv = Reader::createFromPath('%kernel.root.dir%/../.docs/importForDev/shops.csv','r');
         $csv->setHeaderOffset(0);
 
         return $csv;

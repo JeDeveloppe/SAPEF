@@ -15,7 +15,7 @@ class JobService
         ){
     }
 
-    public function addJobs(SymfonyStyle $io){
+    public function addJobsForDev(SymfonyStyle $io){
 
 
         //TODO FAIRE LISTE DES METIERS

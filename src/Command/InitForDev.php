@@ -22,9 +22,9 @@ use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-#[AsCommand(name: 'app:initbeforeprod')]
+#[AsCommand(name: 'app:initfordev')]
 
-class InitBeforeProd extends Command
+class InitForDev extends Command
 {
     public function __construct(
             private UserService $userService,
@@ -53,21 +53,20 @@ class InitBeforeProd extends Command
 
         $io = new SymfonyStyle($input,$output);
         
-        $this->configurationSiteService->importConfigurationSite($io);
-        $this->meetingNameService->addMeetingName($io);
-        $this->meetingPlaceService->addMeetingPlace($io);
-        $this->meetingService->addFakeMeetingIn2100($io);
-
-        // $this->eluService->creationEluStatus($io);
-        // $this->jobService->addJobs($io);
-        // $this->genderService->addGenders($io);
-        // $this->meansOfPaiementService->addMeansOfPaiements($io);
-        // $this->regionErmService->importRegionsErm($io);
-        $this->departmentService->importDepartments($io);
-        // $this->cityService->importCsv($io);
-        $this->shopService->importCsv($io);
-        // $this->userService->initForProd_adminUser($io);
-        // $this->legalInformationService->addLegalInformation($io);
+        $this->configurationSiteService->importForDevConfigurationSite($io);
+        $this->meetingNameService->addMeetingNameForDev($io);
+        $this->meetingPlaceService->addMeetingPlaceForDev($io);
+        $this->meetingService->addFakeMeetingIn2100ForDev($io);
+        $this->eluService->creationEluStatusForDev($io);
+        $this->jobService->addJobsForDev($io);
+        $this->genderService->addGendersForDev($io);
+        $this->meansOfPaiementService->addMeansOfPaiementsForDev($io);
+        $this->regionErmService->importRegionsErmForDev($io);
+        $this->departmentService->importDepartmentsForDev($io);
+        $this->cityService->importCsvCityForDev($io);
+        $this->shopService->importCsvShopForDev($io);
+        $this->userService->initAdminUserForDev($io);
+        $this->legalInformationService->addLegalInformationForDev($io);
 
         return Command::SUCCESS;
     }

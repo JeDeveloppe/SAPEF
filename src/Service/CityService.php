@@ -18,7 +18,7 @@ class CityService
         ){
     }
 
-    public function importCsv(SymfonyStyle $io): void
+    public function importCsvCityForDev(SymfonyStyle $io): void
     {
         $io->title('Importation des villes');
 
@@ -43,7 +43,7 @@ class CityService
 
     private function readCsvFile(): Reader
     {
-        $csv = Reader::createFromPath('%kernel.root.dir%/../.docs/import/villes_france.csv','r');
+        $csv = Reader::createFromPath('%kernel.root.dir%/../.docs/importForDev/villes_france.csv','r');
         $csv->setHeaderOffset(0);
 
         return $csv;
@@ -68,5 +68,4 @@ class CityService
 
         return $entity;
     }
-
 }

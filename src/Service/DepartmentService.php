@@ -16,7 +16,7 @@ class DepartmentService
         ){
     }
 
-    public function importDepartments(SymfonyStyle $io): void
+    public function importDepartmentsForDev(SymfonyStyle $io): void
     {
         $io->title('Importation des départements');
 
@@ -41,7 +41,7 @@ class DepartmentService
 
     private function readCsvFile(): Reader
     {
-        $csv = Reader::createFromPath('%kernel.root.dir%/../.docs/import/department.csv','r');
+        $csv = Reader::createFromPath('%kernel.root.dir%/../.docs/importForDev/department.csv','r');
         $csv->setHeaderOffset(0);
 
         return $csv;

@@ -26,7 +26,7 @@ class MeetingService
 
 
 
-    public function addFakeMeetingIn2100(SymfonyStyle $io){
+    public function addFakeMeetingIn2100ForDev(SymfonyStyle $io){
 
         $io->title('Création Fake Meeting en 2100');
 

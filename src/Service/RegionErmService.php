@@ -16,7 +16,7 @@ class RegionErmService
         ){
     }
 
-    public function importRegionsErm(SymfonyStyle $io): void
+    public function importRegionsErmForDev(SymfonyStyle $io): void
     {
         $io->title('Importation des régions Erm');
 
@@ -41,7 +41,7 @@ class RegionErmService
 
     private function readCsvFileTotalRegions(): Reader
     {
-        $csv = Reader::createFromPath('%kernel.root.dir%/../.docs/import/sapef_region.csv','r');
+        $csv = Reader::createFromPath('%kernel.root.dir%/../.docs/importForDev/sapef_region.csv','r');
         $csv->setHeaderOffset(0);
 
         return $csv;

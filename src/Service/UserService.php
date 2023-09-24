@@ -24,7 +24,7 @@ class UserService
         ){
     }
 
-    public function initForProd_adminUser($io): void
+    public function initAdminUserForDev($io): void
     {
         $io->title('Création / mise à jour de l\'user ADMIN');
 

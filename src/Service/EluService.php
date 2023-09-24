@@ -19,7 +19,7 @@ class EluService
         ){
     }
 
-    public function creationEluStatus(SymfonyStyle $io): void
+    public function creationEluStatusForDev(SymfonyStyle $io): void
     {
         $io->title('Importation des EluStatus');
 
