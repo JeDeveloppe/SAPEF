@@ -7,6 +7,7 @@ use App\Form\ContactType;
 use App\Repository\ConfigurationSiteRepository;
 use App\Repository\DeskRepository;
 use App\Repository\LegalInformationRepository;
+use App\Service\ContactService;
 use App\Service\EluService;
 use App\Service\MeetingService;
 use DateTimeImmutable;
@@ -23,7 +24,8 @@ class SiteController extends AbstractController
         private DeskRepository $deskRepository,
         private LegalInformationRepository $legalInformationRepository,
         private MeetingService $meetingService,
-        private Security $security
+        private Security $security,
+        private ContactService $contactService
     )
     {
     }
@@ -37,38 +39,17 @@ class SiteController extends AbstractController
     }
 
     #[Route('/contactez-le-sapef', name: 'app_site_contact')]
-    public function contact(Request $request, EntityManagerInterface $entityManager): Response
+    public function contact(Request $request): Response
     {
-        $contact = new Contact();
-        $form = $this->createForm(ContactType::class, $contact);
+        $entity = new Contact();
+        $form = $this->createForm(ContactType::class, $entity);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
 
-            $user = $this->security->getUser();
+            $this->contactService->saveQuestionInDatabase($entity, $form);
 
-            if(!$user){
-
-                $contact
-                    ->setEmail($form->get('email')->getData())
-                    ->setPhone($form->get('phone')->getData());
-
-            }else{
-
-                $contact
-                    ->setUser($user)
-                    ->setPhone($user->getPhone())
-                    ->setEmail($user->getEmail());
-            }
-
-            $contact
-                ->setCreatedAt(new DateTimeImmutable('now'))
-                ->setQuestion($form->get('question')->getData());
-
-            $entityManager->persist($contact);
-            $entityManager->flush();
-
-            $this->addFlash('success', 'Message envoyé - Merci');
+            $this->addFlash('success', 'Message bien reçu - Merci');
         }
 
         return $this->render('site/pages/contact.html.twig', [
@@ -81,7 +62,7 @@ class SiteController extends AbstractController
     {
         return $this->render('site/pages/bureau_du_sapef.html.twig', [
             'bureaux' => $this->deskRepository->findAll()
-         ]);
+        ]);
     }
 
     #[Route('/les-elus-du-sapef', name: 'app_site_elus')]
