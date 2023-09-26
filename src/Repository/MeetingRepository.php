@@ -52,6 +52,18 @@ class MeetingRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
+
+    public function findAllNextMeetingAfterThisDate($date): array
+    {
+        return $this->createQueryBuilder('m')
+            // ->leftJoin('m.statut', 'ms')
+            ->where('m.date > :date')
+            // ->andWhere('ms.isDiscutable IS NOT NULL')
+            ->setParameter('date', $date)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 //    /**
 //     * @return Meeting[] Returns an array of Meeting objects
 //     */

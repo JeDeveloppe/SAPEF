@@ -16,6 +16,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TelephoneField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use phpDocumentor\Reflection\Types\Boolean;
 
 class ContactCrudController extends AbstractCrudController
 {
@@ -39,7 +41,8 @@ class ContactCrudController extends AbstractCrudController
             TextField::new('email')->setDisabled(true),
             TelephoneField::new('phone')->setDisabled(true),
             TextareaField::new('question')->setDisabled(true),
-            TextareaField::new('answer'),
+            TextareaField::new('answer')->onlyOnForms(),
+            BooleanField::new('answer')->onlyOnIndex()->setDisabled(true),
             AssociationField::new('answeredBy')->setLabel('Répondu par:')->setDisabled(true)->onlyOnForms(),
             DateTimeField::new('answeredAt')->setFormat('dd-MM-yyyy')->setLabel('Rédondu le:')->setDisabled(true)->onlyOnForms(),
             

@@ -21,6 +21,11 @@ use App\Entity\MeetingPlace;
 use App\Entity\Paiement;
 use App\Entity\SexStatus;
 use App\Repository\ContactRepository;
+use App\Repository\EluRepository;
+use App\Repository\MeetingRepository;
+use App\Repository\PaiementRepository;
+use App\Repository\UserRepository;
+use DateTimeImmutable;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -29,6 +34,16 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 
 class DashboardController extends AbstractDashboardController
 {
+
+    public function __construct(
+        private ContactRepository $contactRepository,
+        private UserRepository $userRepository,
+        private MeetingRepository $meetingRepository,
+        private PaiementRepository $paiementRepository,
+        private EluRepository $eluRepository
+    )
+    {
+    }
 
     #[Route('/admin', name: 'admin')]
     public function index(): Response
@@ -45,23 +60,30 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
+
+        $now = new DateTimeImmutable('now');
+
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToRoute('SITE','fa-solid fa-earth-europe','app_site_home');
         
         yield MenuItem::section('Gestion des questions:');
-        yield MenuItem::linkToCrud('Les questions', 'fa-solid fa-circle-question', Contact::class);
+        yield MenuItem::linkToCrud('Les questions', 'fa-solid fa-circle-question', Contact::class)
+            ->setBadge(count($this->contactRepository->findBy(['answer' => null])),'danger');
 
         yield MenuItem::section('Gestion des réunions:');
-        yield MenuItem::linkToCrud('Les réunions', 'fa-solid fa-handshake', Meeting::class);
+        yield MenuItem::linkToCrud('Les réunions à venir', 'fa-solid fa-handshake', Meeting::class)
+            ->setBadge(count($this->meetingRepository->findAllNextMeetingAfterThisDate($now)),'danger');
         yield MenuItem::linkToCrud('Liste des types de réunions', 'fas fa-list', MeetingName::class);
         yield MenuItem::linkToCrud('Liste des lieux', 'fas fa-list', MeetingPlace::class);
 
         yield MenuItem::section('Gestion des paiements:');
-        yield MenuItem::linkToCrud('Liste des paiements', 'fa-solid fa-money-bill', Paiement::class);
+        yield MenuItem::linkToCrud('Liste des paiements', 'fa-solid fa-money-bill', Paiement::class)
+            ->setBadge(count($this->paiementRepository->findAll()),'info');
         yield MenuItem::linkToCrud('Liste des moyens de paiement', 'fas fa-list', MeanOfPaiement::class);
 
         yield MenuItem::section('Gestion des membres:');
-        yield MenuItem::linkToCrud('Liste des membres', 'fas fa-list', User::class);
+        yield MenuItem::linkToCrud('Liste des membres', 'fas fa-list', User::class)
+            ->setBadge(count($this->userRepository->findAll()),'info');
         yield MenuItem::linkToCrud('Liste des métiers', 'fas fa-list', Job::class);
         yield MenuItem::linkToCrud('Liste des genres', 'fas fa-list', SexStatus::class);
         
@@ -70,7 +92,8 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Liste des roles', 'fas fa-list', DeskRole::class);
 
         yield MenuItem::section('Gestion des élus:');
-        yield MenuItem::linkToCrud('Les élus', 'fa-solid fa-user-secret', Elu::class);
+        yield MenuItem::linkToCrud('Les élus', 'fa-solid fa-user-secret', Elu::class)
+            ->setBadge(count($this->eluRepository->findAll()),'info');
         yield MenuItem::linkToCrud('Liste des status', 'fas fa-list', EluStatus::class);
 
         yield MenuItem::section('Paramètres géographiques:');
