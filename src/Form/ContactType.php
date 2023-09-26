@@ -3,13 +3,15 @@
 namespace App\Form;
 
 use App\Entity\Contact;
-use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\TelType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Bundle\SecurityBundle\Security;
+use Karser\Recaptcha3Bundle\Form\Recaptcha3Type;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Karser\Recaptcha3Bundle\Validator\Constraints\Recaptcha3;
 
 class ContactType extends AbstractType
 {
@@ -45,6 +47,12 @@ class ContactType extends AbstractType
                 'attr' => [
                     'class' => 'form-control'
                 ]
+            ])
+            ->add('captcha', Recaptcha3Type::class, [
+                'constraints' => new Recaptcha3(['message' => 'Problème de captcha. Merci de ré-essayer ou de contacter le support en précisant le/les code(s): {{ errorCodes }}']),
+                'action_name' => 'homepage',
+                // 'script_nonce_csp' => $nonceCSP,
+                'locale' => 'fr',
             ]);
             // ->add('answer')
             // ->add('createdAt')

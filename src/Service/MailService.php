@@ -27,6 +27,5 @@ class MailService
             $this->mailer->send($mail);
         } catch (TransportExceptionInterface $e) {
         }
-
     }
 }

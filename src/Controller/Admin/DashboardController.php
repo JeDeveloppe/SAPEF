@@ -20,6 +20,7 @@ use App\Entity\MeetingName;
 use App\Entity\MeetingPlace;
 use App\Entity\Paiement;
 use App\Entity\SexStatus;
+use App\Repository\ContactRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -28,6 +29,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 
 class DashboardController extends AbstractDashboardController
 {
+
     #[Route('/admin', name: 'admin')]
     public function index(): Response
     {

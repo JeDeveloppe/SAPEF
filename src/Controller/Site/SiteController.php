@@ -2,21 +2,22 @@
 
 namespace App\Controller\Site;
 
+use DateTimeImmutable;
 use App\Entity\Contact;
 use App\Form\ContactType;
-use App\Repository\ConfigurationSiteRepository;
-use App\Repository\DeskRepository;
-use App\Repository\LegalInformationRepository;
-use App\Service\ContactService;
 use App\Service\EluService;
+use App\Service\ContactService;
 use App\Service\MeetingService;
-use DateTimeImmutable;
+use App\Repository\DeskRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
+use App\Repository\LegalInformationRepository;
 use Symfony\Component\HttpFoundation\Response;
+use App\Repository\ConfigurationSiteRepository;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Karser\Recaptcha3Bundle\Validator\Constraints\Recaptcha3Validator;
 
 class SiteController extends AbstractController
 {
@@ -39,7 +40,7 @@ class SiteController extends AbstractController
     }
 
     #[Route('/contactez-le-sapef', name: 'app_site_contact')]
-    public function contact(Request $request): Response
+    public function contact(Request $request,  Recaptcha3Validator $recaptcha3Validator): Response
     {
         $entity = new Contact();
         $form = $this->createForm(ContactType::class, $entity);
@@ -47,9 +48,13 @@ class SiteController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()) {
 
+            // $score = $recaptcha3Validator->getLastResponse()->getScore();
+            // dump($score);
+
             $this->contactService->saveQuestionInDatabase($entity, $form);
 
             $this->addFlash('success', 'Message bien reçu - Merci');
+            return $this->redirectToRoute('app_site_home');
         }
 
         return $this->render('site/pages/contact.html.twig', [
