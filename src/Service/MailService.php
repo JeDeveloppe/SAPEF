@@ -26,6 +26,7 @@ class MailService
         try{
             $this->mailer->send($mail);
         } catch (TransportExceptionInterface $e) {
+            dump($e->getDebug());
         }
     }
 }
