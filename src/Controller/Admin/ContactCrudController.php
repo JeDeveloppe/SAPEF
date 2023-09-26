@@ -74,16 +74,20 @@ class ContactCrudController extends AbstractCrudController
             $user = $this->security->getUser();
 
             $now = new DateTimeImmutable ('now');
-            $entityInstance->setAnsweredAt($now)->setAnsweredBy($user);
 
-            $entityManager->persist($entityInstance);
-            $entityManager->flush();
+            if(!empty($entityInstance->getAnswer())){
 
-            $donnees = [
-                'answer' => $entityInstance->getAnswer()
-            ];
-
-            $this->mailService->sendMail($entityInstance->getEmail(), 'Réponse à votre question sur le site LE SAPEF', 'contact_answer', $donnees);
+                $entityInstance->setAnsweredAt($now)->setAnsweredBy($user);
+                
+                $entityManager->persist($entityInstance);
+                $entityManager->flush();
+                
+                $donnees = [
+                    'answer' => $entityInstance->getAnswer()
+                ];
+                
+                $this->mailService->sendMail($entityInstance->getEmail(), 'Réponse à votre question sur le site LE SAPEF', 'contact_answer', $donnees);
+            }
         }
     }
 }
