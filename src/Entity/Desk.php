@@ -28,6 +28,9 @@ class Desk
     #[ORM\JoinColumn(nullable: false)]
     private ?User $updatedBy = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $orderOfAppearance = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -77,6 +80,18 @@ class Desk
     public function setUpdatedBy(?User $updatedBy): static
     {
         $this->updatedBy = $updatedBy;
+
+        return $this;
+    }
+
+    public function getOrderOfAppearance(): ?int
+    {
+        return $this->orderOfAppearance;
+    }
+
+    public function setOrderOfAppearance(?int $orderOfAppearance): static
+    {
+        $this->orderOfAppearance = $orderOfAppearance;
 
         return $this;
     }

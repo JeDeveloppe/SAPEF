@@ -2,20 +2,22 @@
 
 namespace App\Entity;
 
+use Assert\Image;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\Collection;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\Common\Collections\ArrayCollection;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
 #[Vich\Uploadable]
-#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
+#[UniqueEntity(fields: ['email'], message: 'Il y a déjà un compte avec cette adresse email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -54,6 +56,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     // NOTE: This is not a mapped field of entity metadata, just a simple property.
     #[Vich\UploadableField(mapping: 'users', fileNameProperty: 'image')]
+    #[Assert\File(
+        maxSize: '2M',
+        extensions: ['jpeg','jpg','png'],
+        extensionsMessage: 'Format image non valide: jpeg, jpg, png',
+    )]
+    #[Assert\Image(
+        minWidth: 200,
+        maxWidth: 800,
+        minHeight: 200,
+        maxHeight: 1200,
+    )]
     private ?File $imageFile = null;
 
     #[ORM\Column(length: 255, nullable: true)]

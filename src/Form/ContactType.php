@@ -45,7 +45,8 @@ class ContactType extends AbstractType
             ->add('question', TextareaType::class, [
                 'label' => 'Votre question:',
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'rows' => '4'
                 ]
             ])
             ->add('captcha', Recaptcha3Type::class, [

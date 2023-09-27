@@ -66,7 +66,7 @@ class SiteController extends AbstractController
     public function bureau(): Response
     {
         return $this->render('site/pages/bureau_du_sapef.html.twig', [
-            'bureaux' => $this->deskRepository->findAll()
+            'bureaux' => $this->deskRepository->findBy([], ['orderOfAppearance' => 'ASC'])
         ]);
     }
 

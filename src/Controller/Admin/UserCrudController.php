@@ -63,8 +63,8 @@ class UserCrudController extends AbstractCrudController
                 ->setFormTypeOptions(['placeholder' => 'Sélectionner un genre...']),
             AssociationField::new('shop')
                 ->setLabel('Centre:')
-                ->setDisabled($disabled)
-                ->setFormTypeOptions(['placeholder' => 'Sélectionner un centre...']),
+                ->setFormTypeOptions(['placeholder' => 'Sélectionner un centre...'])
+                ->setPermission('ROLE_SUPER_ADMIN'),
             ImageField::new('image')->setLabel('Image:')->setBasePath($this->getParameter('app.path.images_users'))->onlyOnIndex(),
             TextField::new('imageFile')->setFormType(VichImageType::class)->setFormTypeOptions([
                 //TODO vérifier les options
@@ -74,7 +74,7 @@ class UserCrudController extends AbstractCrudController
                 'download_label' => '...',
                 'download_uri' => true,
                 'image_uri' => true,
-                // 'imagine_pattern' => '...',
+                // 'imagine_pattern' => 'elu',
                 'asset_helper' => true,
             ])->setLabel('Image:')->onlyOnForms(),
             TextField::new('phone'),

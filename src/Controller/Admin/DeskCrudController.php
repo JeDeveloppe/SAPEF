@@ -10,6 +10,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class DeskCrudController extends AbstractCrudController
@@ -37,6 +39,20 @@ class DeskCrudController extends AbstractCrudController
             AssociationField::new('role')
                 ->setLabel('Rôle:')
                 ->setFormTypeOptions(['placeholder' => 'Sélectionner un rôle...']),
+            ChoiceField::new('orderOfAppearance')
+                ->setLabel('Ordre d\'affichage')
+                ->setChoices([
+                    '1' => 1,
+                    '2' => 2,
+                    '3' => 3,
+                    '4' => 4,
+                    '5' => 5,
+                    '6' => 6,
+                    '7' => 7,
+                    '8' => 8,
+                    '9' => 9,
+                    '10' => 10,
+                ]),
             AssociationField::new('updatedBy')
                 ->setLabel('Créé par:')
                 ->setDisabled(true)
