@@ -19,14 +19,14 @@ class MeetingPlaceService
     {
         $entities = [];
 
-        //TODO FAIRE LISTE DES ENTITIES
+        //TODO => METTRE A JOUR EN REUNION
         //! NE PAS CHANGER
         array_push($entities,'Siège Euromaster');
 
         //?METTRE A JOUR
         array_push($entities,'Non définie');
 
-        $io->title('Création place de réunion');
+        $io->title('Création places de réunion');
 
         foreach($entities as $entitiesArray){
 

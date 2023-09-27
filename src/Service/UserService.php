@@ -88,8 +88,8 @@ class UserService
             'lastname' => 'DONEL',
             'sex' => 'HOMME', //? HOMME FEMME
             'phone' => '00.00.00.00.00',
-            'shop' => 3204, //TODO à vérifier
-            'job' => 'TECHNICIEN EAD' //TODO à vérifier
+            'shop' => 3204, //TODO à vérifier EN REUNION
+            'job' => 'TECHNICIEN EAD' //TODO à vérifier EN REUNION
         ];
         $users['Philippe'] = [
             'email' => 'philippe.chambat@euromaster.com',
@@ -99,8 +99,8 @@ class UserService
             'lastname' => 'CHAMBAT',
             'sex' => 'HOMME', //? HOMME FEMME
             'phone' => '00.00.00.00.00',
-            'shop' => 3999, //TODO
-            'job' => 'AO' //TODO a vérifier
+            'shop' => 3999, //TODO à vérifier EN REUNION ET METTRE CSV SHOP A JOUR
+            'job' => 'AO' //TODO à vérifier EN REUNION
         ];
         $users['Thierry'] = [
             'email' => 'thierry.vivien@euromaster.com',
@@ -110,8 +110,8 @@ class UserService
             'lastname' => 'VIVIEN',
             'sex' => 'HOMME', //? HOMME FEMME
             'phone' => '00.00.00.00.00',
-            'shop' => 3999, //TODO à vérifier
-            'job' => 'ACS ITINERANT' //TODO à vérifier
+            'shop' => 3999, //TODO à vérifier EN REUNION
+            'job' => 'ACS ITINERANT' //TODO à vérifier EN REUNION
         ];
         $users['MarieDelphine'] = [
             'email' => 'marie-delphine.carneiro@euromaster.com',
@@ -121,8 +121,8 @@ class UserService
             'lastname' => 'CARNEIRO',
             'sex' => 'FEMME', //? HOMME FEMME
             'phone' => '00.00.00.00.00',
-            'shop' => 3999, //TODO à vérifier
-            'job' => 'ACS ITINERANT' //TODO à vérifier
+            'shop' => 3999, //TODO à vérifier EN REUNION
+            'job' => 'ACS ITINERANT' //TODO à vérifier EN REUNION
         ];
         $users['Martine'] = [
             'email' => 'martine.tessa@euromaster.com',
@@ -132,8 +132,8 @@ class UserService
             'lastname' => 'TESSA',
             'sex' => 'FEMME', //? HOMME FEMME
             'phone' => '00.00.00.00.00',
-            'shop' => 3999, //TODO à vérifier
-            'job' => 'ACS ITINERANT' //TODO à vérifier
+            'shop' => 3999, //TODO à vérifier EN REUNION
+            'job' => 'ACS ITINERANT' //TODO à vérifier EN REUNION
         ];
         $users['Kévin'] = [
             'email' => 'kevin.formet@euromaster.com',
@@ -143,10 +143,9 @@ class UserService
             'lastname' => 'FORMET',
             'sex' => 'HOMME', //? HOMME FEMME
             'phone' => '00.00.00.00.00',
-            'shop' => 3999, //TODO à vérifier
-            'job' => 'TECHNICIEN EAD' //TODO à vérifier
+            'shop' => 3999, //TODO à vérifier EN REUNION
+            'job' => 'TECHNICIEN EAD' //TODO à vérifier EN REUNION
         ];
-      
         
 
         $io->title('Création des admins');

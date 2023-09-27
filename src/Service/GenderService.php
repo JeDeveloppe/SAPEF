@@ -19,7 +19,7 @@ class GenderService
 
         $sexs = [];
 
-        //TODO FAIRE LISTE DES GENRES
+        //TODO => METTRE A JOUR EN REUNION
         //! NE PAS CHANGER
         array_push($sexs,'HOMME', 'FEMME');
 

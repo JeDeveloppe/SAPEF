@@ -18,7 +18,7 @@ class JobService
     public function addJobsForDev(SymfonyStyle $io){
 
 
-        //TODO FAIRE LISTE DES METIERS
+        //TODO => METTRE A JOUR EN REUNION
         $jobs = [];
 
         //! NE PAS CHANGER

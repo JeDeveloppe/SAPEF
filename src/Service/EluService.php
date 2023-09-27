@@ -2,10 +2,14 @@
 
 namespace App\Service;
 
+use App\Entity\Elu;
+use League\Csv\Reader;
 use App\Entity\EluStatus;
 use App\Repository\EluRepository;
 use App\Repository\EluStatusRepository;
 use App\Repository\RegionErmRepository;
+use App\Repository\UserRepository;
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
@@ -14,8 +18,9 @@ class EluService
     public function __construct(
         private EntityManagerInterface $em,
         private EluRepository $eluRepository,
-        private EluStatusRepository $repository,
-        private RegionErmRepository $regionErmRepository
+        private EluStatusRepository $eluStatusRepository,
+        private RegionErmRepository $regionErmRepository,
+        private UserRepository $userRepository,
         ){
     }
 
@@ -24,7 +29,7 @@ class EluService
         $io->title('Importation des EluStatus');
 
             $totals = [];
-            //TODO FAIRE LISTE DES STATUS
+            //TODO => METTRE A JOUR EN REUNION
             //! NE PAS CHANGER
             array_push($totals,'TITULAIRE');
 
@@ -56,14 +61,15 @@ class EluService
         $io->success('Importation terminée');
     }
 
-    public function constructionOfTheMapOfFranceWithElus(){
+    public function constructionOfTheMapOfFranceWithElus()
+    {
 
         $donnees = []; //? toutes les réponses seront dans ce tableau final
         $elus = $this->eluRepository->findBy([],['name' => 'ASC']);
         $titulaires = [];
         $suppleants = [];
 
-        //TODO SI Y A D'AUTRE STATUS FAIRE LA LOGIQUE
+        //TODO => METTRE A JOUR EN REUNION SI AUTRES STATUS
         foreach($elus as $elu){
             if($elu->getStatus() == 'TITULAIRE'){
                 array_push($titulaires, $elu);
@@ -130,5 +136,56 @@ class EluService
         $donnees['states'] = $jsonStates;
 
         return $donnees;
+    }
+
+    public function importElusForProd(SymfonyStyle $io): void
+    {
+        $io->title('Importation des Elus');
+
+            $totals = $this->readCsvFile();
+        
+            $io->progressStart(count($totals));
+
+            foreach($totals as $arrayTotal){
+                $io->progressAdvance();
+                $entity = $this->createOrUpdate($arrayTotal);
+                $this->em->persist($entity);
+            }
+            
+            $this->em->flush();
+
+            $io->progressFinish();
+        
+
+        $io->success('Importation terminée');
+    }
+
+    private function readCsvFile(): Reader
+    {
+        $csv = Reader::createFromPath('%kernel.root.dir%/../.docs/importForProd/elu.csv','r');
+        $csv->setHeaderOffset(0);
+
+        return $csv;
+    }
+
+    private function createOrUpdate(array $arrayEntity): Elu
+    {
+
+        $entity = $this->eluRepository->find($arrayEntity['id']);
+
+        if(!$entity){
+            $entity = new Elu();
+        }
+
+        //"id","name_id","status_id","region_erm_id","updated_by_id","updated_at"
+
+        $entity
+            ->setUpdatedAt(new DateTimeImmutable('now'))
+            ->setStatus($this->eluStatusRepository->find($arrayEntity['status_id']))
+            ->setName($this->userRepository->find($arrayEntity['name_id']))
+            ->setRegionErm($this->regionErmRepository->find($arrayEntity['region_erm_id']))
+            ->setUpdatedBy($this->userRepository->find($arrayEntity['name_id']));
+
+        return $entity;
     }
 }

@@ -20,14 +20,14 @@ class RegionErmService
     {
         $io->title('Importation des régions Erm');
 
-            $regions = $this->readCsvFileTotalRegions();
+            $regions = $this->readCsvFileTotalRegionsForDev();
         
             $io->progressStart(count($regions));
 
             foreach($regions as $arrayRegion){
 
                 $io->progressAdvance();
-                $region = $this->createOrUpdateRegion($arrayRegion);
+                $region = $this->createOrUpdateRegionForDev($arrayRegion);
                 $this->em->persist($region);
             }
             
@@ -39,7 +39,7 @@ class RegionErmService
         $io->success('Importation terminée');
     }
 
-    private function readCsvFileTotalRegions(): Reader
+    private function readCsvFileTotalRegionsForDev(): Reader
     {
         $csv = Reader::createFromPath('%kernel.root.dir%/../.docs/importForDev/sapef_region.csv','r');
         $csv->setHeaderOffset(0);
@@ -47,7 +47,7 @@ class RegionErmService
         return $csv;
     }
 
-    private function createOrUpdateRegion(array $arrayRegion): RegionErm
+    private function createOrUpdateRegionForDev(array $arrayRegion): RegionErm
     {
         $region = $this->regionErmRepository->findOneBy(['id' => $arrayRegion['id']]);
 
@@ -58,5 +58,4 @@ class RegionErmService
 
         return $region;
     }
-
 }

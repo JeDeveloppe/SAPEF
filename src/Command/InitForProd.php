@@ -5,27 +5,28 @@ namespace App\Command;
 use App\Service\EluService;
 use App\Service\JobService;
 use App\Service\CityService;
-use App\Service\ConfigurationSiteService;
+use App\Service\DeskService;
 use App\Service\ShopService;
 use App\Service\UserService;
 use App\Service\GenderService;
+use App\Service\MeetingService;
 use App\Service\RegionErmService;
 use App\Service\DepartmentService;
-use App\Service\DeskService;
-use App\Service\MeansOfPaiementService;
-use App\Service\LegalInformationService;
 use App\Service\MeetingNameService;
 use App\Service\MeetingPlaceService;
-use App\Service\MeetingService;
+use App\Service\MeansOfPaiementService;
+use App\Service\LegalInformationService;
+use App\Service\ConfigurationSiteService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-#[AsCommand(name: 'app:initfordev')]
 
-class InitForDev extends Command
+#[AsCommand(name: 'app:initforprod')]
+
+class InitForProd extends Command
 {
     public function __construct(
             private UserService $userService,
@@ -57,9 +58,9 @@ class InitForDev extends Command
         
         // $this->configurationSiteService->importForDevConfigurationSite($io);
         // $this->meetingNameService->addMeetingNameForDev($io);
-        // $this->deskService->addDeskStatusForDev($io);
         // $this->meetingPlaceService->addMeetingPlaceForDev($io);
         // $this->meetingService->addFakeMeetingIn2100ForDev($io);
+        // $this->deskService->addDeskStatusForDev($io);
         // $this->eluService->creationEluStatusForDev($io);
         // $this->jobService->addJobsForDev($io);
         // $this->genderService->addGendersForDev($io);
@@ -67,13 +68,13 @@ class InitForDev extends Command
         // $this->regionErmService->importRegionsErmForDev($io);
         // $this->departmentService->importDepartmentsForDev($io);
         // $this->cityService->importCsvCityForDev($io);
-        // //TODO IN SHOP.CSV => CM NUMBER FOR SIEGE AND UPDATE IT IN ...AllAdminsUsersForDev
         // $this->shopService->importCsvShopForDev($io);
         // $this->userService->initAdminUserForDev($io);
         // $this->legalInformationService->addLegalInformationForDev($io);
-        $this->meetingService->addFakeMeetingIn2100ForDev($io);
+        // $this->userService->initAllAdminsUsersForDev($io);
 
-        $this->userService->initAllAdminsUsersForDev($io);
+        $this->eluService->importElusForProd($io);
+        $this->deskService->importDeskForProd($io);
 
         return Command::SUCCESS;
     }

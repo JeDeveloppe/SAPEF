@@ -24,15 +24,13 @@ class MeetingService
     {
     }
 
-
-
     public function addFakeMeetingIn2100ForDev(SymfonyStyle $io){
 
         $io->title('Création Fake Meeting en 2100');
 
-        $date = new DateTimeImmutable();
+        $date = new DateTimeImmutable('2100-3-31');
+
         //! ANNEE MOIS JOUR A METTRE A JOUR DANS AUTRE METHODE DE CE SERVICE
-        $meetingIn2100 = $date->setDate(2100,3,31);
         $meetingIn2100 = $date->setTime(14,15,00);
 
         $meeting = $this->meetingRepository->findOneBy(['date' => $meetingIn2100]);
@@ -65,9 +63,8 @@ class MeetingService
 
         //? DATE EN 2100 ENJECTEE A L'INITIALISATION POUR QUE LE SITE FONCTIONNE TOUJOURS...
         if(!$nextMeeting){
-            $date = new DateTimeImmutable();
             //! DOIT ETRE PAREIL QUE METHODE AU DESSUS
-            $date100 = $date->setDate(2100,3,31);
+            $date = new DateTimeImmutable('2100-3-31');
             $date100 = $date->setTime(14,15,00);
 
             $nextMeeting = $this->meetingRepository->findOneBy(['date' => $date100]);

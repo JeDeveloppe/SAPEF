@@ -29,7 +29,7 @@ class LegalInformationService
 
             $io->title('Création / mise à jour des informations légales');
 
-            //TODO METTRE A JOUR LES INFORMATIONS
+            //TODO => METTRE A JOUR EN REUNION
             //! ADRESSE EMAIL SITE DANS .ENV a verifier
             $legal
                 ->setCompanyName('LE SAPEF')
@@ -39,9 +39,9 @@ class LegalInformationService
                 ->setPublicationManagerFirstName('Antoine')
                 ->setPublicationManagerLastName('GALLÉE')
                 ->setSiretCompany('88847646200013')
-                ->setEmailCompany($_ENV['ADRESSE_EMAIL_SITE']) 
                 ->setFullUrlCompany('http://www.refaitesvosjeux.fr')
                 //!NE PAS CHANGER LA SUITE
+                ->setEmailCompany($_ENV['ADRESSE_EMAIL_SITE']) 
                 ->setHostName('IONOS SARL')
                 ->setHostStreet('7 place de la gare')
                 ->setHostPostalCode(57200)
