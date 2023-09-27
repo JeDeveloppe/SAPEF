@@ -1,12 +1,23 @@
 {# templates/admin/my-custom-page.html.twig #}
 {% extends '@EasyAdmin/page/content.html.twig' %}
 
-{% block content_title %}Accueil ADMINISTRATION{% endblock %}
+{% block content_title %}ADMINISTRATION DU SITE{% endblock %}
 
 {% block page_actions %}
 
 {% endblock %}
 
 {% block main %}
+
+    <div class="row">
+        <div class="col-6 mx-auto text-center py-3">
+            <ul class="list-group">
+                <li class="list-group-item"><a href="/admin?crudAction=index&crudControllerFqcn=App%5CController%5CAdmin%5CPaiementCrudController">Gérer les paiements</a></li>
+                <li class="list-group-item"><a href="/admin?crudAction=index&crudControllerFqcn=App%5CController%5CAdmin%5CMeetingCrudController">Gérer les réunions</a></li>
+                <li class="list-group-item"><a href="/admin?crudAction=index&crudControllerFqcn=App%5CController%5CAdmin%5CDeskCrudController">Gérer les membres du bureau</a></li>
+                <li class="list-group-item"><a href="/admin?crudAction=index&crudControllerFqcn=App%5CController%5CAdmin%5CEluCrudController">Gérer les élus</a></li>
+            </ul>
+        </div>
+    </div>
 
 {% endblock %}

@@ -21,6 +21,7 @@ use App\Entity\MeetingPlace;
 use App\Entity\Paiement;
 use App\Entity\SexStatus;
 use App\Repository\ContactRepository;
+use App\Repository\DeskRepository;
 use App\Repository\EluRepository;
 use App\Repository\MeetingRepository;
 use App\Repository\PaiementRepository;
@@ -40,7 +41,8 @@ class DashboardController extends AbstractDashboardController
         private UserRepository $userRepository,
         private MeetingRepository $meetingRepository,
         private PaiementRepository $paiementRepository,
-        private EluRepository $eluRepository
+        private EluRepository $eluRepository,
+        private DeskRepository $deskRepository
     )
     {
     }
@@ -73,7 +75,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::section('Gestion des réunions:');
         yield MenuItem::linkToCrud('Les réunions à venir', 'fa-solid fa-handshake', Meeting::class)
             ->setBadge(count($this->meetingRepository->findAllNextMeetingAfterThisDate($now)),'danger');
-        yield MenuItem::linkToCrud('Liste des types de réunions', 'fas fa-list', MeetingName::class);
+        yield MenuItem::linkToCrud('Liste des types', 'fas fa-list', MeetingName::class);
         yield MenuItem::linkToCrud('Liste des lieux', 'fas fa-list', MeetingPlace::class);
 
         yield MenuItem::section('Gestion des paiements:');
@@ -88,7 +90,8 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Liste des genres', 'fas fa-list', SexStatus::class);
         
         yield MenuItem::section('Gestion du bureau:');
-        yield MenuItem::linkToCrud('Le bureau', 'fa-solid fa-users-rectangle', Desk::class);
+        yield MenuItem::linkToCrud('Le bureau', 'fa-solid fa-users-rectangle', Desk::class)
+            ->setBadge(count($this->deskRepository->findAll()),'info');
         yield MenuItem::linkToCrud('Liste des roles', 'fas fa-list', DeskRole::class);
 
         yield MenuItem::section('Gestion des élus:');
