@@ -74,7 +74,7 @@ class UserCrudController extends AbstractCrudController
                 'download_label' => '...',
                 'download_uri' => true,
                 'image_uri' => true,
-                // 'imagine_pattern' => 'elu',
+                'imagine_pattern' => 'user',
                 'asset_helper' => true,
             ])->setLabel('Image:')->onlyOnForms(),
             TextField::new('phone'),
