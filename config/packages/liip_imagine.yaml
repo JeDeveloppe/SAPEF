@@ -8,5 +8,5 @@ liip_imagine:
             quality: 75 # Qualité de l'image
             filters: # Liste des filtres à appliquer
                 thumbnail: # Filtre "Thumbnail"
-                    size: [230, 230] # Taille de l'image de sortie
+                    size: [250, 250] # Taille de l'image de sortie
                     mode: outbound # Découpage de l'image
