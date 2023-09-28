@@ -6,6 +6,7 @@ use App\Service\EluService;
 use App\Service\JobService;
 use App\Service\CityService;
 use App\Service\ConfigurationSiteService;
+use App\Service\ContactSubjectService;
 use App\Service\ShopService;
 use App\Service\UserService;
 use App\Service\GenderService;
@@ -42,7 +43,8 @@ class InitForDev extends Command
             private MeetingNameService $meetingNameService,
             private MeetingPlaceService $meetingPlaceService,
             private MeetingService $meetingService,
-            private DeskService $deskService
+            private DeskService $deskService,
+            private ContactSubjectService $contactSubjectService
         )
     {
         parent::__construct();
@@ -72,6 +74,7 @@ class InitForDev extends Command
         // $this->userService->initAdminUserForDev($io);
         // $this->legalInformationService->addLegalInformationForDev($io);
         $this->meetingService->addFakeMeetingIn2100ForDev($io);
+        $this->contactSubjectService->addContactSubjectInDatabase($io);
 
         $this->userService->initAllAdminsUsersForDev($io);
 

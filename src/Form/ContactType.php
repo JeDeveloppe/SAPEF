@@ -3,10 +3,12 @@
 namespace App\Form;
 
 use App\Entity\Contact;
+use App\Entity\ContactSubject;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Bundle\SecurityBundle\Security;
 use Karser\Recaptcha3Bundle\Form\Recaptcha3Type;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -42,6 +44,14 @@ class ContactType extends AbstractType
         }
         
         $builder
+            ->add('subject', EntityType::class, [
+                'label' => 'Sujet:',
+                'class' => ContactSubject::class,
+                'placeholder' => 'Sujet de la demande...',
+                'attr' => [
+                    'class' => 'form-control'
+                ]
+            ])
             ->add('question', TextareaType::class, [
                 'label' => 'Votre question:',
                 'attr' => [

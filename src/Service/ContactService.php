@@ -34,7 +34,8 @@ class ContactService
 
         $entity
             ->setCreatedAt(new DateTimeImmutable('now'))
-            ->setQuestion($form->get('question')->getData());
+            ->setQuestion($form->get('question')->getData())
+            ->setSubject($form->get('subject')->getData());
 
         $this->em->persist($entity);
         $this->em->flush();

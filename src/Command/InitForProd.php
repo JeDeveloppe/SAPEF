@@ -14,6 +14,7 @@ use App\Service\RegionErmService;
 use App\Service\DepartmentService;
 use App\Service\MeetingNameService;
 use App\Service\MeetingPlaceService;
+use App\Service\ContactSubjectService;
 use App\Service\MeansOfPaiementService;
 use App\Service\LegalInformationService;
 use App\Service\ConfigurationSiteService;
@@ -43,7 +44,9 @@ class InitForProd extends Command
             private MeetingNameService $meetingNameService,
             private MeetingPlaceService $meetingPlaceService,
             private MeetingService $meetingService,
-            private DeskService $deskService
+            private DeskService $deskService,
+            private ContactSubjectService $contactSubjectService
+
         )
     {
         parent::__construct();
@@ -72,6 +75,8 @@ class InitForProd extends Command
         // $this->userService->initAdminUserForDev($io);
         // $this->legalInformationService->addLegalInformationForDev($io);
         // $this->userService->initAllAdminsUsersForDev($io);
+        //$this->contactSubjectService->addContactSubjectInDatabase($io);
+
 
         $this->eluService->importElusForProd($io);
         $this->deskService->importDeskForProd($io);
