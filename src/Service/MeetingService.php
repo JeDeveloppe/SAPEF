@@ -73,7 +73,7 @@ class MeetingService
         $meetingValues['nextMeeting'] = $nextMeeting;
 
         $nextMeetingDate = $nextMeeting->getDate();
-        $meetingValues['nextMeetingDate'] = $nextMeetingDate;
+        // $meetingValues['nextMeetingDate'] = $nextMeetingDate;
 
 
         $nextMeetingDateEndQuestions = $nextMeetingDate->sub(new DateInterval('P'.$configuration->getDelayBeforeMeetingToSendEmail().'D'));

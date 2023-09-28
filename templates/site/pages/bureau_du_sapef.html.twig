@@ -7,7 +7,7 @@
 
     {% include "site/components/hr.html.twig" %}
 
-     <div class="row flex-column align-items-center">
+     <div class="row flex-column align-items-center pt-5">
         {% for bureau in bureaux %}
             {% include "site/components/card_bureau.html.twig" with {'elu': bureau} %}
         {% endfor %}

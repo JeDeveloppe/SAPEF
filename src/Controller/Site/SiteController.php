@@ -35,7 +35,7 @@ class SiteController extends AbstractController
     public function index(): Response
     {
         return $this->render('site/pages/index.html.twig', [
-            'controller_name' => 'SiteController',
+            'donneesMeeting' => $this->meetingService->nextMeetingCalc()
         ]);
     }
 
@@ -59,6 +59,7 @@ class SiteController extends AbstractController
 
         return $this->render('site/pages/contact.html.twig', [
             'contactForm' => $form->createView(),
+            'donneesMeeting' => $this->meetingService->nextMeetingCalc()
         ]);
     }
 
@@ -66,7 +67,8 @@ class SiteController extends AbstractController
     public function bureau(): Response
     {
         return $this->render('site/pages/bureau_du_sapef.html.twig', [
-            'bureaux' => $this->deskRepository->findBy([], ['orderOfAppearance' => 'ASC'])
+            'bureaux' => $this->deskRepository->findBy([], ['orderOfAppearance' => 'ASC']),
+            'donneesMeeting' => $this->meetingService->nextMeetingCalc()
         ]);
     }
 
@@ -76,16 +78,18 @@ class SiteController extends AbstractController
         $donnees = $eluService->constructionOfTheMapOfFranceWithElus();
 
         return $this->render('site/pages/elus_du_sapef.html.twig', [
-            'donnees' => $donnees
+            'donnees' => $donnees,
+            'donneesMeeting' => $this->meetingService->nextMeetingCalc()
         ]);
     }
 
     #[Route('/a-propos', name: 'app_site_about')]
     public function about(): Response
     {
-        $meetingValues = $this->meetingService->nextMeetingCalc();
 
-        return $this->render('site/pages/about.html.twig', []);
+        return $this->render('site/pages/about.html.twig', [
+            'donneesMeeting' => $this->meetingService->nextMeetingCalc()
+        ]);
     }
 
     #[Route('/adherer-au-sapef', name: 'app_site_adherer')]
@@ -93,7 +97,8 @@ class SiteController extends AbstractController
     {
 
         return $this->render('site/pages/adherer.html.twig', [
-            'configuration' => $configurationSiteRepository->findOneBy([])
+            'configuration' => $configurationSiteRepository->findOneBy([]),
+            'donneesMeeting' => $this->meetingService->nextMeetingCalc()
         ]);
     }
 
@@ -103,7 +108,8 @@ class SiteController extends AbstractController
     {
 
         return $this->render('site/pages/mentions_legales.html.twig', [
-            'legales' => $this->legalInformationRepository->findOneBy(['isOnline' => true], ['id' => 'ASC'])
+            'legales' => $this->legalInformationRepository->findOneBy(['isOnline' => true], ['id' => 'ASC']),
+            'donneesMeeting' => $this->meetingService->nextMeetingCalc()
         ]);
     }
 }
