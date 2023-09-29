@@ -109,6 +109,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'answeredBy', targetEntity: Contact::class)]
     private Collection $answers;
 
+    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?Invitation $invitation = null;
+
+    #[ORM\OneToMany(mappedBy: 'createdBy', targetEntity: Invitation::class)]
+    private Collection $invitations;
+
     public function __construct()
     {
         $this->elus = new ArrayCollection();
@@ -117,6 +123,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->updatedElus = new ArrayCollection();
         $this->contacts = new ArrayCollection();
         $this->answers = new ArrayCollection();
+        $this->invitations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -516,6 +523,58 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($answer->getAnsweredBy() === $this) {
                 $answer->setAnsweredBy(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getInvitation(): ?Invitation
+    {
+        return $this->invitation;
+    }
+
+    public function setInvitation(?Invitation $invitation): static
+    {
+        // unset the owning side of the relation if necessary
+        if ($invitation === null && $this->invitation !== null) {
+            $this->invitation->setUser(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($invitation !== null && $invitation->getUser() !== $this) {
+            $invitation->setUser($this);
+        }
+
+        $this->invitation = $invitation;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Invitation>
+     */
+    public function getInvitations(): Collection
+    {
+        return $this->invitations;
+    }
+
+    public function addInvitation(Invitation $invitation): static
+    {
+        if (!$this->invitations->contains($invitation)) {
+            $this->invitations->add($invitation);
+            $invitation->setCreatedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeInvitation(Invitation $invitation): static
+    {
+        if ($this->invitations->removeElement($invitation)) {
+            // set the owning side to null (unless already changed)
+            if ($invitation->getCreatedBy() === $this) {
+                $invitation->setCreatedBy(null);
             }
         }
 

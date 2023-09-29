@@ -12,6 +12,7 @@ use App\Entity\Desk;
 use App\Entity\DeskRole;
 use App\Entity\Elu;
 use App\Entity\EluStatus;
+use App\Entity\Invitation;
 use App\Entity\Job;
 use App\Entity\LegalInformation;
 use App\Entity\MeanOfPaiement;
@@ -23,6 +24,7 @@ use App\Entity\SexStatus;
 use App\Repository\ContactRepository;
 use App\Repository\DeskRepository;
 use App\Repository\EluRepository;
+use App\Repository\InvitationRepository;
 use App\Repository\MeetingRepository;
 use App\Repository\PaiementRepository;
 use App\Repository\UserRepository;
@@ -42,7 +44,8 @@ class DashboardController extends AbstractDashboardController
         private MeetingRepository $meetingRepository,
         private PaiementRepository $paiementRepository,
         private EluRepository $eluRepository,
-        private DeskRepository $deskRepository
+        private DeskRepository $deskRepository,
+        private InvitationRepository $invitationRepository
     )
     {
     }
@@ -86,6 +89,9 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::section('Gestion des membres:');
         yield MenuItem::linkToCrud('Liste des membres', 'fas fa-list', User::class)
             ->setBadge(count($this->userRepository->findAll()),'info');
+        yield MenuItem::linkToCrud('Invitations', 'fa-solid fa-envelope', Invitation::class)
+            ->setBadge(count($this->invitationRepository->findBy(['user' => null])),'warning');
+        
         yield MenuItem::linkToCrud('Liste des métiers', 'fas fa-list', Job::class);
         yield MenuItem::linkToCrud('Liste des genres', 'fas fa-list', SexStatus::class);
         
