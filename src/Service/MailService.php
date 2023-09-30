@@ -22,7 +22,7 @@ class MailService
         }
 
         $mail = (new TemplatedEmail())
-            ->from(new Address($_ENV['ADRESSE_EMAIL_SITE'], 'LE SAPEF'))
+            ->from(new Address($_ENV['ADRESSE_EMAIL_SITE'], $_ENV['FROM_EMAIL_NAME']))
             ->to($recipient)
             ->subject($subject)
             ->htmlTemplate('email/templates/'.$template.'.html.twig')
