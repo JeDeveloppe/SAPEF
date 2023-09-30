@@ -57,22 +57,22 @@ class InitForDev extends Command
 
         $io = new SymfonyStyle($input,$output);
         
-        // $this->configurationSiteService->importForDevConfigurationSite($io);
-        // $this->meetingNameService->addMeetingNameForDev($io);
-        // $this->deskService->addDeskStatusForDev($io);
-        // $this->meetingPlaceService->addMeetingPlaceForDev($io);
-        // $this->meetingService->addFakeMeetingIn2100ForDev($io);
-        // $this->eluService->creationEluStatusForDev($io);
-        // $this->jobService->addJobsForDev($io);
-        // $this->genderService->addGendersForDev($io);
-        // $this->meansOfPaiementService->addMeansOfPaiementsForDev($io);
-        // $this->regionErmService->importRegionsErmForDev($io);
-        // $this->departmentService->importDepartmentsForDev($io);
-        // $this->cityService->importCsvCityForDev($io);
-        // //TODO IN SHOP.CSV => CM NUMBER FOR SIEGE AND UPDATE IT IN ...AllAdminsUsersForDev
-        // $this->shopService->importCsvShopForDev($io);
-        // $this->userService->initAdminUserForDev($io);
-        // $this->legalInformationService->addLegalInformationForDev($io);
+        $this->configurationSiteService->importForDevConfigurationSite($io);
+        $this->meetingNameService->addMeetingNameForDev($io);
+        $this->deskService->addDeskStatusForDev($io);
+        $this->meetingPlaceService->addMeetingPlaceForDev($io);
+        $this->meetingService->addFakeMeetingIn2100ForDev($io);
+        $this->eluService->creationEluStatusForDev($io);
+        $this->jobService->addJobsForDev($io);
+        $this->genderService->addGendersForDev($io);
+        $this->meansOfPaiementService->addMeansOfPaiementsForDev($io);
+        $this->regionErmService->importRegionsErmForDev($io);
+        $this->departmentService->importDepartmentsForDev($io);
+        $this->cityService->importCsvCityForDev($io);
+        //TODO IN SHOP.CSV => CM NUMBER FOR SIEGE AND UPDATE IT IN ...AllAdminsUsersForDev
+        $this->shopService->importCsvShopForDev($io);
+        $this->userService->initAdminUserForDev($io);
+        $this->legalInformationService->addLegalInformationForDev($io);
         $this->meetingService->addFakeMeetingIn2100ForDev($io);
         $this->contactSubjectService->addContactSubjectInDatabase($io);
 

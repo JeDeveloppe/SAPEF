@@ -43,8 +43,6 @@ class LegalInformationCrudController extends AbstractCrudController
             TextField::new('siretCompany')->setLabel('SIRET')->onlyOnForms(),
             EmailField::new('emailCompany')->onlyOnForms()->setLabel('Email de la société'),
             UrlField::new('fullUrlCompany')->onlyOnForms()->setLabel('Url du site de la société'),
-            AssociationField::new('countryCompany')->setLabel('Pays de la société')->setFormTypeOptions(['placeholder' => 'Sélectionner un pays...']),
-            AssociationField::new('tax')->setLabel('Taxe sur le site')->setFormTypeOptions(['placeholder' => 'Sélectionner une valeur...'])->onlyOnForms(),
             TextField::new('webmasterCompanyName')->onlyOnForms()->setLabel('Socièté du webmaster'),
             TextField::new('webmasterFistName')->onlyOnForms()->setLabel('Prénom du webmaster'),
             TextField::new('webmasterLastName')->onlyOnForms()->setLabel('Nom du webmaster'),

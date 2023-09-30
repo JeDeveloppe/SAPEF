@@ -33,7 +33,7 @@ class DeskService
 
         foreach($entities as $entitiesArray){
 
-            $entity = $this->repository->findOneBy(['name' => $entitiesArray]);
+            $entity = $this->deskRepository->findOneBy(['name' => $entitiesArray]);
 
             if(!$entity){
                 $entity = new DeskRole();

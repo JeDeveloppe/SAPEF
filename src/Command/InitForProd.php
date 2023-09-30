@@ -59,23 +59,23 @@ class InitForProd extends Command
 
         $io = new SymfonyStyle($input,$output);
         
-        // $this->configurationSiteService->importForDevConfigurationSite($io);
-        // $this->meetingNameService->addMeetingNameForDev($io);
-        // $this->meetingPlaceService->addMeetingPlaceForDev($io);
-        // $this->meetingService->addFakeMeetingIn2100ForDev($io);
-        // $this->deskService->addDeskStatusForDev($io);
-        // $this->eluService->creationEluStatusForDev($io);
-        // $this->jobService->addJobsForDev($io);
-        // $this->genderService->addGendersForDev($io);
-        // $this->meansOfPaiementService->addMeansOfPaiementsForDev($io);
-        // $this->regionErmService->importRegionsErmForDev($io);
-        // $this->departmentService->importDepartmentsForDev($io);
-        // $this->cityService->importCsvCityForDev($io);
-        // $this->shopService->importCsvShopForDev($io);
-        // $this->userService->initAdminUserForDev($io);
-        // $this->legalInformationService->addLegalInformationForDev($io);
-        // $this->userService->initAllAdminsUsersForDev($io);
-        //$this->contactSubjectService->addContactSubjectInDatabase($io);
+        $this->configurationSiteService->importForDevConfigurationSite($io);
+        $this->meetingNameService->addMeetingNameForDev($io);
+        $this->meetingPlaceService->addMeetingPlaceForDev($io);
+        $this->meetingService->addFakeMeetingIn2100ForDev($io);
+        $this->deskService->addDeskStatusForDev($io);
+        $this->eluService->creationEluStatusForDev($io);
+        $this->jobService->addJobsForDev($io);
+        $this->genderService->addGendersForDev($io);
+        $this->meansOfPaiementService->addMeansOfPaiementsForDev($io);
+        $this->regionErmService->importRegionsErmForDev($io);
+        $this->departmentService->importDepartmentsForDev($io);
+        $this->cityService->importCsvCityForDev($io);
+        $this->shopService->importCsvShopForDev($io);
+        $this->userService->initAdminUserForDev($io);
+        $this->legalInformationService->addLegalInformationForDev($io);
+        $this->userService->initAllAdminsUsersForDev($io);
+        $this->contactSubjectService->addContactSubjectInDatabase($io);
 
 
         $this->eluService->importElusForProd($io);

@@ -40,7 +40,7 @@ class EluService
 
             foreach($totals as $arrayTotal){
 
-                $entity = $this->repository->findOneBy(['name' => $arrayTotal]);
+                $entity = $this->eluRepository->findOneBy(['name' => $arrayTotal]);
 
                 if(!$entity){
                     $entity = new EluStatus();
