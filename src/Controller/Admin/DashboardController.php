@@ -54,7 +54,15 @@ class DashboardController extends AbstractDashboardController
     public function index(): Response
     {
 
-        return $this->render('admin/dashboard.html.twig');
+        $totalPaiement = 0;
+        $paiements = $this->paiementRepository->findAll();
+        foreach($paiements as $paiement){
+            $totalPaiement += $paiement->getAmount();
+        }
+
+        return $this->render('admin/dashboard.html.twig', [
+            'totalPaiement' => $totalPaiement / 100
+        ]);
     }
 
     public function configureDashboard(): Dashboard

@@ -34,6 +34,9 @@ class Paiement
     #[ORM\Column]
     private ?\DateTimeImmutable $paymentAt = null;
 
+    #[ORM\Column]
+    private ?int $amount = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -107,6 +110,18 @@ class Paiement
     public function setPaymentAt(\DateTimeImmutable $paymentAt): static
     {
         $this->paymentAt = $paymentAt;
+
+        return $this;
+    }
+
+    public function getAmount(): ?int
+    {
+        return $this->amount;
+    }
+
+    public function setAmount(int $amount): static
+    {
+        $this->amount = $amount;
 
         return $this;
     }

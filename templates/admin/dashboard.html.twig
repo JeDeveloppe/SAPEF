@@ -20,4 +20,15 @@
         </div>
     </div>
 
+    <div class="row">
+        <div class="col-4">
+            <div class="card p-0">
+                <div class="card-header">Total des paiements:</div>
+                <div class="card-body text-center text-success font-weight-bolder">
+                {{ totalPaiement | format_currency('EUR', {fraction_digit: 2}) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}

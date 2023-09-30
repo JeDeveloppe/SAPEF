@@ -13,6 +13,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
 
 class PaiementCrudController extends AbstractCrudController
 {
@@ -33,6 +34,7 @@ class PaiementCrudController extends AbstractCrudController
             DateTimeField::new('paymentAt')
                 ->setFormat('dd.MM.yyy à HH:mm')
                 ->setLabel('Date du paiement:'),
+            MoneyField::new('amount')->setLabel('Montant reçu:')->setCurrency('EUR')->setStoredAsCents(),
             AssociationField::new('name')
                 ->setLabel('Membre:')
                 ->setFormTypeOptions(['placeholder' => 'Sélectionner un membre...']),
