@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use DateTimeImmutable;
 use App\Entity\Invitation;
+use App\Service\MailService;
 use Symfony\Component\Uid\Uuid;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -27,7 +28,8 @@ class InvitationCrudController extends AbstractCrudController
     }
 
     public function __construct(
-        private Security $security
+        private Security $security,
+        private MailService $mailService
     )
     {
     }
@@ -68,8 +70,17 @@ class InvitationCrudController extends AbstractCrudController
         if ($entityInstance instanceof Invitation) {
             $user = $this->security->getUser();
             $entityInstance->setSendAt(new DateTimeImmutable('now'))->setCreatedBy($user)->setUuid(Uuid::v4());
+
+            $donnees = [
+                'recipient' => $entityInstance->getEmail(),
+                'host' => $user->getEmail(),
+                'uuid' => $entityInstance->getUuid()
+            ];
+
             $entityManager->persist($entityInstance);
             $entityManager->flush();
+
+            $this->mailService->sendMail($entityInstance->getEmail(),'Invitation au site LE SAPEF', 'invitation_to_registration', $donnees);
         }
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use phpDocumentor\Reflection\Types\Null_;
 use Symfony\Component\Mime\Address;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
@@ -14,7 +15,11 @@ class MailService
         ){
     }
 
-    public function sendMail($recipient, $subject, $template, array $donnees){
+    public function sendMail($recipient, $subject, $template, array $donnees = null){
+
+        if(is_null($donnees)){
+            $donnees = [];
+        }
 
         $mail = (new TemplatedEmail())
             ->from(new Address($_ENV['ADRESSE_EMAIL_SITE'], 'LE SAPEF'))
