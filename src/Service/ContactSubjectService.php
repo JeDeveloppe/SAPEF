@@ -25,7 +25,7 @@ class ContactSubjectService
 
         //?METTRE A JOUR
         array_push($entities,'Données personnelles');
-        array_push($entities,'Autre demande');
+        array_push($entities,'Demande d\'inscription','Autre demande');
 
         $io->title('Création sujets de contact');
 

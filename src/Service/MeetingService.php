@@ -40,7 +40,7 @@ class MeetingService
         }
 
         $meeting
-            ->setName($this->meetingNameRepository->findOneBy(['name' => 'Réunion CSE']))
+            ->setName($this->meetingNameRepository->findOneBy(['name' => 'CSE']))
             ->setPlace($this->meetingPlaceRepository->findOneBy(['name' => 'Siège Euromaster']))
             ->setDate($meetingIn2100);
         $this->em->persist($meeting);

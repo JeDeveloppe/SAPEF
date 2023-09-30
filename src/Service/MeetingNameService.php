@@ -20,7 +20,7 @@ class MeetingNameService
         $entities = [];
 
         //! NE PAS CHANGER
-        array_push($entities,'Réunion CSE');
+        array_push($entities,'CSE');
 
         //?METTRE A JOUR
         array_push($entities,'Non définie');
