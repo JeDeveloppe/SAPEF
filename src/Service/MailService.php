@@ -25,7 +25,7 @@ class MailService
             ->from(new Address($_ENV['ADRESSE_EMAIL_SITE'], 'LE SAPEF'))
             ->to($recipient)
             ->subject($subject)
-            ->htmlTemplate('email/'.$template.'.html.twig')
+            ->htmlTemplate('email/templates/'.$template.'.html.twig')
             ->context($donnees);
 
         try{
