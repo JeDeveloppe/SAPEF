@@ -20,6 +20,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 //TODO expliquer system d'invitation / inscription sur le site
 //TODO penser au template nav s'il faut changer
 //TODO modifier RegistrationController au cas ou
+
 class InvitationCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
@@ -80,6 +81,7 @@ class InvitationCrudController extends AbstractCrudController
             $entityManager->persist($entityInstance);
             $entityManager->flush();
 
+            //TODO A MONTRER EN REUNION FORMAT EMAIL
             $this->mailService->sendMail($entityInstance->getEmail(),'Invitation au site LE SAPEF', 'invitation_to_registration', $donnees);
         }
     }
