@@ -24,6 +24,7 @@ class MailService
         $mail = (new TemplatedEmail())
             ->from(new Address($_ENV['ADRESSE_EMAIL_SITE'], $_ENV['FROM_EMAIL_NAME']))
             ->to($recipient)
+            ->replyTo('no_reply@lesapef.fr')
             ->subject($subject)
             ->htmlTemplate('email/templates/'.$template.'.html.twig')
             ->context($donnees);

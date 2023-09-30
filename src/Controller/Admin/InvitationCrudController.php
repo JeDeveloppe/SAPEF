@@ -73,7 +73,7 @@ class InvitationCrudController extends AbstractCrudController
 
             $donnees = [
                 'recipient' => $entityInstance->getEmail(),
-                'host' => $user->getEmail(),
+                'host' => $user->getNickname(),
                 'uuid' => $entityInstance->getUuid()
             ];
 

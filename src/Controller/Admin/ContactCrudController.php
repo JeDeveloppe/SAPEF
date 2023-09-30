@@ -84,7 +84,9 @@ class ContactCrudController extends AbstractCrudController
                 $entityManager->flush();
                 
                 $donnees = [
-                    'answer' => $entityInstance->getAnswer()
+                    'answer' => $entityInstance->getAnswer(),
+                    'question' => $entityInstance->getQuestion(),
+                    'host' => $user->getNickname()
                 ];
                 
                 $this->mailService->sendMail($entityInstance->getEmail(), 'Réponse à votre question sur le site LE SAPEF', 'contact_answer', $donnees);
