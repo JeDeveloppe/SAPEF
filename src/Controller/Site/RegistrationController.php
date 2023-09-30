@@ -24,7 +24,7 @@ class RegistrationController extends AbstractController
     {
     }
 
-    #[Route('/inscription/{uuid}', name: 'app_register')]
+    #[Route('/inscription/{uuid}', name: 'site_register')]
     public function register(Invitation $invitation, Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, UserAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
     {
 
