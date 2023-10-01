@@ -1,0 +1,25 @@
+<div class="card p-0 mt-3">
+    <div class="card-header">Vos questions</div>
+    <div class="card-body">
+        <table class="table table-striped">
+            <tr>
+                <th>Posée le:</th>
+                <th>Question:</th>
+                <th>Réponse:</th>
+            </tr>
+            {% for question in questions %}
+                <tr>
+                    <td>{{ question.createdAt | date('d-m-Y') }}</td>
+                    <td>{{ question.question }} </td>
+                    <td>
+                        {% if question.answer is not null %}
+                            Oui le {{ question.answeredAt | date('d-m-Y') }}
+                        {% else %}
+                            Pas encore de réponse...
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>

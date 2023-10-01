@@ -1,0 +1,19 @@
+<div class="card p-0">
+    <div class="card-header">Paiements</div>
+    <div class="card-body">
+        <table class="table table-striped">
+            <tr>
+                <th>Date:</th>
+                <th>Montant:</th>
+                <th>Commentaire:</th>
+            </tr>
+            {% for paiement in paiements %}
+                <tr>
+                    <td>{{ paiement.paymentAt | date('d-m-Y') }}</td>
+                    <td>{{ (paiement.amount / 100) | number_format(2, '.', ',') }} €</td>
+                    <td>{{ paiement.comment }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
