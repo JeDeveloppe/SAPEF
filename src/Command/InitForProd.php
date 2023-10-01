@@ -59,7 +59,7 @@ class InitForProd extends Command
 
         $io = new SymfonyStyle($input,$output);
         
-        $this->configurationSiteService->importForDevConfigurationSite($io);
+        $this->configurationSiteService->addConfigurationSite($io);
         $this->meetingNameService->addMeetingNameForDev($io);
         $this->meetingPlaceService->addMeetingPlaceForDev($io);
         $this->meetingService->addFakeMeetingIn2100ForDev($io);

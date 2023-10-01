@@ -26,6 +26,8 @@ class GenderService
         //?METTRE A JOUR
         array_push($sexs,'JE NE VEUX PAS LE RENSEIGNER');
 
+        $io->title('Création des genres');
+
         foreach($sexs as $sexArray){
 
             $sex = $this->sexStatusRepository->findOneBy(['name' => $sexArray]);
