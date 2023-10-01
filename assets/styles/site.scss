@@ -13,7 +13,7 @@
     bottom: 0;
 }
 .container{
-    margin-top: 160px;
+    margin-top: 140px;
 }
 .catalog_card:hover{
     box-shadow: 5px 5px 5px var(--bs-primary);
@@ -72,4 +72,12 @@
 }
 .countdownLetter{
 	margin: 0 4px;
+	color: white;
+}
+.first-letter-color-sapef{
+	color: red;
+	font-size: 1.3em;
+	font-weight: bolder;
+	-webkit-text-stroke-width: 2px;
+	-webkit-text-stroke-color: red;
 }

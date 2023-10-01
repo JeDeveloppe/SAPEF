@@ -27,7 +27,7 @@ var nextMeetingStart = countDownRating.dataset.countdown;
 		seconds = pad( parseInt( seconds_left % 60 ) );
 	
 		// format countdown string + set tag value
-		countdown.innerHTML = "<div class='countdownChiffre'>" + days + "</div><div class='countdownLetter'>J</div><div class='countdownChiffre'>" + hours + "</div><div class='countdownLetter'>Hrs</div><div class='countdownChiffre'>" + minutes + "</div><div class='countdownLetter'>Min</div><div class='countdownChiffre'>" + seconds + "</div><div class='countdownLetter'></div>s</div>"; 
+		countdown.innerHTML = "<div class='countdownChiffre'>" + days + "</div><div class='countdownLetter'>J</div><div class='countdownChiffre'>" + hours + "</div><div class='countdownLetter'>Hrs</div><div class='countdownChiffre'>" + minutes + "</div><div class='countdownLetter'>Min</div><div class='countdownChiffre'>" + seconds + "</div><div class='countdownLetter'>s</div>"; 
 	}
 	
 	function pad(n) {

@@ -14,8 +14,8 @@ class ConfigurationSite
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 6, scale: 2)]
-    private ?string $cotisation = null;
+    #[ORM\Column]
+    private ?int $cotisation = null;
 
     #[ORM\Column(length: 255)]
     private ?string $emailSite = null;
@@ -34,12 +34,12 @@ class ConfigurationSite
         return $this->id;
     }
 
-    public function getCotisation(): ?string
+    public function getCotisation(): ?int
     {
         return $this->cotisation;
     }
 
-    public function setCotisation(string $cotisation): self
+    public function setCotisation(int $cotisation): self
     {
         $this->cotisation = $cotisation;
 
