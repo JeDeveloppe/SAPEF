@@ -1,11 +1,13 @@
 #navbar-top{
-    padding: 30px 10px;
-    transition: ease-in-out 400ms;
+    transition: ease-in-out 200ms;
     position: fixed;
     width: 98%;
     margin-left: 1%;
     top: 0;
     z-index: 99;
+}
+#logo{
+	transition: ease-in-out 400ms;
 }
 #footer-navbar{
     width: 98%;
@@ -13,7 +15,7 @@
     bottom: 0;
 }
 .container{
-    margin-top: 140px;
+    margin-top: 100px;
 }
 .catalog_card:hover{
     box-shadow: 5px 5px 5px var(--bs-primary);
@@ -34,7 +36,9 @@
 .fa-user{
     transform: scale(1.2); 
 }
-
+#afterNav{
+	border-radius: 0px 0px 10px 10px;
+}
 #countdown{
 	background: #222;
 	background-image: -webkit-linear-gradient(top, #222, #333, #333, #222); 

@@ -15,14 +15,18 @@ require('bootstrap');
 window.onscroll = function() {scrollFunction()};
 
 function scrollFunction() {
-  if (document.body.scrollTop >= 80 || document.documentElement.scrollTop >= 80) {
-    document.getElementById("navbar-top").style.padding = "5px 2px";
-    document.getElementById("navbar-top").classList.remove("mt-2");
-    document.getElementById("logo").style.fontSize = "25px";
+  if (document.body.scrollTop >= 40 || document.documentElement.scrollTop >= 40) {
+    document.getElementById("navbar-top").style.padding = "0px 0px";
+    document.getElementById("navbar-top").classList.remove("mt-1");
+    document.getElementById("navbar-top").style.borderBottomLeftRadius = "10px";
+    document.getElementById("navbar-top").style.borderBottomRightRadius = "10px";
+    document.getElementById("logo").style.scale = 0.9;
   } else {
-    document.getElementById("navbar-top").style.padding = "30px 10px";
-    document.getElementById("navbar-top").classList.add("mt-2");
-    document.getElementById("logo").style.fontSize = "35px";
+    document.getElementById("navbar-top").style.padding = "10px 10px";
+    document.getElementById("navbar-top").classList.add("mt-1");
+    document.getElementById("navbar-top").style.borderBottomLeftRadius = "0px";
+    document.getElementById("navbar-top").style.borderBottomRightRadius = "0px";
+    document.getElementById("logo").style.scale = 1;
   }
 }
 
