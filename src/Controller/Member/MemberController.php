@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Form\AccountType;
 use App\Repository\ContactRepository;
 use App\Repository\PaiementRepository;
+use App\Repository\UserRepository;
 use App\Service\MeetingService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,7 +24,8 @@ class MemberController extends AbstractController
         private PaiementRepository $paiementRepository,
         private ContactRepository $contactRepository,
         private MeetingService $meetingService,
-        private EntityManagerInterface $entityManagerInterface
+        private EntityManagerInterface $entityManagerInterface,
+        private UserRepository $userRepository
     )
     {
     }
@@ -51,11 +53,28 @@ class MemberController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()) {
 
+            // $userInDataBase = $this->userRepository->find($user);
+            // $passwordInDataBaseEncoded = $userPasswordHasher->hashPassword(
+            //                 $userInDataBase,
+            //                 $userInDataBase->getPassword()
+            // );
+
+            // $passwordInFormEncoded = $userPasswordHasher->hashPassword(
+            //                             $userInDataBase,
+            //                             $form->get('password')->getData()
+            // );
+
+            // if($passwordInDataBaseEncoded != $passwordInDataBaseEncoded){
+
+            //     $user->setPassword($userPasswordHasher->hashPassword(
+            //         $user,
+            //         $form->get('password')->getData()
+            //     ));
+            // }
+
+            // dd($user);
             $this->entityManagerInterface->persist($user);
             $this->entityManagerInterface->flush();
-
-
-
 
             $this->addFlash('success', 'Données mises à jour !');
         }

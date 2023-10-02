@@ -20,6 +20,7 @@ use App\Entity\Meeting;
 use App\Entity\MeetingName;
 use App\Entity\MeetingPlace;
 use App\Entity\Paiement;
+use App\Entity\ResetPassword;
 use App\Entity\SexStatus;
 use App\Repository\ContactRepository;
 use App\Repository\DeskRepository;
@@ -27,6 +28,7 @@ use App\Repository\EluRepository;
 use App\Repository\InvitationRepository;
 use App\Repository\MeetingRepository;
 use App\Repository\PaiementRepository;
+use App\Repository\ResetPasswordRepository;
 use App\Repository\UserRepository;
 use DateTimeImmutable;
 use Symfony\Component\HttpFoundation\Response;
@@ -45,7 +47,8 @@ class DashboardController extends AbstractDashboardController
         private PaiementRepository $paiementRepository,
         private EluRepository $eluRepository,
         private DeskRepository $deskRepository,
-        private InvitationRepository $invitationRepository
+        private InvitationRepository $invitationRepository,
+        private ResetPasswordRepository $resetPasswordRepository
     )
     {
     }
@@ -99,6 +102,9 @@ class DashboardController extends AbstractDashboardController
             ->setBadge(count($this->userRepository->findAll()),'info');
         yield MenuItem::linkToCrud('Invitations', 'fa-solid fa-envelope', Invitation::class)
             ->setBadge(count($this->invitationRepository->findBy(['user' => null])),'warning');
+        yield MenuItem::linkToCrud('Mot de passe oublié', 'fa-solid fa-lock', ResetPassword::class)
+            ->setBadge(count($this->resetPasswordRepository->findBy(['isUsed' => true])),'info');
+
         
         yield MenuItem::linkToCrud('Liste des métiers', 'fas fa-list', Job::class);
         yield MenuItem::linkToCrud('Liste des genres', 'fas fa-list', SexStatus::class);

@@ -33,7 +33,6 @@ class AccountType extends AbstractType
             //     'label' => 'Mot de passe:',
             //     'attr' => [
             //         'class' => 'form-control',
-            //         'readonly' => true 
             //     ]
             // ])
             ->add('phone', TelType::class, [

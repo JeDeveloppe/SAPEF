@@ -2,13 +2,18 @@
 
 namespace App\Controller\Site;
 
-use App\Entity\Invitation;
 use App\Entity\User;
 use DateTimeImmutable;
+use App\Entity\Invitation;
+use App\Entity\ResetPassword;
+use App\Form\ResetPasswordType;
 use App\Service\MeetingService;
 use App\Form\RegistrationFormType;
+use App\Repository\UserRepository;
 use App\Security\UserAuthenticator;
+use Symfony\Component\Form\FormError;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\ResetPasswordRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -20,6 +25,8 @@ class RegistrationController extends AbstractController
 {
     public function __construct(
         private MeetingService $meetingService,
+        private UserRepository $userRepository,
+        private ResetPasswordRepository $resetPasswordRepository
     )
     {
     }
@@ -28,18 +35,14 @@ class RegistrationController extends AbstractController
     public function register(Invitation $invitation, Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, UserAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
     {
 
-        //TODO mettre a jour en fonction de la manière voulu pour inscription
         if($invitation->getUser() != null){
 
             $this->addFlash('warning', 'Invitation déjà utilisée !');
             return $this->redirectToRoute('app_site_home');
         }
-        //TODO mettre a jour en fonction de la manière voulu pour inscription
-
 
         $user = new User();
 
-        //TODO mettre a jour en fonction de la manière voulu pour inscription
         $user->setEmail($invitation->getEmail());
 
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -65,9 +68,7 @@ class RegistrationController extends AbstractController
             //update invitation
             $invitation->setUser($user);
 
-            //TODO mettre a jour en fonction de la manière voulu pour inscription
             $entityManager->persist($invitation);
-
             $entityManager->flush();
 
             return $userAuthenticator->authenticateUser(
@@ -79,6 +80,58 @@ class RegistrationController extends AbstractController
 
         return $this->render('site/registration/register.html.twig', [
             'registrationForm' => $form->createView(),
+            'donneesMeeting' => $this->meetingService->nextMeetingCalc()
+        ]);
+    }
+
+    #[Route('/reset-password/{uuid}', name: 'site_reset_password')]
+    public function resetPassword($uuid, Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, UserAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
+    {
+
+        $resetPassword = $this->resetPasswordRepository->findOneBy(['uuid' => $uuid]);
+
+        if(!$resetPassword OR $resetPassword->isIsUsed() != false){
+
+            $this->addFlash('warning', 'Demande inconnue ou déjà utilisée !');
+            return $this->redirectToRoute('app_site_home');
+        }
+
+        $form = $this->createForm(ResetPasswordType::class, null);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+
+            if($form->get('password')->getData() !== $form->get('passwordVerify')->getData()){
+
+                $form->get('password')->addError(new FormError('Les mots de passe ne sont pas identiques...'));
+
+            }else{
+
+                // encode the plain password
+                $user = $this->userRepository->findOneBy(['email' => $resetPassword->getEmail()]);
+                $user->setPassword(
+                    $userPasswordHasher->hashPassword(
+                        $user,
+                        $form->get('password')->getData()
+                    )
+                    );
+
+                $entityManager->persist($user);
+
+                //update invitation
+                $resetPassword->setIsUsed(true);
+
+                $entityManager->persist($resetPassword);
+
+                $entityManager->flush();
+
+                $this->addFlash('success', 'Mot de passe mis à jour !');
+                return $this->redirectToRoute('app_site_home');
+            }
+        }
+
+        return $this->render('site/registration/reset_password.html.twig', [
+            'resetPasswordForm' => $form->createView(),
             'donneesMeeting' => $this->meetingService->nextMeetingCalc()
         ]);
     }

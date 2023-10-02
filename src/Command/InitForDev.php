@@ -57,7 +57,7 @@ class InitForDev extends Command
 
         $io = new SymfonyStyle($input,$output);
         
-        $this->configurationSiteService->addConfigurationSite($io);
+        // $this->configurationSiteService->addConfigurationSite($io);
         // $this->meetingNameService->addMeetingNameForDev($io);
         // $this->deskService->addDeskStatusForDev($io);
         // $this->meetingPlaceService->addMeetingPlaceForDev($io);
@@ -71,7 +71,7 @@ class InitForDev extends Command
         // $this->cityService->importCsvCityForDev($io);
         // //TODO IN SHOP.CSV => CM NUMBER FOR SIEGE AND UPDATE IT IN ...AllAdminsUsersForDev
         // $this->shopService->importCsvShopForDev($io);
-        // $this->userService->initAdminUserForDev($io);
+        $this->userService->initAdminUserForDev($io);
         // $this->legalInformationService->addLegalInformationForDev($io);
         // $this->meetingService->addFakeMeetingIn2100ForDev($io);
         // $this->contactSubjectService->addContactSubjectInDatabase($io);
