@@ -18,6 +18,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use phpDocumentor\Reflection\Types\Boolean;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class ContactCrudController extends AbstractCrudController
 {
@@ -28,21 +29,29 @@ class ContactCrudController extends AbstractCrudController
 
     public function __construct(
         private Security $security,
-        private MailService $mailService
+        private MailService $mailService,
+        private RequestStack $requestStack
     )
     {
-        
     }
 
     public function configureFields(string $pageName): iterable
     {
+        //?edition logic
+        $id = $this->requestStack->getCurrentRequest()->get('entityId');
+        if($id){
+            $disabled = true;
+        }else{
+            $disabled = false;
+        }
+
         return [
             DateTimeField::new('createdAt')->setFormat('dd-MM-yyyy')->setLabel('Demande le:')->setDisabled(true),
             TextField::new('email')->setDisabled(true),
             TelephoneField::new('phone')->setDisabled(true),
             AssociationField::new('subject')->setLabel('Sujet:')->setDisabled(true),
             TextareaField::new('question')->setDisabled(true)->setLabel('Question:'),
-            TextareaField::new('answer')->onlyOnForms()->setLabel('Réponse:'),
+            TextareaField::new('answer')->onlyOnForms()->setLabel('Réponse:')->setDisabled($disabled),
             BooleanField::new('answer')->onlyOnIndex()->setLabel('Réponse faite:')->setDisabled(true),
             AssociationField::new('answeredBy')->setLabel('Répondu par:')->setDisabled(true)->onlyOnForms(),
             DateTimeField::new('answeredAt')->setFormat('dd-MM-yyyy')->setLabel('Rédondu le:')->setDisabled(true)->onlyOnForms(),

@@ -102,7 +102,7 @@ class DashboardController extends AbstractDashboardController
             ->setBadge(count($this->userRepository->findAll()),'info');
         yield MenuItem::linkToCrud('Invitations', 'fa-solid fa-envelope', Invitation::class)
             ->setBadge(count($this->invitationRepository->findBy(['user' => null])),'warning');
-        yield MenuItem::linkToCrud('Mot de passe oublié', 'fa-solid fa-lock', ResetPassword::class)
+        yield MenuItem::linkToCrud('Mot de passe oublié', 'fa-solid fa-key', ResetPassword::class)
             ->setBadge(count($this->resetPasswordRepository->findBy(['isUsed' => true])),'warning');
         
         yield MenuItem::linkToCrud('Liste des métiers', 'fas fa-list', Job::class);
