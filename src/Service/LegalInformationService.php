@@ -39,9 +39,9 @@ class LegalInformationService
                 ->setPublicationManagerFirstName('Antoine')
                 ->setPublicationManagerLastName('GALLÉE')
                 ->setSiretCompany('88847646200013')
-                ->setFullUrlCompany('http://www.refaitesvosjeux.fr')
-                //!NE PAS CHANGER LA SUITE
+                ->setFullUrlCompany($_ENV['URL_SITE'])
                 ->setEmailCompany($_ENV['ADRESSE_EMAIL_SITE']) 
+                //!NE PAS CHANGER LA SUITE
                 ->setHostName('IONOS SARL')
                 ->setHostStreet('7 place de la gare')
                 ->setHostPostalCode(57200)

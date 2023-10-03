@@ -104,7 +104,6 @@ class RegistrationController extends AbstractController
 
             }else{
 
-                //TODO envoi email
                 $resetPassword = new ResetPassword();
                 $resetPassword->setEmail($form->get('email')->getData());
                 $this->resetPasswordService->saveResetPasswordInDatabaseAndSendEmail($resetPassword);

@@ -66,23 +66,24 @@ class UserService
     public function initAllAdminsUsersForDev(SymfonyStyle $io){
 
         $now = new DateTimeImmutable('now');
+        $role = ['ROLE_ADMIN'];
         $password = 'Bienvenue@uSapef';
         $users = [];
 
         $users['JeanLuc'] = [
             'email' => 'jean-luc.bord@euromaster.com',
-            'role' => ['ROLE_ADMIN'],
+            'role' => $role,
             'nickname' => 'Jean-Luc',
             'firstname' => 'Jean-Luc',
             'lastname' => 'BORD',
             'sex' => 'HOMME', //? HOMME FEMME
-            'phone' => '00.00.00.00.00',
+            'phone' => '00.00.00.00.00', //TODO à vérifier EN REUNION
             'shop' => 3203, //? Vérifier dans table SHOP
             'job' => 'AO'  //? Vérifier dans table JOB
         ];
         $users['Alain'] = [
             'email' => 'alain.donel@euromaster.com',
-            'role' => ['ROLE_ADMIN'],
+            'role' => $role,
             'nickname' => 'Alain',
             'firstname' => 'Alain',
             'lastname' => 'DONEL',
@@ -93,56 +94,56 @@ class UserService
         ];
         $users['Philippe'] = [
             'email' => 'philippe.chambat@euromaster.com',
-            'role' => ['ROLE_ADMIN'],
+            'role' => $role,
             'nickname' => 'Philippe',
             'firstname' => 'Philippe',
             'lastname' => 'CHAMBAT',
             'sex' => 'HOMME', //? HOMME FEMME
-            'phone' => '00.00.00.00.00',
+            'phone' => '00.00.00.00.00', //TODO à vérifier EN REUNION
             'shop' => 3999, //TODO à vérifier EN REUNION ET METTRE CSV SHOP A JOUR
             'job' => 'AO' //TODO à vérifier EN REUNION
         ];
         $users['Thierry'] = [
             'email' => 'thierry.vivien@euromaster.com',
-            'role' => ['ROLE_ADMIN'],
+            'role' => $role,
             'nickname' => 'Thierry',
             'firstname' => 'Thierry',
             'lastname' => 'VIVIEN',
             'sex' => 'HOMME', //? HOMME FEMME
-            'phone' => '00.00.00.00.00',
+            'phone' => '00.00.00.00.00', //TODO à vérifier EN REUNION
             'shop' => 3999, //TODO à vérifier EN REUNION
             'job' => 'ACS ITINERANT' //TODO à vérifier EN REUNION
         ];
         $users['MarieDelphine'] = [
             'email' => 'marie-delphine.carneiro@euromaster.com',
-            'role' => ['ROLE_ADMIN'],
+            'role' => $role,
             'nickname' => 'M-D',
             'firstname' => 'Marie-Delphine',
             'lastname' => 'CARNEIRO',
             'sex' => 'FEMME', //? HOMME FEMME
-            'phone' => '00.00.00.00.00',
+            'phone' => '00.00.00.00.00', //TODO à vérifier EN REUNION
             'shop' => 3999, //TODO à vérifier EN REUNION
             'job' => 'ACS ITINERANT' //TODO à vérifier EN REUNION
         ];
         $users['Martine'] = [
             'email' => 'martine.tessa@euromaster.com',
-            'role' => ['ROLE_ADMIN'],
+            'role' => $role,
             'nickname' => 'Martine',
             'firstname' => 'Martine',
             'lastname' => 'TESSA',
             'sex' => 'FEMME', //? HOMME FEMME
-            'phone' => '00.00.00.00.00',
+            'phone' => '00.00.00.00.00', //TODO à vérifier EN REUNION
             'shop' => 3999, //TODO à vérifier EN REUNION
             'job' => 'ACS ITINERANT' //TODO à vérifier EN REUNION
         ];
         $users['Kévin'] = [
             'email' => 'kevin.formet@euromaster.com',
-            'role' => ['ROLE_ADMIN'],
+            'role' => $role,
             'nickname' => 'Kévin',
             'firstname' => 'Kévin',
             'lastname' => 'FORMET',
             'sex' => 'HOMME', //? HOMME FEMME
-            'phone' => '00.00.00.00.00',
+            'phone' => '00.00.00.00.00', //TODO à vérifier EN REUNION
             'shop' => 3999, //TODO à vérifier EN REUNION
             'job' => 'TECHNICIEN EAD' //TODO à vérifier EN REUNION
         ];

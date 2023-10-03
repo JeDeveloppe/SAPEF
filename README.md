@@ -6,6 +6,6 @@
 # faire un initforprod
 # importer table region_erm_department manuellement dans la bdd ionos
 
-# FAIRE LES TEMPLATES SITE ET EMAIL
+# FAIRE LES TEMPLATE SITE
 # DÉPLOYER LE SITE en PROD
 
