@@ -7,6 +7,7 @@ use App\Entity\ResetPassword;
 use Symfony\Component\Uid\Uuid;
 use App\Repository\UserRepository;
 use App\Service\MailService;
+use App\Service\ResetPasswordService;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
@@ -27,7 +28,8 @@ class ResetPasswordCrudController extends AbstractCrudController
 
     public function __construct(
         private UserRepository $userRepository,
-        private MailService $mailService
+        private MailService $mailService,
+        private ResetPasswordService $resetPasswordService
     )
     {
     }
@@ -66,7 +68,7 @@ class ResetPasswordCrudController extends AbstractCrudController
 
     public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
-        if ($entityInstance instanceof ResetPassword) {
+        if($entityInstance instanceof ResetPassword) {
 
             $user = $this->userRepository->findOneBy(['email' => $entityInstance->getEmail()]);
 
@@ -80,18 +82,8 @@ class ResetPasswordCrudController extends AbstractCrudController
 
             }else{
 
-                $entityInstance->setCreatedAt(new DateTimeImmutable('now'))->setUuid(Uuid::v4())->setIsUsed(false);
+                $this->resetPasswordService->saveResetPasswordInDatabaseAndSendEmail($entityInstance);
 
-                $donnees = [
-                    'recipient' => $entityInstance->getEmail(),
-                    'uuid' => $entityInstance->getUuid()
-                ];
-
-                $entityManager->persist($entityInstance);
-                $entityManager->flush();
-
-                //TODO A MONTRER EN REUNION FORMAT EMAIL
-                $this->mailService->sendMail($entityInstance->getEmail(),'Lien pour le changement de votre mot de passe', 'reset_password', $donnees);
             }
         }
     }

@@ -6,6 +6,7 @@ use App\Entity\User;
 use DateTimeImmutable;
 use App\Entity\Invitation;
 use App\Entity\ResetPassword;
+use App\Form\EmailForSendResetPasswordType;
 use App\Form\ResetPasswordType;
 use App\Service\MeetingService;
 use App\Form\RegistrationFormType;
@@ -14,6 +15,7 @@ use App\Security\UserAuthenticator;
 use Symfony\Component\Form\FormError;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\ResetPasswordRepository;
+use App\Service\ResetPasswordService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -26,12 +28,13 @@ class RegistrationController extends AbstractController
     public function __construct(
         private MeetingService $meetingService,
         private UserRepository $userRepository,
-        private ResetPasswordRepository $resetPasswordRepository
+        private ResetPasswordRepository $resetPasswordRepository,
+        private ResetPasswordService $resetPasswordService
     )
     {
     }
 
-    #[Route('/inscription/{uuid}', name: 'site_register')]
+    #[Route('/inscription/{uuid}', name: 'registration_register')]
     public function register(Invitation $invitation, Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, UserAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
     {
 
@@ -84,7 +87,40 @@ class RegistrationController extends AbstractController
         ]);
     }
 
-    #[Route('/reset-password/{uuid}', name: 'site_reset_password')]
+    #[Route('/check-email', name: 'registration_check_email')]
+    public function checkEmail(Request $request): Response
+    {
+
+        $form = $this->createForm(EmailForSendResetPasswordType::class, null);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+
+            $user = $this->userRepository->findOneBy(['email' => $form->get('email')->getData()]);
+
+            if(!$user){
+
+                $form->get('email')->addError(new FormError('Aucun compte n\'est associé à cette adresse email...'));
+
+            }else{
+
+                //TODO envoi email
+                $resetPassword = new ResetPassword();
+                $resetPassword->setEmail($form->get('email')->getData());
+                $this->resetPasswordService->saveResetPasswordInDatabaseAndSendEmail($resetPassword);
+
+                $this->addFlash('success', 'Mot de passe mis à jour !');
+                return $this->redirectToRoute('app_site_home');
+            }
+        }
+
+        return $this->render('site/registration/email_to_send_link_for_reset_password.html.twig', [
+            'emailForSendResetPasswordForm' => $form->createView(),
+            'donneesMeeting' => $this->meetingService->nextMeetingCalc()
+        ]);
+    }
+
+    #[Route('/reset-password/{uuid}', name: 'registration_reset_password')]
     public function resetPassword($uuid, Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, UserAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
     {
 

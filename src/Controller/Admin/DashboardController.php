@@ -103,8 +103,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Invitations', 'fa-solid fa-envelope', Invitation::class)
             ->setBadge(count($this->invitationRepository->findBy(['user' => null])),'warning');
         yield MenuItem::linkToCrud('Mot de passe oublié', 'fa-solid fa-lock', ResetPassword::class)
-            ->setBadge(count($this->resetPasswordRepository->findBy(['isUsed' => true])),'info');
-
+            ->setBadge(count($this->resetPasswordRepository->findBy(['isUsed' => true])),'warning');
         
         yield MenuItem::linkToCrud('Liste des métiers', 'fas fa-list', Job::class);
         yield MenuItem::linkToCrud('Liste des genres', 'fas fa-list', SexStatus::class);
