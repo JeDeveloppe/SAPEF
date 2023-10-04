@@ -30,6 +30,13 @@
                                 <label class="form-label">{{ form_label(accountForm.firstname) }}</label>
                                 {{ form_widget(accountForm.firstname) }}
                             </div>
+                            <div class="col-12">
+                                <div class="mb-3 col-11 mx-auto col-md-5 ">
+                                    <label class="form-label">{{ form_label(accountForm.nickname) }}</label>
+                                    {{ form_widget(accountForm.nickname) }}
+                                    <div id="nicknameHelp" class="form-text">Quelque chose d'unique :)</div>
+                                </div>
+                            </div>
                             <div class="mb-3 col-11 mx-auto col-md-5 ">
                                 <label class="form-label">{{ form_label(accountForm.job) }}</label>
                                 {{ form_widget(accountForm.job) }}
@@ -46,11 +53,6 @@
                                 <label class="form-label">{{ form_label(accountForm.phone) }}</label>
                                 {{ form_widget(accountForm.phone) }}
                             </div>
-                            {# <div class="mb-3 col-11 mx-auto col-md-5 ">
-                                <label class="form-label">{{ form_label(accountForm.password) }}</label>
-                                {{ form_widget(accountForm.password) }}
-                                <div id="PasswordHelp" class="form-text">Quelque chose de robuste...</div>
-                            </div> #}
                             <div class="col-12 text-center my-3">
                                 <button type="submit" class="btn btn-success">Mettre à jour</button>
                             </div>

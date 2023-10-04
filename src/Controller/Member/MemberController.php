@@ -2,11 +2,14 @@
 
 namespace App\Controller\Member;
 
+use App\Entity\Invitation;
 use App\Entity\User;
 use App\Form\AccountType;
+use App\Form\EmailForSendInvitationType;
 use App\Repository\ContactRepository;
 use App\Repository\PaiementRepository;
 use App\Repository\UserRepository;
+use App\Service\InvitationService;
 use App\Service\MeetingService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,7 +28,8 @@ class MemberController extends AbstractController
         private ContactRepository $contactRepository,
         private MeetingService $meetingService,
         private EntityManagerInterface $entityManagerInterface,
-        private UserRepository $userRepository
+        private UserRepository $userRepository,
+        private InvitationService $invitationService
     )
     {
     }
@@ -53,26 +57,6 @@ class MemberController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()) {
 
-            // $userInDataBase = $this->userRepository->find($user);
-            // $passwordInDataBaseEncoded = $userPasswordHasher->hashPassword(
-            //                 $userInDataBase,
-            //                 $userInDataBase->getPassword()
-            // );
-
-            // $passwordInFormEncoded = $userPasswordHasher->hashPassword(
-            //                             $userInDataBase,
-            //                             $form->get('password')->getData()
-            // );
-
-            // if($passwordInDataBaseEncoded != $passwordInDataBaseEncoded){
-
-            //     $user->setPassword($userPasswordHasher->hashPassword(
-            //         $user,
-            //         $form->get('password')->getData()
-            //     ));
-            // }
-
-            // dd($user);
             $this->entityManagerInterface->persist($user);
             $this->entityManagerInterface->flush();
 
@@ -81,6 +65,29 @@ class MemberController extends AbstractController
 
         return $this->render('member/account.html.twig', [
             'accountForm' => $form->createView(),
+            'donneesMeeting' => $this->meetingService->nextMeetingCalc()
+        ]);
+    }
+
+    #[Route('/invitation', name: 'invitation')]
+    public function invitation(Request $request): Response
+    {
+
+        $form = $this->createForm(EmailForSendInvitationType::class, null);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+
+            $recipient = $form->get('email')->getData();
+
+            $this->invitationService->saveInvitationInDatabaseAndSendEmail($recipient);
+
+            $this->addFlash('success', 'Votre invitation à été envoyée!');
+            return $this->redirectToRoute('member_account');
+        }
+
+        return $this->render('member/email_to_send_link_for_invitation.html.twig', [
+            'emailForSendInvitationForm' => $form->createView(),
             'donneesMeeting' => $this->meetingService->nextMeetingCalc()
         ]);
     }

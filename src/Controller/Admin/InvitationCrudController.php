@@ -70,12 +70,10 @@ class InvitationCrudController extends AbstractCrudController
 
     public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
-        if($entityInstance instanceof Invitation) {
-            
-            $createdUser = $this->security->getUser();
-    
-            $this->invitationService->saveInvitationInDatabaseAndSendEmail($entityInstance, $createdUser);
 
-        }
+            $recipient = $entityInstance->getEmail();
+
+            $this->invitationService->saveInvitationInDatabaseAndSendEmail($recipient);
+
     }
 }

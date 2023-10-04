@@ -9,6 +9,7 @@ use App\Entity\SexStatus;
 use Doctrine\ORM\QueryBuilder;
 use App\Repository\JobRepository;
 use App\Repository\ShopRepository;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -29,12 +30,13 @@ class AccountType extends AbstractType
                     'class' => 'form-control'
                 ]
             ])
-            // ->add('password', PasswordType::class, [
-            //     'label' => 'Mot de passe:',
-            //     'attr' => [
-            //         'class' => 'form-control',
-            //     ]
-            // ])
+            ->add('nickname', TextType::class, [
+                'label' => 'Pseudo',
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+                'required' => false
+            ])
             ->add('phone', TelType::class, [
                 'label' => 'Téléphone:',
                 'attr' => [
