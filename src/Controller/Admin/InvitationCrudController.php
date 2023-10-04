@@ -16,7 +16,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 
 //TODO expliquer system d'invitation / inscription sur le site
 //TODO penser au template nav s'il faut changer
@@ -41,6 +41,11 @@ class InvitationCrudController extends AbstractCrudController
     {
         return [
             TextField::new('email')->setLabel('Email:'),
+            BooleanField::new('isAgreeTerm')
+                ->setLabel('Je reconnais avoir prévu(e) la personne de ma demarche de lui envoyer un email.')
+                ->onlyOnForms()
+                ->onlyOnDetail()
+                ->setRequired(true),
             TextField::new('uuid')->hideWhenCreating()->setLabel('Token:'),
             DateTimeField::new('sendAt')->setFormat('dd.MM.yyyy à HH:mm')->setLabel('Créé / envoyé:')->hideWhenCreating(),
             AssociationField::new('user')->hideWhenCreating()->setLabel('Inscrit:'),
@@ -72,8 +77,9 @@ class InvitationCrudController extends AbstractCrudController
     {
 
             $recipient = $entityInstance->getEmail();
+            $agreeTerm = $entityInstance->getIsAgreeTerm();
 
-            $this->invitationService->saveInvitationInDatabaseAndSendEmail($recipient);
+            $this->invitationService->saveInvitationInDatabaseAndSendEmail($recipient, $agreeTerm);
 
     }
 }

@@ -1,39 +1,53 @@
-{% extends 'site/base.html.twig' %}
+{% extends 'member/base.html.twig' %}
 
 {% block title %}Espace membre{% endblock %}
 
 {% block body %}
-    <h1 class="page-section-heading text-center text-black text-uppercase mt-5">Inviter une personne</h1>
 
-    {% include "site/components/hr.html.twig" %}
+    <div class="card col-12">
+        <div class="card-header">Invitation d'une personne</div>
+        <div class="card-body">
 
-        {% if not emailForSendInvitationForm.vars.valid %}
-            <ul class="col-12 col-md-6 text-center text-danger mx-auto my-3">
-                {# Loop through every form item #}
-                {% for child in emailForSendInvitationForm.children %}
-                    {# Display the errors of the form item #}
-                    {% for error in child.vars.errors %}
-                        <li class="list-unstyled">{{error.message}}</li>
-                    {% endfor %}
+        {% include "site/flash_message.html.twig" %}
+
+            <div class="col-12 lead text-center mt-3">Vous pouvez inviter la personne de votre choix à rejoindre notre site en lui envoyant un email.</div>
+
+            {{ form_start(emailForSendInvitationForm) }}
+
+                <div class="col-11 col-lg-8 mx-auto d-flex flex-wrap justify-content-around my-4">
+                    <div class="my-3 col-11 mx-auto col-md-8 offset-md-1 mx-md-0">
+                        <label class="form-label">{{ form_label(emailForSendInvitationForm.email) }}</label>
+                        {{ form_widget(emailForSendInvitationForm.email) }}
+                    </div>
+                    <div class="my-3 col-11 mx-auto col-md-5 d-flex">
+                        <label class="form-label">{{ form_label(emailForSendInvitationForm.isAgreeTerms) }}</label>
+                        {{ form_widget(emailForSendInvitationForm.isAgreeTerms) }}
+                    </div>
+                    <div class="col-12 text-center my-3">
+                        <button type="submit" class="btn btn-success">Envoyer</button>
+                    </div>
+                </div>
+                
+            {{ form_end(emailForSendInvitationForm) }}
+
+            {% include "site/components/hr.html.twig" %}
+
+            <table class="table table-striped mt-3 align-middle text-center">
+                <tr>
+                    <th>Date d'envoi:</th>
+                    <th>Email invité:</th>
+                    <th>Invitation utilisée</th>
+                </tr>
+                {% for invitation in invitations %}
+                    <tr>
+                        <td>{{ invitation.sendAt | date('d-M-Y') }}</td>
+                        <td>{{ invitation.email }}</td>
+                        <td>{{ invitation.user ?? 'NON' }}</td>
+                    </tr>
                 {% endfor %}
-            </ul>
-        {% endif %}
+            </table>
 
-        {{ form_start(emailForSendInvitationForm) }}
+        </div>
+    </div>
 
-            <div class="col-11 col-lg-8 mx-auto d-flex flex-wrap justify-content-around my-4">
-                <div class="my-3 col-11 mx-auto col-md-8 offset-md-1 mx-md-0">
-                    <label class="form-label">{{ form_label(emailForSendInvitationForm.email) }}</label>
-                    {{ form_widget(emailForSendInvitationForm.email) }}
-                </div>
-                <div class="my-3 col-11 mx-auto col-md-5  text-center">
-                    <label class="form-label">{{ form_label(emailForSendInvitationForm.isAgreeTerms) }}</label>
-                    {{ form_widget(emailForSendInvitationForm.isAgreeTerms) }}
-                </div>
-                <div class="col-12 text-center my-3">
-                    <button type="submit" class="btn btn-success">Envoyer</button>
-                </div>
-            </div>
-            
-        {{ form_end(emailForSendInvitationForm) }}
 {% endblock %}

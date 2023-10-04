@@ -30,6 +30,9 @@ class Invitation
     #[ORM\JoinColumn(nullable: false)]
     private ?User $createdBy = null;
 
+    #[ORM\Column]
+    private ?bool $isAgreeTerm = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -91,6 +94,18 @@ class Invitation
     public function setCreatedBy(?User $createdBy): static
     {
         $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    public function getIsAgreeTerm(): ?bool
+    {
+        return $this->isAgreeTerm;
+    }
+
+    public function setIsAgreeTerm(bool $isAgreeTerm): static
+    {
+        $this->isAgreeTerm = $isAgreeTerm;
 
         return $this;
     }

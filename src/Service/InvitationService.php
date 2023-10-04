@@ -17,10 +17,10 @@ class InvitationService
         ){
     }
 
-    public function saveInvitationInDatabaseAndSendEmail(string $recipient){
+    public function saveInvitationInDatabaseAndSendEmail(string $recipient, $agreeTerm){
 
             $invitation = new Invitation();
-            $invitation->setEmail($recipient);
+            $invitation->setEmail($recipient)->setIsAgreeTerm($agreeTerm);
 
             $createdUser = $this->security->getUser();
 

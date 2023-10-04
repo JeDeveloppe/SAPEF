@@ -1,66 +1,57 @@
-{% extends 'site/base.html.twig' %}
+{% extends 'member/base.html.twig' %}
 
 {% block title %}Espace membre{% endblock %}
 
 {% block body %}
 
-    <div class="row my-5">
-        {# colonne menu #}
-        <div class="col-12 col-md-3 col-lg-2 bg-secondary">
-            {% include "member/components/_menu.html.twig" %}
-        </div>
-        {# colonne des cards #}
-        <div class="col-12 col-md-9 col-lg-10 d-flex flex-wrap p-3">
-            <div class="card">
-                <div class="card-header">Mon compte</div>
-                <div class="card-body">
-                    {{ form_start(accountForm) }}
+    <div class="card">
+        <div class="card-header">Mon compte</div>
+        <div class="card-body">
+            {{ form_start(accountForm) }}
 
-                        <div class="col-11 col-lg-8 mx-auto d-flex flex-wrap justify-content-around my-4">
-                            <div class="my-3 col-11 mx-auto col-md-8 offset-md-1 mx-md-0">
-                                <label class="form-label">{{ form_label(accountForm.email) }}</label>
-                                {{ form_widget(accountForm.email) }}
-                                <div id="emailHelp" class="form-text">Identifiant de connexion.</div>
-                            </div>
-                            <div class="mb-3 col-11 mx-auto col-md-5 ">
-                                <label class="form-label">{{ form_label(accountForm.lastname) }}</label>
-                                {{ form_widget(accountForm.lastname) }}
-                            </div>
-                            <div class="mb-3 col-11 mx-auto col-md-5 ">
-                                <label class="form-label">{{ form_label(accountForm.firstname) }}</label>
-                                {{ form_widget(accountForm.firstname) }}
-                            </div>
-                            <div class="col-12">
-                                <div class="mb-3 col-11 mx-auto col-md-5 ">
-                                    <label class="form-label">{{ form_label(accountForm.nickname) }}</label>
-                                    {{ form_widget(accountForm.nickname) }}
-                                    <div id="nicknameHelp" class="form-text">Quelque chose d'unique :)</div>
-                                </div>
-                            </div>
-                            <div class="mb-3 col-11 mx-auto col-md-5 ">
-                                <label class="form-label">{{ form_label(accountForm.job) }}</label>
-                                {{ form_widget(accountForm.job) }}
-                            </div>
-                            <div class="mb-3 col-11 mx-auto col-md-5 ">
-                                <label class="form-label">{{ form_label(accountForm.shop) }}</label>
-                                {{ form_widget(accountForm.shop) }}
-                            </div>
-                            <div class="mb-3 col-11 mx-auto col-md-5 ">
-                                <label class="form-label">{{ form_label(accountForm.sex) }}</label>
-                                {{ form_widget(accountForm.sex) }}
-                            </div>
-                            <div class="mb-3 col-11 mx-auto col-md-5 ">
-                                <label class="form-label">{{ form_label(accountForm.phone) }}</label>
-                                {{ form_widget(accountForm.phone) }}
-                            </div>
-                            <div class="col-12 text-center my-3">
-                                <button type="submit" class="btn btn-success">Mettre à jour</button>
-                            </div>
+                <div class="col-11 col-lg-8 mx-auto d-flex flex-wrap justify-content-around my-4">
+                    <div class="my-3 col-11 mx-auto col-md-8 offset-md-1 mx-md-0">
+                        <label class="form-label">{{ form_label(accountForm.email) }}</label>
+                        {{ form_widget(accountForm.email) }}
+                        <div id="emailHelp" class="form-text">Identifiant de connexion.</div>
+                    </div>
+                    <div class="mb-3 col-11 mx-auto col-md-5 ">
+                        <label class="form-label">{{ form_label(accountForm.lastname) }}</label>
+                        {{ form_widget(accountForm.lastname) }}
+                    </div>
+                    <div class="mb-3 col-11 mx-auto col-md-5 ">
+                        <label class="form-label">{{ form_label(accountForm.firstname) }}</label>
+                        {{ form_widget(accountForm.firstname) }}
+                    </div>
+                    <div class="col-12">
+                        <div class="mb-3 col-11 mx-auto col-md-5 ">
+                            <label class="form-label">{{ form_label(accountForm.nickname) }}</label>
+                            {{ form_widget(accountForm.nickname) }}
+                            <div id="nicknameHelp" class="form-text">Quelque chose d'unique :)</div>
                         </div>
-
-                    {{ form_end(accountForm) }}
+                    </div>
+                    <div class="mb-3 col-11 mx-auto col-md-5 ">
+                        <label class="form-label">{{ form_label(accountForm.job) }}</label>
+                        {{ form_widget(accountForm.job) }}
+                    </div>
+                    <div class="mb-3 col-11 mx-auto col-md-5 ">
+                        <label class="form-label">{{ form_label(accountForm.shop) }}</label>
+                        {{ form_widget(accountForm.shop) }}
+                    </div>
+                    <div class="mb-3 col-11 mx-auto col-md-5 ">
+                        <label class="form-label">{{ form_label(accountForm.sex) }}</label>
+                        {{ form_widget(accountForm.sex) }}
+                    </div>
+                    <div class="mb-3 col-11 mx-auto col-md-5 ">
+                        <label class="form-label">{{ form_label(accountForm.phone) }}</label>
+                        {{ form_widget(accountForm.phone) }}
+                    </div>
+                    <div class="col-12 text-center my-3">
+                        <button type="submit" class="btn btn-success">Mettre à jour</button>
+                    </div>
                 </div>
-            </div>
+
+            {{ form_end(accountForm) }}
         </div>
     </div>
 

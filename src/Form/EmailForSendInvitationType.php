@@ -20,7 +20,7 @@ class EmailForSendInvitationType extends AbstractType
                 ]
             ])
             ->add('isAgreeTerms', CheckboxType::class, [
-                'label' => 'Je reconnais avoir bien prévenu ma/mon collègue de cette démarche.'
+                'label' => 'Je reconnais avoir prévenu(e) ma/mon collègue de cette démarche.'
             ])
         ;
     }

@@ -7,6 +7,7 @@ use App\Entity\User;
 use App\Form\AccountType;
 use App\Form\EmailForSendInvitationType;
 use App\Repository\ContactRepository;
+use App\Repository\InvitationRepository;
 use App\Repository\PaiementRepository;
 use App\Repository\UserRepository;
 use App\Service\InvitationService;
@@ -29,7 +30,8 @@ class MemberController extends AbstractController
         private MeetingService $meetingService,
         private EntityManagerInterface $entityManagerInterface,
         private UserRepository $userRepository,
-        private InvitationService $invitationService
+        private InvitationService $invitationService,
+        private InvitationRepository $invitationRepository
     )
     {
     }
@@ -73,22 +75,25 @@ class MemberController extends AbstractController
     public function invitation(Request $request): Response
     {
 
+        $user = $this->security->getUser();
         $form = $this->createForm(EmailForSendInvitationType::class, null);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
 
             $recipient = $form->get('email')->getData();
+            $agreeTerm = $form->get('isAgreeTerms')->getData();
 
-            $this->invitationService->saveInvitationInDatabaseAndSendEmail($recipient);
+            $this->invitationService->saveInvitationInDatabaseAndSendEmail($recipient, $agreeTerm);
 
             $this->addFlash('success', 'Votre invitation à été envoyée!');
-            return $this->redirectToRoute('member_account');
+            return $this->redirectToRoute('member_invitation');
         }
 
         return $this->render('member/email_to_send_link_for_invitation.html.twig', [
             'emailForSendInvitationForm' => $form->createView(),
-            'donneesMeeting' => $this->meetingService->nextMeetingCalc()
+            'donneesMeeting' => $this->meetingService->nextMeetingCalc(),
+            'invitations' => $this->invitationRepository->findBy(['createdBy' => $user])
         ]);
     }
 }
