@@ -38,13 +38,23 @@
                     <th>Email invité:</th>
                     <th>Invitation utilisée</th>
                 </tr>
-                {% for invitation in invitations %}
+                {% if invitations | length > 0 %}
+
+                    {% for invitation in invitations %}
+                        <tr>
+                            <td>{{ invitation.sendAt | date('d-M-Y') }}</td>
+                            <td>{{ invitation.email }}</td>
+                            <td>{{ invitation.user ?? 'NON' }}</td>
+                        </tr>
+                    {% endfor %}
+        
+                {% else %}
+                    
                     <tr>
-                        <td>{{ invitation.sendAt | date('d-M-Y') }}</td>
-                        <td>{{ invitation.email }}</td>
-                        <td>{{ invitation.user ?? 'NON' }}</td>
+                        <td colspan="3">Aucune pour le moment...</td>
                     </tr>
-                {% endfor %}
+
+                {% endif %}
             </table>
 
         </div>
