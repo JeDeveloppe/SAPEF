@@ -17,8 +17,7 @@ class MeansOfPaiementService
 
     public function addMeansOfPaiementsForDev(SymfonyStyle $io){
 
-        //TODO => METTRE A JOUR EN REUNION
-        $moyens = ['CB','ESPÈCES','CHQ','VIR','PAYPAL'];
+        $moyens = ['CB','CHQ','VIR','PAYPAL'];
 
         foreach($moyens as $moyenArray){
 

@@ -67,7 +67,6 @@ class UserCrudController extends AbstractCrudController
                 ->setPermission('ROLE_SUPER_ADMIN'),
             ImageField::new('image')->setLabel('Image:')->setBasePath($this->getParameter('app.path.images_users'))->onlyOnIndex(),
             TextField::new('imageFile')->setFormType(VichImageType::class)->setFormTypeOptions([
-                //TODO vérifier les options - René
                 'required' => false,
                 'allow_delete' => false,
                 'delete_label' => 'Supprimer du serveur ?',
@@ -106,7 +105,7 @@ class UserCrudController extends AbstractCrudController
     {
         if ($entityInstance instanceof User) {
             $now = new DateTimeImmutable ('now');
-            $entityInstance->setCreatedAt($now)->setLastVisiteAt($now)->setPassword(
+            $entityInstance->setCreatedAt($now)->setLastVisiteAt($now)->setIsAgreeTerms(true)->setPassword(
                 $this->userPasswordHasher->hashPassword(
                     $entityInstance,
                     "BienvenueAuSapef"

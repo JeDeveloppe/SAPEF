@@ -38,6 +38,9 @@ class Shop
     #[ORM\Column(type: Types::DECIMAL, precision: 9, scale: 6, nullable: true)]
     private ?string $latitude = null;
 
+    #[ORM\Column(length: 25)]
+    private ?string $phone = null;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
@@ -154,4 +157,17 @@ class Shop
     {
         return $this->name;
     }
+
+    public function getPhone(): ?string
+    {
+        return $this->phone;
+    }
+
+    public function setPhone(string $phone): static
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
 }

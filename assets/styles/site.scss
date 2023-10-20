@@ -1,3 +1,15 @@
+* {
+	box-sizing: border-box;
+}
+
+body{
+	background: rgb(41,85,198);  //#2955FF
+	background: -moz-linear-gradient(90deg, rgba(41,85,198,1) 0%, rgba(18,121,9,1) 57%);
+	background: -webkit-linear-gradient(90deg, rgba(41,85,198,1) 0%, rgba(18,121,9,1) 57%);
+	background: linear-gradient(90deg, rgba(41,85,198,1) 0%, rgba(18,121,9,1) 57%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#2955c6",endColorstr="#127909",GradientType=1);
+}
+
 #navbar-top{
     transition: ease-in-out 200ms;
     position: fixed;
@@ -79,8 +91,8 @@
 	color: white;
 }
 .first-letter-color-sapef{
-	color: red;
-	font-size: 1.3em;
+	color: black;
+	font-size: 1em;
 	font-weight: bolder;
 	-webkit-text-stroke-width: 2px;
 	-webkit-text-stroke-color: red;

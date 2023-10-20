@@ -29,16 +29,16 @@ class LegalInformationService
 
             $io->title('Création / mise à jour des informations légales');
 
-            //TODO => METTRE A JOUR EN REUNION
+
             //! ADRESSE EMAIL SITE DANS .ENV a verifier
             $legal
                 ->setCompanyName('LE SAPEF')
-                ->setStreetCompany('24 rue froide')
-                ->setPostalCodeCompany(14980)
-                ->setCityCompany('ROTS')
-                ->setPublicationManagerFirstName('Antoine')
-                ->setPublicationManagerLastName('GALLÉE')
-                ->setSiretCompany('88847646200013')
+                ->setStreetCompany('39 boulevard Paul Langevin')
+                ->setPostalCodeCompany(38600)
+                ->setCityCompany('FONTAINE')
+                ->setPublicationManagerFirstName('Philippe')
+                ->setPublicationManagerLastName('CHAMBAT')
+                ->setSiretCompany('000') //TODO a revoir
                 ->setFullUrlCompany($_ENV['URL_SITE'])
                 ->setEmailCompany($_ENV['ADRESSE_EMAIL_SITE']) 
                 //!NE PAS CHANGER LA SUITE

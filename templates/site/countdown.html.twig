@@ -1,15 +1,12 @@
 
 <div class="row p-0 m-0 justify-content-center">
     <div class="js-countdown" data-countdown="{{ donneesMeeting.nextMeetingTimestamp|serialize(format = 'json') }}"></div>
-    {% set route =  app.request.attributes.get('_route') %}
-    {% if route is not same as "app_site_home" %}
-            <div id="afterNav" class="col-12 col-md-8 d-flex justify-content-center align-items-center bg-primary pt-3 pb-1">
-                <div id="text_nav" class="d-inline-block text-white">
-                    Temps restant pour posez vos questions de la prochaine réunion {{ donneesMeeting.nextMeeting.name }} du {{ donneesMeeting.nextMeeting.date | date("d-m-Y") }}:
-                </div>
-                <div id="countdown" class="ms-2">
-                    <div id='tiles'></div>
-                </div>
-            </div>
-    {% endif %}
+    <div id="afterNav" class="col-12 col-md-8 d-flex justify-content-center align-items-center bg-primary pt-3 pb-1">
+        <div id="text_nav" class="d-inline-block text-white">
+            Temps restant pour posez vos questions à la prochaine réunion {{ donneesMeeting.nextMeeting.name }} qui se déroulera le {{ donneesMeeting.nextMeeting.date | date("d-m-Y") }}:
+        </div>
+        <div id="countdown" class="ms-2">
+            <div id='tiles'></div>
+        </div>
+    </div>
 </div>

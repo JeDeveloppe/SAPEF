@@ -17,8 +17,6 @@ class JobService
 
     public function addJobsForDev(SymfonyStyle $io){
 
-
-        //TODO => METTRE A JOUR EN REUNION => et au féminin ?
         $jobs = [];
 
         //! NE PAS CHANGER
@@ -29,15 +27,15 @@ class JobService
         array_push($jobs,'DG');
         array_push($jobs,'DO','DOA');
         array_push($jobs,'AO', 'DR', 'RAVL');
-        array_push($jobs,'RCGO VL', 'RCGO VI / VL','RCS VI','RCS VL','RCS MULTI SITE', 'RZ VI');
-        array_push($jobs,'ACS VI', 'ACS VL', 'ACS ITINERANT');
-        array_push($jobs,'TECHNICIEN VI', 'TECHNICIEN VL', 'TECHNICIEN EAD');
+        array_push($jobs,'RCGO VL', 'RCGO VI / VL','RCS VI','RCS VL','RCS MULTI SITE', 'RZ VI','RCS ITINERANT(E)');
+        array_push($jobs,'ACS VI','ACS CGO VI', 'ACS VL', 'ACS ITINERANT');
+        array_push($jobs,'TECHNICIEN VI', 'TECHNICIEN VL', 'TECHNICIEN EAD', 'CT');
 
         //?LISTE AU COMMERCE
         array_push($jobs,'ATC PL', 'ATC AGR', 'ATC GC');
 
         //?LISTE AU SIEGE ?
-        // array_push($jobs,'ATC PL', 'ATC AGR', 'ATC GC');
+        array_push($jobs,'SERVICE SUPPORT');
 
         foreach($jobs as $jobArray){
 

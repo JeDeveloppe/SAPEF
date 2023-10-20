@@ -20,7 +20,6 @@ class ConfigurationSiteService
     public function addConfigurationSite(SymfonyStyle $io)
     {
 
-        //TODO => METTRE A JOUR EN REUNION
         $config[] = [
             'cotisation' => 2500, //cotisation in cents
             'delay' => 15,  //delay before meeting to send email

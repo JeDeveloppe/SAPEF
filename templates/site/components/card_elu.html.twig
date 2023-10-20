@@ -1,23 +1,26 @@
-<div class="col-11 col-sm-9 col-md-8 col-lg-6 col-xxl-5 mb-3">
+<div class="col-11 col-sm-9 col-md-8 col-lg-4 mb-3">
     <div class="card p-0 col-12 h-100">
         <div class="card-header bg-primary">{{ elu.status }}</div>
-        <div class="card-body d-flex flex-wrap p-0">
-            <div class="col-7 p-4">
-                <i class="fas fa-user"></i> {{ elu.name.firstname }} {{ elu.name.lastname }}<br/>
-                <small><i class="fas fa-briefcase"></i> {{ elu.name.job.name }} </small><br/>
-                <i class="fas fa-location"></i> {{ elu.name.shop.name }} - {{ elu.name.shop.counterMark }}<br/>
-                {% if elu.name.phone is not null %}
-                    <br/><i class="fas fa-mobile-alt"></i> : {{ elu.name.phone }}
-                {% endif %}
-            </div>
-            <div class="col-5 p-4 d-flex justify-content-center">
+        <div class="card-body d-flex flex-column p-0">
+            <div class="col-11 col-md-9 col-lg-6 mx-auto pt-2 d-flex justify-content-around">
                 {% if elu.name.image is not null %}
                     <img class="img-thumbnail" src="{{ vich_uploader_asset(elu.name, 'imageFile') | imagine_filter('user')  }}"/>
                 {% else %}
                     <img class="img-thumbnail" src="{{ asset('/build/images/design/placeholder.png') | imagine_filter('user') }}" alt="Image à renseigner">
                 {% endif %}
             </div>
-            <div class="col-6 mx-auto p-2">
+            <div class="col-12 mt-3 px-2 text-center">
+                <i class="fas fa-user"></i> {{ elu.name.firstname }}<br/>
+                {{ elu.name.lastname }}<br/>
+                <small><i class="fas fa-briefcase"></i> {{ elu.name.job.name }} </small><br/>
+                <i class="fas fa-location"></i> {{ elu.name.shop.name }} - {{ elu.name.shop.counterMark }}<br/>
+                {% if elu.name.phone is not null %}
+                    <i class="fas fa-mobile-alt"></i> : {{ elu.name.phone }}
+                {% else %}
+                    Agence ERM au: {{ elu.name.shop.phone }}
+                {% endif %}
+            </div>
+            <div class="col-9 mx-auto p-2">
                 <select class="form-select" name="departements_from_elu">
                     <option value="">Départements...</option>
                         {% for department in elu.regionErm.departments %}{

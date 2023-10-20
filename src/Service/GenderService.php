@@ -19,7 +19,6 @@ class GenderService
 
         $sexs = [];
 
-        //TODO => METTRE A JOUR EN REUNION
         //! NE PAS CHANGER
         array_push($sexs,'HOMME', 'FEMME');
 

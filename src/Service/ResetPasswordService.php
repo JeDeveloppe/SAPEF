@@ -27,7 +27,6 @@ class ResetPasswordService
         $this->em->persist($resetPassword);
         $this->em->flush();
 
-        //TODO A MONTRER EN REUNION FORMAT EMAIL
         $this->mailService->sendMail($resetPassword->getEmail(),'Lien pour le changement de votre mot de passe', 'reset_password', $donnees);
     }
 

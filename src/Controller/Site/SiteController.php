@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Repository\LegalInformationRepository;
 use Symfony\Component\HttpFoundation\Response;
 use App\Repository\ConfigurationSiteRepository;
+use App\Repository\RegionErmRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Karser\Recaptcha3Bundle\Validator\Constraints\Recaptcha3Validator;
@@ -26,7 +27,8 @@ class SiteController extends AbstractController
         private LegalInformationRepository $legalInformationRepository,
         private MeetingService $meetingService,
         private Security $security,
-        private ContactService $contactService
+        private ContactService $contactService,
+        private RegionErmRepository $regionErmRepository
     )
     {
     }
@@ -76,9 +78,11 @@ class SiteController extends AbstractController
     public function elus(EluService $eluService): Response
     {
         $donnees = $eluService->constructionOfTheMapOfFranceWithElus();
+        $regions = $this->regionErmRepository->findAll();
 
         return $this->render('site/pages/elus_du_sapef.html.twig', [
             'donnees' => $donnees,
+            'legends' => $regions,
             'donneesMeeting' => $this->meetingService->nextMeetingCalc()
         ]);
     }

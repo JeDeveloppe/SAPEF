@@ -35,7 +35,6 @@ class InvitationService
                 'uuid' => $invitation->getUuid()
             ];
 
-            //TODO A MONTRER EN REUNION FORMAT EMAIL
             $this->mailService->sendMail($invitation->getEmail(),'Invitation au site LE SAPEF', 'invitation_to_registration', $donnees);
 
     }

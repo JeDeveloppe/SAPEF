@@ -65,6 +65,7 @@ class ShopService
         ->setName($arrayEntity['name'])
         ->setCounterMark($arrayEntity['cm'])
         ->setAddress($arrayEntity['address'])
+        ->setPhone($arrayEntity['phone'])
         ->setLatitude($this->utilities->stringToNull($arrayEntity['latitude'])) 
         ->setLongitude($this->utilities->stringToNull($arrayEntity['longitude']))
         ->setDepartment($this->departmentRepository->findOneBy(['number' => substr($arrayEntity['postal_code'],0,2)]));

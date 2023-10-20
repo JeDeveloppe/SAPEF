@@ -10,7 +10,7 @@
 
     {% include "site/components/hr.html.twig" %}
 
-    <div class="row my-5">
+    <div class="row mt-5">
         <div class="col-11 col-md-9 col-lg-6 mx-auto">
             <script type="text/javascript" src="{{ asset('map/mapdata.js') }}"></script> 
             <script type="text/javascript" src="{{ asset('map/countrymap.js') }}"></script> 
@@ -18,7 +18,25 @@
         </div>
     </div>
 
-    {% if donnees.titulaires is defined and donnees.titulaires|length > 0 %}
+    <div class="row mb-5 justify-content-around">
+        {% for region in legends %}
+            <div class="col-11 col-md-6 col-lg-4 my-2">
+                <ul class="list-group"><span class="badge" style="background-color:{{ region.color }}">{{ region.name }}</span>
+                    {% if region.elus | length > 0 %}
+                            {% for elu in region.elus %}
+                            <li class="list-group-item">{{ elu.name }}<br/>
+                            <i class="fas fa-location"></i> {{ elu.name.shop.name }} - {{ elu.name.shop.counterMark }}<br/>
+                            <i class="fas fa-mobile-alt"></i> : {{ elu.name.phone }}</li>
+                        {% endfor %}
+                    {% else %}
+                        <li class="list-group-item">Aucun pour le moment...</li>
+                    {% endif %}
+                </ul>
+            </div>
+        {% endfor %}
+    </div>
+
+    {# {% if donnees.titulaires is defined and donnees.titulaires|length > 0 %}
     {% set titulaires = donnees.titulaires %}
         {% include "site/components/hr.html.twig" %}
 
@@ -39,6 +57,6 @@
                 {% include "site/components/card_elu.html.twig" with {'elu': suppleant} %}
             {% endfor %}
         </div>
-    {% endif %}
+    {% endif %} #}
 
 {% endblock %}

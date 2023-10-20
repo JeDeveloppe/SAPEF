@@ -21,9 +21,11 @@ function scrollFunction() {
     document.getElementById("navbar-top").style.borderBottomLeftRadius = "10px";
     document.getElementById("navbar-top").style.borderBottomRightRadius = "10px";
     document.getElementById("logo").style.scale = 0.9;
+    document.getElementById("navbar-top").classList.add("border-top border-success");
   } else {
     document.getElementById("navbar-top").style.padding = "10px 10px";
     document.getElementById("navbar-top").classList.add("mt-1");
+    document.getElementById("navbar-top").classList.remove("border-top border-success");
     document.getElementById("navbar-top").style.borderBottomLeftRadius = "0px";
     document.getElementById("navbar-top").style.borderBottomRightRadius = "0px";
     document.getElementById("logo").style.scale = 1;

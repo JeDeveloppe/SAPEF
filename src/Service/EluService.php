@@ -29,12 +29,12 @@ class EluService
         $io->title('Importation des EluStatus');
 
             $totals = [];
-            //TODO => METTRE A JOUR EN REUNION
             //! NE PAS CHANGER
             array_push($totals,'TITULAIRE');
 
             //?METTRE A JOUR
             array_push($totals,'SUPPLEANT(E)');
+            array_push($totals,'REPRESENTANT(E) SYNDICAL(E)');
         
             $io->progressStart(count($totals));
 
@@ -69,7 +69,6 @@ class EluService
         $titulaires = [];
         $suppleants = [];
 
-        //TODO => METTRE A JOUR EN REUNION SI AUTRES STATUS
         foreach($elus as $elu){
             if($elu->getStatus() == 'TITULAIRE'){
                 array_push($titulaires, $elu);
@@ -100,7 +99,8 @@ class EluService
                 "lng" => $elu->getName()->getShop()->getLongitude(),
                 "name" => $elu->getName()->getShop()->getName(),
                 "color" => "#000000",
-                "description" => $elu->getName()->getFirstName().' '.$elu->getName()->getLastname().' ('.$elu->getName()->getJob().')<br/><i class="fas fa-mobile-alt"></i>: '.$elu->getName()->getPhone()
+                // "description" => $elu->getName()->getFirstName().' '.$elu->getName()->getLastname().' ('.$elu->getName()->getJob().')<br/><i class="fas fa-mobile-alt"></i>: '.$elu->getName()->getPhone()
+                "description" => $listeUsers
                 ];
 
                 $departments = $region->getDepartments();
@@ -136,56 +136,5 @@ class EluService
         $donnees['states'] = $jsonStates;
 
         return $donnees;
-    }
-
-    public function importElusForProd(SymfonyStyle $io): void
-    {
-        $io->title('Importation des Elus');
-
-            $totals = $this->readCsvFile();
-        
-            $io->progressStart(count($totals));
-
-            foreach($totals as $arrayTotal){
-                $io->progressAdvance();
-                $entity = $this->createOrUpdate($arrayTotal);
-                $this->em->persist($entity);
-            }
-            
-            $this->em->flush();
-
-            $io->progressFinish();
-        
-
-        $io->success('Importation terminée');
-    }
-
-    private function readCsvFile(): Reader
-    {
-        $csv = Reader::createFromPath('%kernel.root.dir%/../.docs/importForProd/elu.csv','r');
-        $csv->setHeaderOffset(0);
-
-        return $csv;
-    }
-
-    private function createOrUpdate(array $arrayEntity): Elu
-    {
-
-        $entity = $this->eluRepository->find($arrayEntity['id']);
-
-        if(!$entity){
-            $entity = new Elu();
-        }
-
-        //"id","name_id","status_id","region_erm_id","updated_by_id","updated_at"
-
-        $entity
-            ->setUpdatedAt(new DateTimeImmutable('now'))
-            ->setStatus($this->eluStatusRepository->find($arrayEntity['status_id']))
-            ->setName($this->userRepository->find($arrayEntity['name_id']))
-            ->setRegionErm($this->regionErmRepository->find($arrayEntity['region_erm_id']))
-            ->setUpdatedBy($this->userRepository->find($arrayEntity['name_id']));
-
-        return $entity;
     }
 }

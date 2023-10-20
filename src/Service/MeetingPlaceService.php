@@ -19,7 +19,6 @@ class MeetingPlaceService
     {
         $entities = [];
 
-        //TODO => METTRE A JOUR EN REUNION
         //! NE PAS CHANGER
         array_push($entities,'Siège Euromaster');
 

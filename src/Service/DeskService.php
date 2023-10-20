@@ -26,7 +26,6 @@ class DeskService
     {
         $entities = [];
 
-        //TODO => METTRE A JOUR EN REUNION
         $entities = ['PRÉSIDENT','VICE- PRÉSIDENT', 'SECRETAIRE', 'SECRETAIRE ADJOINT','TRESORIER','TRESORIER ADJOINT','DÉLÉGUÉ AUX RELATIONS EXTÉRIEURES'];
 
         $io->title('Création des rôles du bureau');

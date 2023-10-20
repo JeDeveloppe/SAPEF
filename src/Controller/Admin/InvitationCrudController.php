@@ -18,10 +18,6 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 
-//TODO expliquer system d'invitation / inscription sur le site
-//TODO penser au template nav s'il faut changer
-//TODO modifier RegistrationController au cas ou
-
 class InvitationCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
@@ -44,8 +40,11 @@ class InvitationCrudController extends AbstractCrudController
             BooleanField::new('isAgreeTerm')
                 ->setLabel('Je reconnais avoir prévu(e) la personne de ma demarche de lui envoyer un email.')
                 ->onlyOnForms()
-                ->onlyOnDetail()
                 ->setRequired(true),
+            BooleanField::new('isAgreeTerm')
+                ->setLabel('Termes')
+                ->onlyOnIndex()
+                ->setDisabled(true),
             TextField::new('uuid')->hideWhenCreating()->setLabel('Token:'),
             DateTimeField::new('sendAt')->setFormat('dd.MM.yyyy à HH:mm')->setLabel('Créé / envoyé:')->hideWhenCreating(),
             AssociationField::new('user')->hideWhenCreating()->setLabel('Inscrit:'),
