@@ -282,8 +282,8 @@
 "281","Six Fours VL","3333","04-94-10-96-80","AVENUE DE L EUROPE ZA DES PLAYES","83140","SIX FOURS LES PLAGES",NULL,NULL
 "282","CGO VI Dijon","3408","06-74-68-63-32","Parc Tertiaire Mirande batiment I 14 rue Pierre de Coubertin","21000"," DIJON",NULL,NULL
 "283","CGO VL Dijon","3420","06-74-68-63-32","Parc Tertiaire Mirande batiment I 14 rue Pierre de Coubertin","21000"," DIJON",NULL,NULL
-"284","CGO VL Rennes Cesson","3412","06-31-84-59-80","Centre ERM Cesson Rue des Charmilles Chantepie","35510"," Cesson Sévigné",NULL,NULL
-"285","CGO VI Rennes Cesson","3406","06-47-25-01-52","Centre ERM Cesson Rue des Charmilles Chantepie","35510"," Cesson Sévigné",NULL,NULL
+"284","CGO VL Rennes Cesson","3412","06-31-84-59-80","Centre ERM Cesson Rue des Charmilles Chantepie","35510"," Cesson Sévigné","-1.6237943373281847","48.101066226006175"
+"285","CGO VI Rennes Cesson","3406","06-47-25-01-52","Centre ERM Cesson Rue des Charmilles Chantepie","35510"," Cesson Sévigné","-1.6237943373281847","48.101066226006175"
 "286","CGO VI St Egrève","3411","06-88-41-46-52","Siège ERM 180 Avenue de l'Europe","38330"," Montbonnot",NULL,NULL
 "287","CGO VL St Egrève","3416","06-88-41-46-52","Siège ERM 180 Avenue de l'Europe","38330"," Montbonnot",NULL,NULL
 "288","CGO VI Clermont Lumière","3425","06-85-07-83-47","Centre ERM Lumière ZI Le Brézet ","63100",NULL,NULL

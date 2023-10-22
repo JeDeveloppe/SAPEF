@@ -4,10 +4,16 @@
 
 {% block body %}
 
-        <div class="col-12 col-md-4 col-lg-3 py-2 d-flex justify-content-around">
-            <div id="countdown">
-                <div id='tiles'></div>
-            </div>
+    <div class="col-12 col-md-4 col-lg-3 py-2 d-flex justify-content-around">
+        <div id="countdown">
+            <div id='tiles'></div>
         </div>
+    </div>
+
+    <div class="row">
+        <div class="col-11 mx-auto text-center">
+            <img id="logo" src="{{ asset('/build/images/design/logoSite.png') | imagine_filter('logoSapef') }}" alt="">
+        </div>
+    </div>
 
 {% endblock %}

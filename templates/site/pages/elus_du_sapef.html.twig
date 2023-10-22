@@ -18,21 +18,19 @@
         </div>
     </div>
 
-    <div class="row mb-5 justify-content-around">
+    <div class="row mb-5 justify-content-start">
         {% for region in legends %}
-            <div class="col-11 col-md-6 col-lg-4 my-2">
-                <ul class="list-group"><span class="badge" style="background-color:{{ region.color }}">{{ region.name }}</span>
-                    {% if region.elus | length > 0 %}
+            {% if region.elus | length > 0 %}
+                <div class="col-11 col-md-6 col-lg-4 my-2">
+                    <ul class="list-group"><span class="badge" style="background-color:{{ region.color }}">{{ region.name }}</span>
                             {% for elu in region.elus %}
-                            <li class="list-group-item">{{ elu.name }}<br/>
-                            <i class="fas fa-location"></i> {{ elu.name.shop.name }} - {{ elu.name.shop.counterMark }}<br/>
-                            <i class="fas fa-mobile-alt"></i> : {{ elu.name.phone }}</li>
-                        {% endfor %}
-                    {% else %}
-                        <li class="list-group-item">Aucun pour le moment...</li>
-                    {% endif %}
-                </ul>
-            </div>
+                                <li class="list-group-item">{{ elu.name }}<br/>
+                                <i class="fas fa-location"></i> {{ elu.name.shop.name }} - {{ elu.name.shop.counterMark }}<br/>
+                                <i class="fas fa-mobile-alt"></i> : {{ elu.name.phone }}</li>
+                            {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
         {% endfor %}
     </div>
 

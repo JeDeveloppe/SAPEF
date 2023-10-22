@@ -99,14 +99,15 @@ class EluService
                 "lng" => $elu->getName()->getShop()->getLongitude(),
                 "name" => $elu->getName()->getShop()->getName(),
                 "color" => "#000000",
-                // "description" => $elu->getName()->getFirstName().' '.$elu->getName()->getLastname().' ('.$elu->getName()->getJob().')<br/><i class="fas fa-mobile-alt"></i>: '.$elu->getName()->getPhone()
-                "description" => $listeUsers
+                "description" => $elu->getName()->getFirstName().' '.$elu->getName()->getLastname().' ('.$elu->getName()->getJob().')<br/><i class="fas fa-mobile-alt"></i>: '.$elu->getName()->getPhone()
                 ];
 
                 $departments = $region->getDepartments();
 
                 //tri alphabetique de l'array
-                asort($listeUsers);
+                // asort($listeUsers);
+                //ordre aléatoire de l'array
+                shuffle($listeUsers);
 
                 //composition de la liste dans l'ordre alphabetique Name 
                 $liste_users = '<ul>';

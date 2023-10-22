@@ -27,7 +27,7 @@ body{
     bottom: 0;
 }
 .container{
-    margin-top: 100px;
+    margin-top: 80px;
 }
 .catalog_card:hover{
     box-shadow: 5px 5px 5px var(--bs-primary);
@@ -50,6 +50,7 @@ body{
 }
 #afterNav{
 	border-radius: 0px 0px 10px 10px;
+	background: rgba(255, 0, 0, 0.05);
 }
 #countdown{
 	background: #222;
