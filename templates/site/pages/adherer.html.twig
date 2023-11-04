@@ -7,7 +7,7 @@
 
     {% include "site/components/hr.html.twig" %}
 
-    <div class="accordion my-5 col-11 mx-auto col-md-9 col-lg-8" id="accordionExample">
+    <div class="accordion my-5 col-11 mx-auto" id="accordionExample">
         <div class="accordion-item">
             <h2 class="accordion-header" id="headingOne">
             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -15,7 +15,7 @@
             </button>
             </h2>
             <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-            <div class="accordion-body bg-primary text-white lh-lg">
+            <div class="accordion-body lh-lg">
                 Une personne syndiquée est une personne qui choisit d'adhérer à une organisation syndicale.<br/>
                 Un syndicat est un regroupement volontaire de personnes ayant pour objet de faire connaître et défendre les droits et intérêts collectifs.<br/>
                 Le syndicat mobilise, conteste, propose, revendique et négocie afin de faire respecter et évoluer les droits collectifs.
@@ -29,7 +29,7 @@
             </button>
             </h2>
             <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-            <div class="accordion-body bg-primary text-white lh-lg">
+            <div class="accordion-body lh-lg">
                 <ul class="p-4">Il existe plusieurs raisons de se syndiquer:                                            
                     <li>Être informé de vos droits individuels et collectifs ainsi que de l'évolution de la législation</li>
                     <li>Etre écouté et soutenu au quotidien durant son parcours professionnel</li>
@@ -50,7 +50,7 @@
             </button>
             </h2>
             <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-            <div class="accordion-body bg-primary text-white lh-lg">
+            <div class="accordion-body lh-lg">
                 Vous ne devez subir aucunes représailles de la part de votre employeur du fait de votre engagement syndical.<br/>
                 En effet, le Code du travail vous protège contre toute forme de discrimination liée à l'appartenance à un syndicat (article L. 1132-1 du Code du travail).<br/>
                 Toutefois, vous n'êtes absolument pas tenu de dire à votre employeur que vous adhérez à un syndicat.
@@ -64,11 +64,11 @@
             </button>
             </h2>
             <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
-            <div class="accordion-body bg-primary text-white lh-lg">
+            <div class="accordion-body lh-lg">
                 {% set cotisation = configuration.cotisation / 100 %}
                 <p><b>Cotisation annuelle {{ cotisation | number_format(2, '.', ',') }} €</b></p>
                 <p>Cette cotisation permet notamment au syndicat de financer son activité, d'informer et défendre ses adhérents et de former les militants (tracts, site Internet, frais de déplacement…)</p>
-                <p>En versant {{ cotisation | number_format(2, '.', ',') }} € au SAPEF, vous bénéficiez d'un crédit d'impôt de {{ (cotisation * 66 / 100) | number_format(2, '.', ',') }} € (66 % de la cotisation annuelle payée).</p> 
+                <p>En versant {{ cotisation | number_format(2, '.', ',') }} € au SAPEF, vous bénéficiez d'un crédit d'impôt de {{ (cotisation * 66 / 100) | number_format(2, '.', ',') }} € (66 % de la cotisation annuelle payée <span class="align-top">*</span>).</p> 
                 <p class="lead">En adhérant, vous ferez partie d’un groupe autonome, dynamique et sympathique !</p>
                 <p class="col-12 text-center">Vous pouvez faire un don par virement:<br/>
                         IBAN: {{ configuration.iban }}<br/>
@@ -82,6 +82,7 @@
                         <img class="col-11 col-md-7 col-xl-4 mx-auto" src="{{ asset('/build/images/design/paypal.png') }}" alt="Faire un don par Paypal ou CB !" data-bs-toggle="tooltip" data-bs-html="true" title="Faire un don par Paypal ou CB !">
                     </a>
                 </div>
+            * hors déclaration d'impôts faite en frais rééls.
             </div>
             </div>
         </div>

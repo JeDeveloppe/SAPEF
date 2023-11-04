@@ -3,7 +3,12 @@
 {% block title %}Connexion{% endblock %}
 
 {% block body %}
-<form method="post">
+
+    <h1 class="text-center text-black text-uppercase mt-5">Connexion</h1>
+
+    {% include "site/components/hr.html.twig" %}
+
+<form method="post" class="col-11 col-md-9 col-lg-6 mx-auto">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
@@ -14,22 +19,17 @@
         </div>
     {% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-    <label for="inputPassword">Password</label>
+    <label for="inputEmail">Adresse email:</label>
+    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control mb-3" autocomplete="email" required autofocus>
+    <label for="inputPassword">Mot de passe:</label>
     <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
 
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
+    <button class="btn btn-info mt-3" type="submit">Se connecter</button>
 </form>
 
-<div class="row">
+<div class="row my-4">
     <div class="col-12 text-end">
         <a href="{{ path('registration_check_email') }}">Mot de passe oublié ?</a>
     </div>

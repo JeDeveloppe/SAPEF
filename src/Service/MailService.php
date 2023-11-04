@@ -35,4 +35,25 @@ class MailService
             dump($e->getDebug());
         }
     }
+
+    public function sendMailToSapefAdresse($recipient, $subject, $template, array $donnees = null){
+
+        if(is_null($donnees)){
+            $donnees = [];
+        }
+
+        $mail = (new TemplatedEmail())
+            ->from($recipient)
+            ->to($_ENV['ADRESSE_EMAIL_SITE'])
+            ->replyTo($recipient)
+            ->subject($subject)
+            ->htmlTemplate('email/templates/'.$template.'.html.twig')
+            ->context($donnees);
+
+        try{
+            $this->mailer->send($mail);
+        } catch (TransportExceptionInterface $e) {
+            dump($e->getDebug());
+        }
+    }
 }

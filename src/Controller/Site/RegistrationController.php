@@ -108,7 +108,7 @@ class RegistrationController extends AbstractController
                 $resetPassword->setEmail($form->get('email')->getData());
                 $this->resetPasswordService->saveResetPasswordInDatabaseAndSendEmail($resetPassword);
 
-                $this->addFlash('success', 'Mot de passe mis à jour !');
+                $this->addFlash('success', 'Un lien viens de vous être envoyé...');
                 return $this->redirectToRoute('app_site_home');
             }
         }

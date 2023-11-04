@@ -67,13 +67,14 @@ class UserService
     {
 
         $now = new DateTimeImmutable('now');
-        $role = ['ROLE_ADMIN'];
+        $roleAdmin = ['ROLE_ADMIN'];
+        $roleUser = ['ROLE_USER'];
         $password = 'Bienvenue@uSapef';
         $users = [];
 
         $users['René'] = [
             'email' => 'rene.wetta@euromaster.com',
-            'role' => $role,
+            'role' => $roleAdmin,
             'nickname' => 'René',
             'firstname' => 'René',
             'lastname' => 'WETTA',
@@ -85,7 +86,7 @@ class UserService
 
         $users['JeanLuc'] = [
             'email' => 'jean-luc.bord@euromaster.com',
-            'role' => $role,
+            'role' => $roleAdmin,
             'nickname' => 'Jean-Luc',
             'firstname' => 'Jean-Luc',
             'lastname' => 'BORD',
@@ -96,7 +97,7 @@ class UserService
         ];
         $users['MarieDelphine'] = [
             'email' => 'marie-delphine.carneiro@euromaster.com',
-            'role' => $role,
+            'role' => $roleUser,
             'nickname' => 'M-D',
             'firstname' => 'Marie-Delphine',
             'lastname' => 'CARNEIRO',
@@ -107,7 +108,7 @@ class UserService
         ];
         $users['Anne'] = [
             'email' => 'anne.belrepayreo@euromaster.com',
-            'role' => $role,
+            'role' => $roleUser,
             'nickname' => 'Anne',
             'firstname' => 'Anne',
             'lastname' => 'BELREPAYRE',
@@ -118,7 +119,7 @@ class UserService
         ];
         $users['Thierry'] = [
             'email' => 'thierry.dussault@euromaster.com',
-            'role' => $role,
+            'role' => $roleUser,
             'nickname' => 'Thierry',
             'firstname' => 'Thierry',
             'lastname' => 'DUSSAULT',
@@ -129,7 +130,7 @@ class UserService
         ];
         $users['Stephane'] = [
             'email' => 'stephane.lelievre@euromaster.com',
-            'role' => $role,
+            'role' => $roleUser,
             'nickname' => 'Stephane',
             'firstname' => 'Stephane',
             'lastname' => 'LELIEVRE',
@@ -140,7 +141,7 @@ class UserService
         ];
         $users['Martine'] = [
             'email' => 'martine.tessa@euromaster.com',
-            'role' => $role,
+            'role' => $roleAdmin,
             'nickname' => 'Martine',
             'firstname' => 'Martine',
             'lastname' => 'TESSA',
@@ -151,7 +152,7 @@ class UserService
         ];
         $users['JeanPierre'] = [
             'email' => 'jean-pierre.soares@euromaster.com',
-            'role' => $role,
+            'role' => $roleUser,
             'nickname' => 'JP',
             'firstname' => 'Jean-Pierre',
             'lastname' => 'SOARES',
@@ -162,7 +163,7 @@ class UserService
         ];
         $users['Laurent'] = [
             'email' => 'laurent.holtzer@euromaster.com',
-            'role' => $role,
+            'role' => $roleUser,
             'nickname' => 'Laurent',
             'firstname' => 'Laurent',
             'lastname' => 'HOLTZER',
@@ -173,7 +174,7 @@ class UserService
         ];
         $users['Pascal'] = [
             'email' => 'pascal.marchant@euromaster.com',
-            'role' => $role,
+            'role' => $roleUser,
             'nickname' => 'Pascal',
             'firstname' => 'Pascal',
             'lastname' => 'MARCHANT',
@@ -184,7 +185,7 @@ class UserService
         ];
         $users['Emilien'] = [
             'email' => 'emilien.djedi@euromaster.com',
-            'role' => $role,
+            'role' => $roleUser,
             'nickname' => 'Emilien',
             'firstname' => 'Emilien',
             'lastname' => 'DJEDI',
@@ -195,7 +196,7 @@ class UserService
         ];
         $users['Kévin'] = [
             'email' => 'kevin.formet@euromaster.com',
-            'role' => $role,
+            'role' => $roleUser,
             'nickname' => 'Kévin',
             'firstname' => 'Kévin',
             'lastname' => 'FORMET',
@@ -206,7 +207,7 @@ class UserService
         ];
         $users['Alain'] = [
             'email' => 'alain.donel@euromaster.com',
-            'role' => $role,
+            'role' => $roleUser,
             'nickname' => 'Alain',
             'firstname' => 'Alain',
             'lastname' => 'DONEL',
@@ -217,7 +218,7 @@ class UserService
         ];
         $users['Nicole'] = [
             'email' => 'nicole.lafarge@euromaster.com',
-            'role' => $role,
+            'role' => $roleUser,
             'nickname' => 'Nicole',
             'firstname' => 'Nicole',
             'lastname' => 'LAFARGE',
@@ -228,7 +229,7 @@ class UserService
         ];    
         $users['Simon'] = [
             'email' => 'simon.lambot@euromaster.com',
-            'role' => $role,
+            'role' => $roleUser,
             'nickname' => 'Simon',
             'firstname' => 'Simon',
             'lastname' => 'LAMBOT',
@@ -239,7 +240,7 @@ class UserService
         ];
         $users['Alicia'] = [
             'email' => 'alicia.legoff@euromaster.com',
-            'role' => $role,
+            'role' => $roleUser,
             'nickname' => 'Alicia',
             'firstname' => 'Alicia',
             'lastname' => 'LE GOFF',
@@ -250,7 +251,7 @@ class UserService
         ];
         $users['Quentin'] = [
             'email' => 'quentin.leloup@euromaster.com',
-            'role' => $role,
+            'role' => $roleUser,
             'nickname' => 'Quentin',
             'firstname' => 'Quentin',
             'lastname' => 'LELOUP',
@@ -261,7 +262,7 @@ class UserService
         ];
         $users['Vincent'] = [
             'email' => 'vincent.ortega@euromaster.com',
-            'role' => $role,
+            'role' => $roleUser,
             'nickname' => 'Vincent',
             'firstname' => 'Vincent',
             'lastname' => 'ORTEGA',
@@ -272,7 +273,7 @@ class UserService
         ];
         $users['Julien'] = [
             'email' => 'julien.rundstadler@euromaster.com',
-            'role' => $role,
+            'role' => $roleUser,
             'nickname' => 'Julien',
             'firstname' => 'Julien',
             'lastname' => 'RUNDSTADLER',
@@ -283,7 +284,7 @@ class UserService
         ];
         $users['Benjamin'] = [
             'email' => 'benjamin.valliere@euromaster.com',
-            'role' => $role,
+            'role' => $roleUser,
             'nickname' => 'Benjamin',
             'firstname' => 'Benjamin',
             'lastname' => 'VALLIERE',
@@ -294,7 +295,7 @@ class UserService
         ];
         $users['Thierry'] = [
             'email' => 'thierry.vivien@euromaster.com',
-            'role' => $role,
+            'role' => $roleUser,
             'nickname' => 'Thierry',
             'firstname' => 'Thierry',
             'lastname' => 'VIVIEN',
@@ -305,7 +306,7 @@ class UserService
         ];
         $users['Philippe'] = [
             'email' => 'philippe.chambat@euromaster.com',
-            'role' => $role,
+            'role' => $roleAdmin,
             'nickname' => 'Philippe',
             'firstname' => 'Philippe',
             'lastname' => 'CHAMBAT',

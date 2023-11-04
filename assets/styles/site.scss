@@ -48,7 +48,8 @@ body{
 .fa-user{
     transform: scale(1.2); 
 }
-#afterNav{
+
+.bgtransparent05{
 	border-radius: 0px 0px 10px 10px;
 	background: rgba(255, 0, 0, 0.05);
 }
@@ -92,8 +93,8 @@ body{
 	color: white;
 }
 .first-letter-color-sapef{
-	color: black;
-	font-size: 1em;
+	color: red;
+	font-size: 2em;
 	font-weight: bolder;
 	-webkit-text-stroke-width: 2px;
 	-webkit-text-stroke-color: red;

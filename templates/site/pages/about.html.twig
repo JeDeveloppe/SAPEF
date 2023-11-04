@@ -8,30 +8,27 @@
     {% include "site/components/hr.html.twig" %}
 
     <div class="row justify-content-center mb-4">
-        <div class="col-11 col-lg-9 d-flex justify-content-center flex-wrap">           
-            <div class="card col-12 my-3 bg-primary text-white">
-                <div class="card-body">
-                    Depuis la création d’Euromaster France en 1994, le Syndicat Autonome du Personnel de la Société Piot Pneu a changé de nom pour s'appeller:
-                    <div class="col-12 text-center h4 my-3"> S.A.P.E.F </div>
-                    <div class="col-12 text-center h5 my-3">
-                        ( <span class="first-letter-color-sapef">S</span>yndicat 
-                        <span class="first-letter-color-sapef">A</span>utonome du 
-                        <span class="first-letter-color-sapef">P</span>ersonnel d’
-                        <span class="first-letter-color-sapef">E</span>uromaster 
-                        <span class="first-letter-color-sapef">F</span>rance)
-                    </div>
-                    <ul class="col-12 my-5 list-group list-group-flush">Depuis cette date, les missions du Syndicat Autonome du Personnel d’EUROMASTER-FRANCE sont:                                           
-                        <li class="mt-3">La défense des intérêts matériels et moraux, tant collectifs, qu’individuels, du personnel
-d’EUROMASTER-FRANCE.</li>
-                        <li class="">Resserrer les liens de solidarité entre l’ensemble des salariés.</li>
-                        <li class="">Étudier les questions sociales, économiques, culturelles et professionnelles qui lui seront
-soumises, et rechercher les solutions les plus constructives dans l’intérêt de l’Entreprise et du
-Personnel.</li>
-                        <li class="">Proposer par tous les moyens légaux, l’amélioration des conditions de travail, d’hygiène et
-de sécurité du personnel.</li>
-                        <li class="">Négocier en début d'année les augmentations de salaire et les avantages sociaux.</li>
-                    </ul>
+        <div class="card col-11 col-lg-9 d-flex justify-content-center flex-wrap my-3 text-white bgtransparent05">
+            <div class="card-body p-3">
+                Depuis la création d’Euromaster France en 1994, le Syndicat Autonome du Personnel de la Société Piot Pneu a changé de nom pour s'appeller:
+                {# <div class="col-12 text-center h4 my-3"> S.A.P.E.F </div> #}
+                <div class="col-11 mx-auto text-center mt-2 bg-white border rounded-2">
+                    <img id="logo" src="{{ asset('/build/images/design/logoSite.png') | imagine_filter('logoSapef') }}" alt="">
                 </div>
+                <div class="col-12 text-center h5 my-3">
+                    <span class="first-letter-color-sapef">S</span>yndicat 
+                    <span class="first-letter-color-sapef">A</span>utonome du 
+                    <span class="first-letter-color-sapef">P</span>ersonnel d’
+                    <span class="first-letter-color-sapef">E</span>uromaster 
+                    <span class="first-letter-color-sapef">F</span>rance
+                </div>
+                <ul class="mt-4 mb-2">Depuis cette date, les missions du S.A.P.E.F sont:                                           
+                    <li class="mt-3">La défense des intérêts matériels et moraux, tant collectifs, qu’individuels, du personnel d’EUROMASTER-FRANCE.</li>
+                    <li class="my-2 px-2">Resserrer les liens de solidarité entre l’ensemble des salariés.</li>
+                    <li class="my-2 px-2">Étudier les questions sociales, économiques, culturelles et professionnelles qui lui seront soumises, et rechercher les solutions les plus constructives dans l’intérêt de l’Entreprise et du Personnel.</li>
+                    <li class="my-2 px-2">Proposer par tous les moyens légaux, l’amélioration des conditions de travail, d’hygiène et de sécurité du personnel.</li>
+                    <li class="my-2 px-2">Négocier en début d'année les augmentations de salaire et les avantages sociaux.</li>
+                </ul>
             </div>
         </div>
     </div>

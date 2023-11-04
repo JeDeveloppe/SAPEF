@@ -16,6 +16,7 @@ use App\Repository\LegalInformationRepository;
 use Symfony\Component\HttpFoundation\Response;
 use App\Repository\ConfigurationSiteRepository;
 use App\Repository\RegionErmRepository;
+use App\Service\MailService;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Karser\Recaptcha3Bundle\Validator\Constraints\Recaptcha3Validator;
@@ -28,7 +29,8 @@ class SiteController extends AbstractController
         private MeetingService $meetingService,
         private Security $security,
         private ContactService $contactService,
-        private RegionErmRepository $regionErmRepository
+        private RegionErmRepository $regionErmRepository,
+        private MailService $mailService
     )
     {
     }
@@ -53,7 +55,15 @@ class SiteController extends AbstractController
             // $score = $recaptcha3Validator->getLastResponse()->getScore();
             // dump($score);
 
-            $this->contactService->saveQuestionInDatabase($entity, $form);
+            //envoi vers l'adresse du SAPEF
+            $donnees = [
+                'question' => $form->get('question')->getData(),
+                'phone' => $form->get('phone')->getData()
+            ];
+            $this->mailService->sendMailToSapefAdresse($form->get('email')->getData(),$form->get('subject')->getData(), 'contact_question', $donnees);
+
+            //envoi dans la BDD
+            // $this->contactService->saveQuestionInDatabase($entity, $form);
 
             $this->addFlash('success', 'Message bien reçu - Merci');
             return $this->redirectToRoute('app_site_home');

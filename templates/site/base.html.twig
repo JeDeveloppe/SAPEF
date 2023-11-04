@@ -26,14 +26,27 @@
     <body id="body_container" class="d-flex flex-column min-vh-100">
         
         {% include "site/nav.html.twig" %}
-
-        
-        {% include "site/flash_message.html.twig" %}
         
         <div class="container">
             {% include "site/countdown.html.twig" %}
 
-            {% block body %}{% endblock %}
+            {% include "site/flash_message.html.twig" %}
+
+            {% if 'member' in app.request.pathinfo %}
+                <div class="row my-5">
+                    {# colonne menu #}
+                    <div class="col-12 col-md-3 col-lg-2">
+                        {% include "member/components/_menu.html.twig" %}
+                    </div>
+                    {# colonne des cards #}
+                    <div class="col-12 col-md-9 col-lg-10 d-flex flex-wrap p-3">
+            {% endif %}
+                        {% block body %}{% endblock %}
+                        
+            {% if 'member' in app.request.pathinfo %}
+                    </div>
+                </div>
+            {% endif %}
         </div>
 
         {% block javascript %}
