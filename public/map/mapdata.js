@@ -44,7 +44,7 @@ var simplemaps_countrymap_mapdata={
     label_font: "Arial",
     hide_labels: "no",
     hide_eastern_labels: "no",
-   
+
 		//Zoom settings
 		zoom: "yes",
     // manual_zoom: "no",
