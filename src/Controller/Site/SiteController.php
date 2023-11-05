@@ -54,13 +54,22 @@ class SiteController extends AbstractController
 
             // $score = $recaptcha3Validator->getLastResponse()->getScore();
             // dump($score);
+            $user = $this->security->getUser();
+
+            if($user){
+                $phone = $user->getPhone();
+                $email = $user->getEmail();
+            }else{
+                $phone = $form->get('phone')->getData();
+                $email = $form->get('email')->getData();
+            };
 
             //envoi vers l'adresse du SAPEF
             $donnees = [
                 'question' => $form->get('question')->getData(),
-                'phone' => $form->get('phone')->getData()
+                'phone' => $phone
             ];
-            $this->mailService->sendMailToSapefAdresse($form->get('email')->getData(),$form->get('subject')->getData(), 'contact_question', $donnees);
+            $this->mailService->sendMailToSapefAdresse($email,$form->get('subject')->getData(), 'contact_question', $donnees);
 
             //envoi dans la BDD
             // $this->contactService->saveQuestionInDatabase($entity, $form);

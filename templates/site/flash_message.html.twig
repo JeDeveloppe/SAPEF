@@ -2,9 +2,9 @@
 
     {% for label, messages in app.flashes %}
         {% for message in messages %}
-            <div class="row">
-                <div class="col-11 mx-auto col-md-6 mt-3 mt-md-5 py-3 text-center alertDiv bg-{{ label }} alert-dismissible fade show" role="alert">
-                {{ message }}
+            <div id="flashMessage" class="col-11 mx-auto d-flex justify-content-end mt-5 z-3 position-absolute">
+                <div class="d-inline-block text-center p-3 bg-{{ label }}" role="alert">
+                    {{ message }}
                 </div>
             </div>
         {% endfor %}

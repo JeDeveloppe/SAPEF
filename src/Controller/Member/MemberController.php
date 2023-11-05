@@ -49,6 +49,14 @@ class MemberController extends AbstractController
         ]);
     }
 
+    #[Route('/liens-utiles', name: 'useful_links')]
+    public function usefulLinks(): Response
+    {
+        return $this->render('member/useful_links.html.twig', [
+            'donneesMeeting' => $this->meetingService->nextMeetingCalc(),
+        ]);
+    }
+
     #[Route('/mon-compte', name: 'account')]
     public function account(Request $request, UserPasswordHasherInterface $userPasswordHasher): Response
     {
