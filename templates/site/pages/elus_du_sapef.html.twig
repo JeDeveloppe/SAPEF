@@ -22,9 +22,10 @@
         {% for region in legends %}
             {% if region.elus | length > 0 %}
                 <div class="col-11 col-md-6 col-lg-4 my-2">
-                    <ul class="list-group"><span class="badge" style="background-color:{{ region.color }}">{{ region.name }}</span>
+                    <ul class="list-group text-center"><span style="background-color:{{ region.color }}">{{ region.name }}</span>
                             {% for elu in region.elus %}
                                 <li class="list-group-item">{{ elu.name }}<br/>
+                                <i class="fas fa-briefcase"></i> {{ elu.name.job.name }}<br/>
                                 <i class="fas fa-location"></i> {{ elu.name.shop.name }} - {{ elu.name.shop.counterMark }}<br/>
                                 <i class="fas fa-mobile-alt"></i> : {{ elu.name.phone }}</li>
                             {% endfor %}

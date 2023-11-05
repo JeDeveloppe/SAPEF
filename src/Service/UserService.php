@@ -158,7 +158,7 @@ class UserService
             'lastname' => 'SOARES',
             'sex' => 'HOMME',
             'phone' => '06.60.50.74.94',
-            'shop' => 3204, 
+            'shop' => 3336, 
             'job' => 'CT' 
         ];
         $users['Laurent'] = [
