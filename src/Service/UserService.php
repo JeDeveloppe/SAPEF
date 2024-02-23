@@ -3,7 +3,6 @@
 namespace App\Service;
 
 use App\Entity\User;
-use App\Repository\CountryRepository;
 use App\Repository\JobRepository;
 use App\Repository\SexStatusRepository;
 use App\Repository\ShopRepository;
@@ -181,7 +180,7 @@ class UserService
             'sex' => 'HOMME',
             'phone' => '06.27.72.55.36',
             'shop' => 3142, 
-            'job' => 'CT' 
+            'job' => 'TECHNICIEN VL' 
         ];
         $users['Emilien'] = [
             'email' => 'emilien.djedi@euromaster.com',

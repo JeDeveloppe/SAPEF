@@ -1,19 +1,109 @@
-{% extends 'site/base.html.twig' %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Bienvenue | LE SAPEF</title>
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('build/images/favicon/apple-touch-icon.png') }}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('build/images/favicon/favicon-32x32.png') }}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('build/images/favicon/favicon-16x16.png') }}">
+        <link rel="manifest" href="{{ asset('build/images/favicon/site.webmanifest') }}">
+        <link rel="mask-icon" href="{{ asset('build/images/favicon/safari-pinned-tab.svg') }}" color="#5bbad5">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lato:wght@700&family=Nunito+Sans:opsz,wght@6..12,200&family=PT+Sans&display=swap" rel="stylesheet">
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="theme-color" content="#ffffff">
+        <script src="https://kit.fontawesome.com/39dfe16fa3.js" crossorigin="anonymous"></script>
+    </head>
+    <style>
+        @import url(https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css);
+        @import url(https://fonts.googleapis.com/css?family=Montserrat);
+        @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
 
-{% block title %}Bienvenue !{% endblock %}
+        h1 {
+        margin: 0;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 4em;
+        color: #333;
+        -webkit-text-shadow: 0 2px 1px rgba(0, 0, 0, 0.6), 0 0 2px rgba(0, 0, 0, 0.7);
+        -moz-text-shadow: 0 2px 1px rgba(0, 0, 0, 0.6), 0 0 2px rgba(0, 0, 0, 0.7);
+        text-shadow: 0 2px 1px rgba(0, 0, 0, 0.6), 0 0 2px rgba(0, 0, 0, 0.7);
+        word-spacing: 16px;
+        }
 
-{% block body %}
+        p {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 1.4em;
+        font-weight: bold;
+        color: #222;
+        text-shadow: 0 0 40px #FFFFFF, 0 0 30px #FFFFFF, 0 0 20px #FFFFFF;
+        }
 
-    <div class="col-12 col-md-4 col-lg-3 py-2 d-flex justify-content-around">
-        <div id="countdown">
-            <div id='tiles'></div>
+        .container {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+        background: url('');
+        background-size: cover;
+        }
+
+        .wrapper {
+        width: 100%;
+        min-height: 100%;
+        height: auto;
+        display: table;
+        }
+
+        .content {
+        display: table-cell;
+        vertical-align: middle;
+        }
+
+        .item {
+        width: auto;
+        height: auto;
+        margin: 0 auto;
+        text-align: center;
+        padding: 8px;
+        }
+
+        @media only screen and (min-width: 800px) {
+        h1 {
+            font-size: 6em;
+        }
+        p {
+            font-size: 1.6em;
+        }
+        }
+
+        @media only screen and (max-width: 320px) {
+        h1 {
+            font-size: 2em;
+        }
+        p {
+            font-size: 1.2em;
+        }
+        }
+    </style>
+    <body id="body_container" class="d-flex flex-column min-vh-100">
+        <div class="row mt-5">
+            <div class="col-11 mx-auto text-center">
+                <img id="logo" src="{{ asset('/build/images/design/logoSite.png') | imagine_filter('logoSapef') }}" alt="">
+            </div>
         </div>
-    </div>
-
-    <div class="row">
-        <div class="col-11 mx-auto text-center">
-            <img id="logo" src="{{ asset('/build/images/design/logoSite.png') | imagine_filter('logoSapef') }}" alt="">
+        <div class="container">
+            <div class="wrapper">
+                <div class="content">
+                    <div class="item col-12 text-center">
+                        <!-- Place your content here to have it be centered vertically and horizontally  -->
+                        <h1>ON ARRIVE</h1>
+                        <p>Site en construction</p>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
 
-{% endblock %}
+    </body>
+</html>

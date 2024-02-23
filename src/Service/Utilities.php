@@ -2,8 +2,6 @@
 
 namespace App\Service;
 
-use App\Repository\ConfigurationRepository;
-use App\Repository\InformationsLegalesRepository;
 use DateTimeImmutable;
 
 class Utilities

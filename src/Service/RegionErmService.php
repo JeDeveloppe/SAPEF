@@ -57,7 +57,7 @@ class RegionErmService
         if(!$region){
             $region = new RegionErm();
         }
-        $region->setName($arrayRegion['name'])->setColor($arrayRegion['color'])->setColorHover($arrayRegion['hover_color']);
+        $region->setName($arrayRegion['name'])->setColor($arrayRegion['color'])->setColorHover($arrayRegion['color_hover']);
 
         return $region;
     }
