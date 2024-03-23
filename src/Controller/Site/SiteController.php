@@ -67,6 +67,7 @@ class SiteController extends AbstractController
                 'question' => $form->get('question')->getData(),
                 'phone' => $phone
             ];
+            
             $this->mailService->sendMailToSapefAdresse($email,$form->get('subject')->getData(), 'contact_question', $donnees);
 
             //envoi dans la BDD

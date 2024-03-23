@@ -43,17 +43,22 @@ class MailService
         }
 
         $mail = (new TemplatedEmail())
-            ->from($recipient)
-            ->to($_ENV['ADRESSE_EMAIL_SITE'])
+            ->from($_ENV['ADRESSE_EMAIL_SITE'])
+            ->to($_ENV['ADRESSE_EMAIL_SAPEF'])
             ->replyTo($recipient)
             ->subject($subject)
             ->htmlTemplate('email/templates/'.$template.'.html.twig')
             ->context($donnees);
 
-        try{
+        try
+        {
+            $mail->getHeaders()->addTextHeader('X-Transport', 'main');
             $this->mailer->send($mail);
-        } catch (TransportExceptionInterface $e) {
-            dump($e->getDebug());
+        } 
+        catch(TransportExceptionInterface $e)
+        {
+            echo "Message non envoyer :".$e->getDebug();
+            dd('non envoyé');
         }
     }
 }
