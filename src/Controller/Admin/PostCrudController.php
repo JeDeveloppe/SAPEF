@@ -6,14 +6,17 @@ use App\Entity\Post;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 
 class PostCrudController extends AbstractCrudController
 {
@@ -33,8 +36,20 @@ class PostCrudController extends AbstractCrudController
     {
         return [
             TextField::new('title')->setLabel('Titre:'),
-            TextEditorField::new('content')->setLabel('Contenu:'),
-            BooleanField::new('isOnline')->setLabel('Afficher sur le site')
+            // TextareaField::new('content')->hideOnIndex(),
+            TextEditorField::new('content', 'Contenu:')
+                ->setFormType(CKEditorType::class),
+            BooleanField::new('isOnline')
+                ->setLabel('Afficher sur le site'),
+            DateTimeField::new('createdAt')
+                ->setFormat('dd-MM-yyyy')
+                ->onlyOnDetail(),
+            AssociationField::new('createdBy')
+                ->setLabel('Créé par:')
+                ->onlyOnDetail(),
+            AssociationField::new('updatedBy')
+                ->setLabel('Mise à jour par:')
+                ->onlyOnDetail(),
         ];
     }
 
@@ -42,19 +57,20 @@ class PostCrudController extends AbstractCrudController
     {
         return $crud
             ->showEntityActionsInlined()
-            ->setPageTitle('index', 'Liste des posts')
-            ->setPageTitle('new', 'Nouveau post')
-            ->setPageTitle('detail', 'Détails d\'un post')
+            ->setPageTitle('index', 'Liste des actualités')
+            ->setPageTitle('new', 'Nouvelle actualité')
+            ->setPageTitle('detail', 'Détails d\'une actualité')
             ->setDefaultSort(['id' => 'DESC'])
-            ;
+            ->setFormThemes(['@EasyAdmin/crud/form_theme.html.twig', '@FOSCKEditor/Form/ckeditor_widget.html.twig']);
+            // ->addFormTheme('@FOSCKEditor/Form/ckeditor_widget.html.twig');
     }
 
     public function configureActions(Actions $actions): Actions
     {
         return $actions
             ->remove(Crud::PAGE_INDEX, Action::DELETE)
-            ->remove(Crud::PAGE_INDEX, Action::EDIT)
             ->remove(Crud::PAGE_DETAIL, Action::EDIT)
+            ->remove(Crud::PAGE_DETAIL, Action::DELETE)
             ->add(Crud::PAGE_INDEX, Action::DETAIL);
     }
 

@@ -87,8 +87,8 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Les questions', 'fa-solid fa-circle-question', Contact::class)
             ->setBadge(count($this->contactRepository->findBy(['answer' => null])),'danger');
 
-        yield MenuItem::section('Gestion des posts:');
-        yield MenuItem::linkToCrud('Les posts', 'fa-solid fa-sign-hanging', Post::class);
+        yield MenuItem::section('Gestion des actualités:');
+        yield MenuItem::linkToCrud('Les actualités', 'fa-solid fa-sign-hanging', Post::class);
 
         yield MenuItem::section('Gestion des réunions:');
         yield MenuItem::linkToCrud('Les réunions à venir', 'fa-solid fa-handshake', Meeting::class)
