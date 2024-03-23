@@ -1,6 +1,6 @@
 {% extends 'site/base.html.twig' %}
 
-{% block title %}Bienvenue !{% endblock %}
+{% block title %}Les actualités {% endblock %}
 
 {% block body %}
 
@@ -12,7 +12,7 @@
 
     {% if posts | length > 0 %}
 
-        <div class="row justify-content-around">
+        <div class="row justify-content-around my-5">
         
             {% for key,post in posts %}  
 
@@ -21,17 +21,17 @@
             {% endfor %}
 
         </div>
-
-        <div class="row my-5">
+        
+        <div class="row mt-5">
             <div class="col-12 d-flex justify-content-center">
-                <a href="{{ path('app_site_actualities') }}">Voir toutes les actualités</a>
+                {{ knp_pagination_render(posts, 'site/components/pagination.html.twig') }}
             </div>
         </div>
-        
+    
     {% else %}
         
         <div class="row justify-content-around">
-            <div class="col-11 col-9 card">
+            <div class="col-11 col-9">
                 Aucun post pour le moment...
             </div>
         </div>

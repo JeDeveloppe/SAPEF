@@ -115,6 +115,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'createdBy', targetEntity: Invitation::class)]
     private Collection $invitations;
 
+    #[ORM\OneToMany(mappedBy: 'createdBy', targetEntity: Post::class)]
+    private Collection $posts;
+
+    #[ORM\OneToMany(mappedBy: 'updatedBy', targetEntity: Post::class)]
+    private Collection $posts_updated;
+
     public function __construct()
     {
         $this->elus = new ArrayCollection();
@@ -124,6 +130,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->contacts = new ArrayCollection();
         $this->answers = new ArrayCollection();
         $this->invitations = new ArrayCollection();
+        $this->posts = new ArrayCollection();
+        $this->posts_updated = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -575,6 +583,66 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($invitation->getCreatedBy() === $this) {
                 $invitation->setCreatedBy(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Post>
+     */
+    public function getPosts(): Collection
+    {
+        return $this->posts;
+    }
+
+    public function addPost(Post $post): static
+    {
+        if (!$this->posts->contains($post)) {
+            $this->posts->add($post);
+            $post->setCreatedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removePost(Post $post): static
+    {
+        if ($this->posts->removeElement($post)) {
+            // set the owning side to null (unless already changed)
+            if ($post->getCreatedBy() === $this) {
+                $post->setCreatedBy(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Post>
+     */
+    public function getPostsUpdated(): Collection
+    {
+        return $this->posts_updated;
+    }
+
+    public function addPostsUpdated(Post $postsUpdated): static
+    {
+        if (!$this->posts_updated->contains($postsUpdated)) {
+            $this->posts_updated->add($postsUpdated);
+            $postsUpdated->setUpdatedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removePostsUpdated(Post $postsUpdated): static
+    {
+        if ($this->posts_updated->removeElement($postsUpdated)) {
+            // set the owning side to null (unless already changed)
+            if ($postsUpdated->getUpdatedBy() === $this) {
+                $postsUpdated->setUpdatedBy(null);
             }
         }
 

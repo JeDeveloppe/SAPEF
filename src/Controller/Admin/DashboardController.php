@@ -20,6 +20,7 @@ use App\Entity\Meeting;
 use App\Entity\MeetingName;
 use App\Entity\MeetingPlace;
 use App\Entity\Paiement;
+use App\Entity\Post;
 use App\Entity\ResetPassword;
 use App\Entity\SexStatus;
 use App\Repository\ContactRepository;
@@ -85,6 +86,9 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::section('Gestion des questions:');
         yield MenuItem::linkToCrud('Les questions', 'fa-solid fa-circle-question', Contact::class)
             ->setBadge(count($this->contactRepository->findBy(['answer' => null])),'danger');
+
+        yield MenuItem::section('Gestion des posts:');
+        yield MenuItem::linkToCrud('Les posts', 'fa-solid fa-sign-hanging', Post::class);
 
         yield MenuItem::section('Gestion des réunions:');
         yield MenuItem::linkToCrud('Les réunions à venir', 'fa-solid fa-handshake', Meeting::class)

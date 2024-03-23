@@ -13,11 +13,13 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Repository\LegalInformationRepository;
 use Symfony\Component\HttpFoundation\Response;
 use App\Repository\ConfigurationSiteRepository;
+use App\Repository\PostRepository;
 use App\Repository\RegionErmRepository;
 use App\Service\MailService;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Karser\Recaptcha3Bundle\Validator\Constraints\Recaptcha3Validator;
+use Knp\Component\Pager\PaginatorInterface;
 
 class SiteController extends AbstractController
 {
@@ -28,16 +30,43 @@ class SiteController extends AbstractController
         private Security $security,
         private ContactService $contactService,
         private RegionErmRepository $regionErmRepository,
-        private MailService $mailService
+        private MailService $mailService,
+        private PaginatorInterface $paginatorInterface
     )
     {
     }
 
     #[Route('/', name: 'app_site_home')]
-    public function index(): Response
+    public function index(PostRepository $postRepository, Request $request): Response
     {
+        $donnees = $postRepository->findBy(['isOnline' => true],['id' => 'DESC'], 3);
+
+        $posts = $this->paginatorInterface->paginate(
+            $donnees, /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            5 /*limit per page*/
+        );
+
         return $this->render('site/pages/index.html.twig', [
-            'donneesMeeting' => $this->meetingService->nextMeetingCalc()
+            'donneesMeeting' => $this->meetingService->nextMeetingCalc(),
+            'posts' => $posts
+        ]);
+    }
+
+    #[Route('/les-actualites', name: 'app_site_actualities')]
+    public function actualities(PostRepository $postRepository, Request $request): Response
+    {
+        $donnees = $postRepository->findBy(['isOnline' => true],['id' => 'DESC']);
+
+        $posts = $this->paginatorInterface->paginate(
+            $donnees, /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            5 /*limit per page*/
+        );
+
+        return $this->render('site/pages/posts.html.twig', [
+            'donneesMeeting' => $this->meetingService->nextMeetingCalc(),
+            'posts' => $posts
         ]);
     }
 

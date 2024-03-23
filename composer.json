@@ -12,6 +12,7 @@
         "doctrine/orm": "^2.16",
         "easycorp/easyadmin-bundle": "^4.7",
         "karser/karser-recaptcha3-bundle": "^0.1.24",
+        "knplabs/knp-paginator-bundle": "^6.3",
         "league/csv": "^9.0",
         "liip/imagine-bundle": "^2.12",
         "phpdocumentor/reflection-docblock": "^5.3",

@@ -1,0 +1,11 @@
+<div class="col-11 col-sm-9 col-md-8 col-lg-7 my-3">
+    <div class="card p-0 col-12 mb-4 h-100">
+        <div class="card-header">{{ donnee.title }}</div>
+        <div class="card-body">
+            {{ donnee.content | raw }}
+        </div>
+        <div class="card-footer text-end small">
+            Mise en ligne le {{ donnee.createdAt | date('d-m-Y') }} à {{ donnee.createdAt | date('H:i:s', "Europe/Paris") }}
+        </div>
+    </div>
+</div>
