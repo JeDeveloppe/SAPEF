@@ -10,6 +10,7 @@ use App\Form\EmailForSendResetPasswordType;
 use App\Form\ResetPasswordType;
 use App\Service\MeetingService;
 use App\Form\RegistrationFormType;
+use App\Repository\InvitationRepository;
 use App\Repository\UserRepository;
 use App\Security\UserAuthenticator;
 use Symfony\Component\Form\FormError;
@@ -29,18 +30,59 @@ class RegistrationController extends AbstractController
         private MeetingService $meetingService,
         private UserRepository $userRepository,
         private ResetPasswordRepository $resetPasswordRepository,
-        private ResetPasswordService $resetPasswordService
+        private ResetPasswordService $resetPasswordService,
+        private InvitationRepository $invitationRepository
     )
     {
     }
 
-    #[Route('/inscription/{uuid}', name: 'registration_register')]
-    public function register(Invitation $invitation, Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, UserAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
+    #[Route('/formulaire-adhesion/', name: 'app_registration_register_without_uuid')]
+    public function registerWithoutUuid(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, UserAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
     {
 
-        if($invitation->getUser() != null){
+        $user = new User();
 
-            $this->addFlash('warning', 'Invitation déjà utilisée !');
+        $form = $this->createForm(RegistrationFormType::class, $user);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid() && $form->get('password')->getData() == $form->get('passwordVerify')->getData()) {
+            // encode the plain password
+            $now = new DateTimeImmutable('now');
+            $user->setPassword(
+                $userPasswordHasher->hashPassword(
+                    $user,
+                    $form->get('password')->getData()
+                )
+            )
+            ->setEmail($form->get('email')->getData())
+            ->setLastname(strtoupper($form->get('lastname')->getData()))
+            ->setFirstname(ucfirst($form->get('firstname')->getData()))
+            ->setCreatedAt($now)
+            ->setLastVisiteAt($now);
+
+            $entityManager->persist($user);
+
+            return $userAuthenticator->authenticateUser(
+                $user,
+                $authenticator,
+                $request
+            );
+        }
+
+        return $this->render('site/registration/register.html.twig', [
+            'registrationForm' => $form->createView(),
+            'donneesMeeting' => $this->meetingService->nextMeetingCalc()
+        ]);
+    }
+
+    #[Route('/inscription-sur-invitation/{uuid}', name: 'registration_register_with_uuid')]
+    public function registerWithUuid($uuid, Invitation $invitation, Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, UserAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
+    {
+        $invitation = $this->invitationRepository->findOneByUuid($uuid);
+
+        if(!$invitation){
+
+            $this->addFlash('warning', 'Invitation inconnue ou déjà utilisée!');
             return $this->redirectToRoute('app_site_home');
         }
 

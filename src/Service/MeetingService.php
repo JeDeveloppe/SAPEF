@@ -59,7 +59,7 @@ class MeetingService
         $add = $configuration->getDelayBeforeMeetingToSendEmail()+1;
         $newMeetingDate = $now->add(new DateInterval('P'.$add.'D'));
 
-        $nextMeeting = $this->meetingRepository->findNextMeeting($newMeetingDate);
+        $nextMeeting = $this->meetingRepository->findOneNextMeeting($newMeetingDate);
 
         //? DATE EN 2100 ENJECTEE A L'INITIALISATION POUR QUE LE SITE FONCTIONNE TOUJOURS...
         if(!$nextMeeting){

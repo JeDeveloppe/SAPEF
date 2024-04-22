@@ -3,7 +3,7 @@
 {% block title %}Adhérer{% endblock %}
 
 {% block body %}
-    <h1 class="page-section-heading text-center text-black text-uppercase mt-5">Adherer au SAPEF</h1>
+    <h1 class="page-section-heading text-center text-white text-uppercase mt-5">Adherer au SAPEF</h1>
 
     {% include "site/components/hr.html.twig" %}
 
@@ -66,24 +66,59 @@
             <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
             <div class="accordion-body lh-lg">
                 {% set cotisation = configuration.cotisation / 100 %}
-                <p><b>Cotisation annuelle {{ cotisation | number_format(2, '.', ',') }} €</b></p>
-                <p>Cette cotisation permet notamment au syndicat de financer son activité, d'informer et défendre ses adhérents et de former les militants (tracts, site Internet, frais de déplacement…)</p>
-                <p>En versant {{ cotisation | number_format(2, '.', ',') }} € au SAPEF, vous bénéficiez d'un crédit d'impôt de {{ (cotisation * 66 / 100) | number_format(2, '.', ',') }} € (66 % de la cotisation annuelle payée <span class="align-top">*</span>).</p> 
-                <p class="lead">En adhérant, vous ferez partie d’un groupe autonome, dynamique et sympathique !</p>
-                <p class="col-12 text-center">Vous pouvez faire un don par virement:<br/>
-                        IBAN: {{ configuration.iban }}<br/>
-                        BIC: {{ configuration.bic }}
-                </p>
-                <p class="col-12 text-center my-3">Ou en cliquant sur le logo ci-dessous:
-
-                <!-- Paiement Section Button-->
-                <div class="col-12 text-center mb-3">
-                    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=BBW6UW73TKFZ8&source=url">
-                        <img class="col-11 col-md-7 col-xl-4 mx-auto" src="{{ asset('/build/images/design/paypal.png') }}" alt="Faire un don par Paypal ou CB !" data-bs-toggle="tooltip" data-bs-html="true" title="Faire un don par Paypal ou CB !">
-                    </a>
-                </div>
-            * hors déclaration d'impôts faite en frais rééls.
+                <p class="mt-3">La cotisation permet notamment au syndicat de financer son activité, d'informer et défendre ses adhérents et de former les militants (tracts, site Internet, frais de déplacement…)</p>
+                <p class="lead mb-2 col-12 text-center">En adhérant, vous ferez partie d’un groupe autonome, dynamique et sympathique !</p>
             </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingFive">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                Comment adhérer ?
+            </button>
+            </h2>
+            <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
+                <div class="accordion-body lh-lg">
+                    <p class="col-12 text-center"><b>Prix de la cotisation annuelle: {{ cotisation | number_format(2, '.', ',') }} €</b></p>
+                    <p>En versant {{ cotisation | number_format(2, '.', ',') }} € au SAPEF, vous bénéficiez d'un crédit d'impôt de {{ (cotisation * 66 / 100) | number_format(2, '.', ',') }} € (66 % de la cotisation annuelle payée <span class="align-top">*</span>).</p> 
+                        <div class="col-12 d-flex justify-content-around flex-wrap">
+                            <div class="col-11 col-sm-10 col-md-9 col-xl-4 p-2">
+                                <div class="card p-0 h-100">
+                                    <div class="card-header">Par virement</div>
+                                    <div class="card-body">
+                                        <p class="col-12 text-center">
+                                            IBAN:<br/> {{ configuration.iban }}<br/>
+                                            BIC: {{ configuration.bic }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-11 col-sm-10 col-md-9 col-xl-4 p-2">
+                                <div class="card p-0 h-100">
+                                    <div class="card-header">Par CB</div>
+                                    <div class="card-body text-center">
+                                        <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=BBW6UW73TKFZ8&source=url" target="_blank">
+                                            <img class="col-10 mx-auto" src="{{ asset('/build/images/design/paypal.png') }}" alt="Faire un don par Paypal ou CB !" data-bs-toggle="tooltip" data-bs-html="true" title="Faire un don par Paypal ou CB !">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-11 col-sm-10 col-md-9 col-xl-4 p-2">
+                                <div class="card p-0 h-100">
+                                    <div class="card-header">Par chèque à l'adresse suivante:</div>
+                                    <div class="card-body">
+                                        {{ legales.companyName }}<br />
+                                        {{ legales.streetCompany }}<br/>
+                                        {{ legales.postalCodeCompany }} {{ legales.cityCompany }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 text-center my-3">
+                            Vous pouvez utiliser le <a class="" href="{{ path('app_registration_register_without_uuid') }}">formulaire d'adhésion en ligne</a> ou joindre le <a href="{{ path('app_download_adhesion', {'year': 'now' | date('Y') }) }}">formulaire papier</a> à votre réglement.
+                        </div>
+                </div>
+                <span class="ms-2 small">* hors déclaration d'impôts faite en frais rééls.</span>
             </div>
         </div>
     </div>

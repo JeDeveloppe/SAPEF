@@ -1,9 +1,9 @@
 {% extends 'site/base.html.twig' %}
 
-{% block title %}Inscription{% endblock %}
+{% block title %}Adhérer au SAPEF{% endblock %}
 
 {% block body %}
-    <h1 class="page-section-heading text-center text-black text-uppercase mt-5">Inscription</h1>
+    <h1 class="page-section-heading text-center text-white text-uppercase mt-5">Adhérer au SAPEF</h1>
 
     {% include "site/components/hr.html.twig" %}
 
@@ -50,11 +50,15 @@
                     {{ form_widget(registrationForm.phone) }}
                 </div>
                 <div class="my-3 col-11 mx-auto col-md-5  text-center">
+                    <label class="form-label">J'accepte les <a target="_blank" href="{{ path('app_site_mentions') }}">conditions générales d'utilisation</a>:</label>
+                    {{ form_widget(registrationForm.accept) }}
+                </div>
+                {# <div class="my-3 col-11 mx-auto col-md-5  text-center">
                     <label class="form-label">{{ form_label(registrationForm.isAgreeTerms) }}</label>
                     {{ form_widget(registrationForm.isAgreeTerms) }}
-                </div>
+                </div> #}
                 <div class="col-12 text-center my-3">
-                    <button type="submit" class="btn btn-success">Inscription</button>
+                    <button type="submit" class="btn btn-success">Adhérer</button>
                 </div>
             </div>
             

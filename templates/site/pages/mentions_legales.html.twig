@@ -4,9 +4,9 @@
 
 {% block body %}
 
-    <h1 class="col-12 my-5 text-center">Mentions légales</h1>
+    <h1 class="col-12 my-5 text-center text-white">Mentions légales</h1>
 
-    <div class="row my-5">
+    <div class="row my-5 text-white">
         <div class="col-12 mt-4 mb-4">
 
             <p>Conformément aux dispositions des articles 6-III et 19 de la Loi n° 2004-575 du 21 juin 2004 pour la Confiance dans l’économie numérique et de la protection des données (RGPD) de l’Union européenne (UE), nous portons à la connaissance des utilisateurs et visiteurs du site {{ legales.fullUrlCompany }} les informations suivantes :</p>
@@ -107,7 +107,8 @@
                         <div class="col-12 ml-5">
                             {{ legales.companyName }}<br />
                             A l'attention du délégué à la protection des données (DPO)<br />
-                            {{ legales.streetCompany }} {{ legales.postalCodeCompany }} {{ legales.cityCompany }}
+                            {{ legales.streetCompany }}<br/>
+                            {{ legales.postalCodeCompany }} {{ legales.cityCompany }}
                         </div>
             </p>
             Sur le site {{ legales.fullUrlCompany }}, le proprietaire du site ne collecte des informations personnelles relatives à l’utilisateur que pour le besoin de certains services proposés par le site {{ legales.fullUrlCompany }}. L’utilisateur fournit ces informations en toute connaissance de cause, notamment lorsqu’il procède par lui-même à leur saisie. Il est alors précisé à l’utilisateur du site {{ legales.fullUrlCompany }} l’obligation ou non de fournir ces informations.

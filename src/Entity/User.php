@@ -100,9 +100,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\JoinColumn(nullable: false)]
     private ?SexStatus $sex = null;
 
-    #[ORM\Column]
-    private ?bool $isAgreeTerms = null;
-
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Contact::class)]
     private Collection $contacts;
 
@@ -120,6 +117,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\OneToMany(mappedBy: 'updatedBy', targetEntity: Post::class)]
     private Collection $posts_updated;
+
+    #[ORM\Column]
+    private ?bool $isAgreeTerms = null;
 
     public function __construct()
     {
@@ -465,18 +465,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getIsAgreeTerms(): ?bool
-    {
-        return $this->isAgreeTerms;
-    }
-
-    public function setIsAgreeTerms(bool $isAgreeTerms): static
-    {
-        $this->isAgreeTerms = $isAgreeTerms;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, Contact>
      */
@@ -645,6 +633,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $postsUpdated->setUpdatedBy(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getIsAgreeTerms(): ?bool
+    {
+        return $this->isAgreeTerms;
+    }
+
+    public function setIsAgreeTerms(bool $isAgreeTerms): static
+    {
+        $this->isAgreeTerms = $isAgreeTerms;
 
         return $this;
     }

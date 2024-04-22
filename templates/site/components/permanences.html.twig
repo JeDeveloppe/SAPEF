@@ -1,0 +1,14 @@
+<div class="row justify-content-around pb-5">
+    <h2 class="col-12 text-center text-white">Permanences {{ 'now' | date('Y') }}</h2>
+    <div class="col-11 text-center lead text-white my-3">
+        Bureau {{ legales.companyName }} (agence Euromaster)<br />
+        {{ legales.streetCompany }}<br/>
+        {{ legales.postalCodeCompany }} {{ legales.cityCompany }}
+    </div>
+    <p class="col-12 text-center text-white h5">De 10h à 12h sur rendez-vous aux dates suivantes:</p>
+    {% for nextPermanance in nextPermanances %}
+        <div class="col-12 text-center text-white">
+            {{ nextPermanance.date |date_modify("-1 day")|date("d/m/Y") }}
+        </div>
+    {% endfor %}
+</div>

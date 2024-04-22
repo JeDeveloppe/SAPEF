@@ -100,9 +100,13 @@ class RegistrationFormType extends AbstractType
                     'class' => 'form-control'
                 ]
             ])
-            ->add('isAgreeTerms', CheckboxType::class, [
-                'label' => 'J\'ai lu et j\'accepte les CGU: '
-            ])
+            ->add('accept', CheckboxType::class, [
+                'required' => true,
+                'mapped' => false
+            ]);
+            // ->add('isAgreeTerms', CheckboxType::class, [
+            //     'label' => 'J\'ai lu et j\'accepte les CGU: '
+            // ])
         ;
     }
 

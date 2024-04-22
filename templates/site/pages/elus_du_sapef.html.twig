@@ -6,7 +6,7 @@
     <div class="js-locations" data-locations="{{ donnees.stores }}"></div>
     <div class="js-states" data-states="{{ donnees.states }}"></div>
  
-    <h1 class="page-section-heading text-center text-black text-uppercase mt-5">Les élus du Sapef</h1>
+    <h1 class="page-section-heading text-center text-white text-uppercase mt-5">Les élus du Sapef</h1>
 
     {% include "site/components/hr.html.twig" %}
 
@@ -36,6 +36,8 @@
             {% endif %}
         {% endfor %}
     </div>
+
+    {% include "site/components/permanences.html.twig" %}
 
     {# {% if donnees.titulaires is defined and donnees.titulaires|length > 0 %}
     {% set titulaires = donnees.titulaires %}

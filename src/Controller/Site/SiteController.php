@@ -5,21 +5,26 @@ namespace App\Controller\Site;
 use App\Entity\Contact;
 use App\Form\ContactType;
 use App\Service\EluService;
+use App\Service\MailService;
 use App\Service\ContactService;
 use App\Service\MeetingService;
 use App\Repository\DeskRepository;
+use App\Repository\PostRepository;
+use App\Repository\RegionErmRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use App\Repository\LegalInformationRepository;
 use Symfony\Component\HttpFoundation\Response;
 use App\Repository\ConfigurationSiteRepository;
-use App\Repository\PostRepository;
-use App\Repository\RegionErmRepository;
-use App\Service\MailService;
+use App\Repository\MeetingRepository;
+use DateTimeImmutable;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Karser\Recaptcha3Bundle\Validator\Constraints\Recaptcha3Validator;
-use Knp\Component\Pager\PaginatorInterface;
 
 class SiteController extends AbstractController
 {
@@ -31,7 +36,8 @@ class SiteController extends AbstractController
         private ContactService $contactService,
         private RegionErmRepository $regionErmRepository,
         private MailService $mailService,
-        private PaginatorInterface $paginatorInterface
+        private PaginatorInterface $paginatorInterface,
+        private MeetingRepository $meetingRepository
     )
     {
     }
@@ -115,9 +121,13 @@ class SiteController extends AbstractController
     #[Route('/le-bureau-du-sapef', name: 'app_site_bureau')]
     public function bureau(): Response
     {
+        $now = new DateTimeImmutable('now');
+
         return $this->render('site/pages/bureau_du_sapef.html.twig', [
             'bureaux' => $this->deskRepository->findBy([], ['orderOfAppearance' => 'ASC']),
-            'donneesMeeting' => $this->meetingService->nextMeetingCalc()
+            'donneesMeeting' => $this->meetingService->nextMeetingCalc(),
+            'legales' => $this->legalInformationRepository->findOneBy(['isOnline' => true], ['id' => 'ASC']),
+            'nextPermanances' => $this->meetingRepository->findAllNextMeetingAfterThisDate($now)
         ]);
     }
 
@@ -126,11 +136,14 @@ class SiteController extends AbstractController
     {
         $donnees = $eluService->constructionOfTheMapOfFranceWithElus();
         $regions = $this->regionErmRepository->findAll();
+        $now = new DateTimeImmutable('now');
 
         return $this->render('site/pages/elus_du_sapef.html.twig', [
             'donnees' => $donnees,
             'legends' => $regions,
-            'donneesMeeting' => $this->meetingService->nextMeetingCalc()
+            'donneesMeeting' => $this->meetingService->nextMeetingCalc(),
+            'legales' => $this->legalInformationRepository->findOneBy(['isOnline' => true], ['id' => 'ASC']),
+            'nextPermanances' => $this->meetingRepository->findAllNextMeetingAfterThisDate($now)
         ]);
     }
 
@@ -149,6 +162,7 @@ class SiteController extends AbstractController
 
         return $this->render('site/pages/adherer.html.twig', [
             'configuration' => $configurationSiteRepository->findOneBy([]),
+            'legales' => $this->legalInformationRepository->findOneBy(['isOnline' => true], ['id' => 'ASC']),
             'donneesMeeting' => $this->meetingService->nextMeetingCalc()
         ]);
     }
@@ -162,5 +176,28 @@ class SiteController extends AbstractController
             'legales' => $this->legalInformationRepository->findOneBy(['isOnline' => true], ['id' => 'ASC']),
             'donneesMeeting' => $this->meetingService->nextMeetingCalc()
         ]);
+    }
+
+    #[Route('/download/adhesion-{year}', name: 'app_download_adhesion')]
+    public function download($year)
+    {
+        // load the file from the filesystem
+        $file = new File('../public/download/adhesion_'.$year.'.docx');
+        if(!$file){
+
+            $this->addFlash('warning','Année du document non connue !!!');
+
+            return $this->redirectToRoute('app_site_home');
+
+        }else{
+
+            return $this->file($file);
+
+            // // rename the downloaded file
+            // return $this->file($file, 'custom_name.pdf');
+
+            // display the file contents in the browser instead of downloading it
+            // return $this->file('adhesion_'.$year.'.docx', 'my_invoice.pdf', ResponseHeaderBag::DISPOSITION_INLINE);
+        }
     }
 }

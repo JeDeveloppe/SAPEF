@@ -39,7 +39,7 @@ class MeetingRepository extends ServiceEntityRepository
         }
     }
 
-    public function findNextMeeting($date): ?Meeting
+    public function findOneNextMeeting($date): ?Meeting
     {
         return $this->createQueryBuilder('m')
             // ->leftJoin('m.statut', 'ms')
@@ -60,6 +60,7 @@ class MeetingRepository extends ServiceEntityRepository
             ->where('m.date > :date')
             // ->andWhere('ms.isDiscutable IS NOT NULL')
             ->setParameter('date', $date)
+            ->orderBy('m.date','ASC')
             ->getQuery()
             ->getResult()
         ;
