@@ -182,7 +182,7 @@ class SiteController extends AbstractController
     public function download($year)
     {
         // load the file from the filesystem
-        $file = new File('../public/download/adhesion_'.$year.'.docx');
+        $file = new File('../public/download/adhesion_'.$year.'.pdf');
         if(!$file){
 
             $this->addFlash('warning','Année du document non connue !!!');
