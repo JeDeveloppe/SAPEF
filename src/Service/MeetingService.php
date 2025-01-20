@@ -63,11 +63,15 @@ class MeetingService
 
         //? DATE EN 2100 ENJECTEE A L'INITIALISATION POUR QUE LE SITE FONCTIONNE TOUJOURS...
         if(!$nextMeeting){
-            //! DOIT ETRE PAREIL QUE METHODE AU DESSUS
+            //! ON CREER UN MEETING EN 2100 POUR QUE LE SITE FONCTIONNE TOUJOURS...
             $date = new DateTimeImmutable('2100-3-31');
             $date100 = $date->setTime(14,15,00);
 
-            $nextMeeting = $this->meetingRepository->findOneBy(['date' => $date100]);
+            $nextMeeting = new Meeting();
+            $nextMeeting
+                ->setName($this->meetingNameRepository->findOneBy(['name' => 'CSE']))
+                ->setPlace($this->meetingPlaceRepository->findOneBy(['name' => 'Siège Euromaster']))
+                ->setDate($date100);
         }
 
         $meetingValues['nextMeeting'] = $nextMeeting;
@@ -78,7 +82,7 @@ class MeetingService
 
         $nextMeetingDateEndQuestions = $nextMeetingDate->sub(new DateInterval('P'.$configuration->getDelayBeforeMeetingToSendEmail().'D'));
 
-  
+
         $meetingValues['nextMeetingDateEndQuestions'] = $nextMeetingDateEndQuestions;
 
         $nextMeetingTimestamp = $nextMeetingDateEndQuestions->getTimestamp();
